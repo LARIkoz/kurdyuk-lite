@@ -1,0 +1,36 @@
+# Personal project runs (session-specific data)
+.kurdyuk-lite/runs/
+
+# Session-specific task tracking
+tasks/
+
+# Local Claude state
+.claude/
+
+# Project data
+competitor-teardown/
+
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+*.env
+
+# Databases
+*.db
+
+# OS files
+.DS_Store
+
+# Research & transcripts (personal content)
+*.mp3
+*.srt
+*.txt
+research-*.md
+sebastian-*.md
+
+# Python caches
+.pytest_cache/
+.ruff_cache/
+__pycache__/
