@@ -1,0 +1,4468 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, noimageindex"
+    />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow" />
+    <meta http-equiv="X-Robots-Tag" content="noindex, nofollow, noarchive" />
+    <title>Мои принципы вайбкодинга — Оркестратор, а не кодер</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --bg2: #1e293b;
+        --bg3: #0f172a;
+        --glass: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --cyan: #00d2ff;
+        --purple: #7c3aed;
+        --amber: #f59e0b;
+        --green: #10b981;
+        --red: #ef4444;
+        --blue: #3b82f6;
+        --pink: #ec4899;
+        --nav-h: 64px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* NAV */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        height: var(--nav-h);
+        background: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        gap: 8px;
+        overflow-x: auto;
+      }
+
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-logo {
+        font-weight: 800;
+        font-size: 0.9rem;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        white-space: nowrap;
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+
+      .nav-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--cyan);
+        background: rgba(0, 210, 255, 0.1);
+      }
+
+      /* LAYOUT */
+      section {
+        padding: 80px 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .section-tag {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        background: rgba(0, 210, 255, 0.1);
+        border: 1px solid rgba(0, 210, 255, 0.2);
+        border-radius: 4px;
+        padding: 4px 10px;
+        margin-bottom: 16px;
+      }
+
+      h2.section-title {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+      }
+
+      .section-sub {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-bottom: 48px;
+        max-width: 600px;
+      }
+
+      /* GLASS CARD */
+      .card {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .card-sm {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 16px 20px;
+      }
+
+      /* GRID */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      @media (max-width: 900px) {
+        .grid-4 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .grid-2,
+        .grid-4 {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 60px 16px;
+        }
+      }
+
+      /* FADE-IN */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* HERO */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 24px 60px;
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .hero-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 50% at 20% 30%,
+            rgba(0, 210, 255, 0.08) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 60% at 80% 70%,
+            rgba(124, 58, 237, 0.08) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      #hero > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 20px;
+      }
+
+      .hero-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cyan);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+      }
+
+      h1.hero-title {
+        font-size: clamp(2.4rem, 6vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.08;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          135deg,
+          #f1f5f9 0%,
+          var(--cyan) 50%,
+          var(--purple) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        color: var(--text-muted);
+        font-weight: 400;
+        max-width: 720px;
+        margin-bottom: 48px;
+        line-height: 1.6;
+      }
+
+      .hero-counters {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 48px;
+      }
+
+      @media (max-width: 600px) {
+        .hero-counters {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .counter-card {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .counter-value {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 900;
+        margin-bottom: 4px;
+      }
+
+      .counter-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .hero-quote {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        font-style: italic;
+        border-left: 3px solid var(--purple);
+        padding-left: 16px;
+        max-width: 600px;
+      }
+
+      /* PRINCIPLE CARDS */
+      .principle-card {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 28px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .principle-card:hover {
+        border-color: rgba(0, 210, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .principle-num {
+        font-size: 3rem;
+        font-weight: 900;
+        opacity: 0.08;
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        line-height: 1;
+      }
+
+      .principle-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+      }
+
+      .principle-text {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .principle-source {
+        font-size: 0.75rem;
+        color: var(--purple);
+        margin-top: 12px;
+        font-weight: 600;
+      }
+
+      /* PIPELINE */
+      .pipeline-track {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+        padding: 20px 0 40px;
+        margin-bottom: 40px;
+      }
+
+      .pipeline-step {
+        flex-shrink: 0;
+        width: 130px;
+        text-align: center;
+        position: relative;
+      }
+
+      .pipeline-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin: 0 auto 12px;
+        border: 2px solid;
+      }
+
+      .pipeline-step-name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: #f1f5f9;
+      }
+
+      .pipeline-step-model {
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      .pipeline-arrow {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        padding-bottom: 28px;
+      }
+
+      /* COMPARISON TABLE */
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .compare-table th {
+        text-align: left;
+        padding: 12px 16px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .compare-table td {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .compare-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .model-badge {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+
+      .badge-opus {
+        background: rgba(124, 58, 237, 0.2);
+        color: var(--purple);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+      }
+      .badge-sonnet {
+        background: rgba(0, 210, 255, 0.2);
+        color: var(--cyan);
+        border: 1px solid rgba(0, 210, 255, 0.3);
+      }
+      .badge-gemini {
+        background: rgba(16, 185, 129, 0.2);
+        color: var(--green);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .badge-codex {
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--amber);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      /* ANNOTATION CYCLE */
+      .cycle-flow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 24px 0;
+        align-items: center;
+      }
+
+      .cycle-node {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 12px 18px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+        min-width: 120px;
+      }
+
+      .cycle-arrow-r {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+      }
+
+      /* CONTEXT CARDS */
+      .ctx-card {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 24px;
+        position: relative;
+      }
+
+      .ctx-icon {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+      }
+
+      .ctx-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+      }
+
+      .ctx-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* PROJECT CARDS */
+      .proj-card {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 24px;
+        transition: all 0.3s;
+      }
+
+      .proj-card:hover {
+        border-color: rgba(0, 210, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .proj-status {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+      }
+
+      .proj-name {
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+      }
+
+      .proj-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+
+      .proj-stats {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .proj-stat {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .proj-stat strong {
+        color: var(--cyan);
+        font-weight: 700;
+      }
+
+      /* ANTIPATTERN */
+      .anti-card {
+        background: rgba(239, 68, 68, 0.05);
+        border: 1px solid rgba(239, 68, 68, 0.15);
+        border-radius: 16px;
+        padding: 24px;
+        position: relative;
+      }
+
+      .anti-card::before {
+        content: "//";
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 2rem;
+        font-weight: 900;
+        opacity: 0.1;
+        color: var(--red);
+      }
+
+      .anti-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--red);
+        margin-bottom: 8px;
+      }
+
+      .anti-text {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .anti-fix {
+        font-size: 0.8rem;
+        color: var(--green);
+        margin-top: 10px;
+        font-weight: 600;
+      }
+
+      /* COMPARE BORIS */
+      .cmp-row {
+        display: grid;
+        grid-template-columns: 200px 1fr 1fr;
+        gap: 1px;
+        background: var(--glass-border);
+        margin-bottom: 1px;
+      }
+
+      .cmp-row > div {
+        background: var(--bg);
+        padding: 14px 18px;
+        font-size: 0.85rem;
+      }
+
+      .cmp-header {
+        font-weight: 700;
+        color: var(--text-muted);
+        font-size: 0.75rem !important;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .cmp-label {
+        font-weight: 600;
+        color: #f1f5f9;
+      }
+
+      @media (max-width: 600px) {
+        .cmp-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* STACK */
+      .stack-layer {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+        transition: all 0.3s;
+      }
+
+      .stack-layer:hover {
+        border-color: rgba(0, 210, 255, 0.2);
+      }
+
+      .stack-layer-icon {
+        font-size: 1.4rem;
+        width: 36px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .stack-layer-name {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #f1f5f9;
+        min-width: 140px;
+      }
+
+      .stack-layer-desc {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* CHART CONTAINER */
+      .chart-wrap {
+        position: relative;
+        height: 300px;
+        margin: 20px 0;
+      }
+
+      /* BLOCKQUOTE */
+      .bq {
+        border-left: 3px solid var(--purple);
+        padding: 16px 20px;
+        margin: 24px 0;
+        background: rgba(124, 58, 237, 0.05);
+        border-radius: 0 12px 12px 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      .bq-author {
+        display: block;
+        margin-top: 8px;
+        font-style: normal;
+        font-weight: 700;
+        color: var(--purple);
+        font-size: 0.8rem;
+      }
+
+      /* SECTION ALT BG */
+      .bg-alt {
+        background: var(--bg2);
+      }
+
+      .bg-alt section {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      /* ARTICLE */
+      .article {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      .article h3.art-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #f1f5f9;
+        margin: 56px 0 20px;
+        padding-top: 32px;
+        border-top: 1px solid var(--glass-border);
+      }
+
+      .article h3.art-title:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .article p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 16px;
+      }
+
+      .article p strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .article .art-highlight {
+        background: rgba(0, 210, 255, 0.06);
+        border-left: 3px solid var(--cyan);
+        padding: 16px 20px;
+        border-radius: 0 12px 12px 0;
+        margin: 24px 0;
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .article .art-highlight-amber {
+        background: rgba(245, 158, 11, 0.06);
+        border-left: 3px solid var(--amber);
+        padding: 16px 20px;
+        border-radius: 0 12px 12px 0;
+        margin: 24px 0;
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .article .art-highlight-red {
+        background: rgba(239, 68, 68, 0.06);
+        border-left: 3px solid var(--red);
+        padding: 16px 20px;
+        border-radius: 0 12px 12px 0;
+        margin: 24px 0;
+        font-size: 0.9rem;
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .article .art-code {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 20px 0;
+        font-family: "SF Mono", "Fira Code", monospace;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        overflow-x: auto;
+        white-space: pre-wrap;
+      }
+
+      .article .art-label {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+      }
+
+      .art-toc {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-bottom: 48px;
+      }
+
+      .art-toc-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+
+      .art-toc a {
+        display: block;
+        color: var(--cyan);
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 4px 0;
+        transition: color 0.2s;
+      }
+
+      .art-toc a:hover {
+        color: #f1f5f9;
+      }
+
+      .art-toc a .toc-num {
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-right: 8px;
+        font-size: 0.8rem;
+      }
+
+      /* VERDICT CARD */
+      .verdict-card {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 210, 255, 0.08),
+          rgba(124, 58, 237, 0.08)
+        );
+        border: 1px solid rgba(0, 210, 255, 0.2);
+        border-radius: 16px;
+        padding: 32px;
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .verdict-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #f1f5f9;
+      }
+
+      .verdict-text {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        max-width: 640px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+      /* DIAGRAMS */
+      .diagram-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 24px 0;
+        padding: 24px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+      }
+
+      .diagram-flow .d-node {
+        background: rgba(255, 255, 255, 0.04);
+        border: 2px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 10px 16px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-align: center;
+        min-width: 80px;
+        color: var(--text);
+      }
+
+      .diagram-flow .d-arrow {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .diagram-flow .d-node-highlight,
+      .diagram-vertical .d-node-highlight {
+        background: rgba(0, 210, 255, 0.1);
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+
+      .diagram-flow .d-node-red,
+      .diagram-vertical .d-node-red {
+        border-color: var(--red);
+        color: var(--red);
+      }
+
+      .diagram-flow .d-node-amber,
+      .diagram-vertical .d-node-amber {
+        border-color: var(--amber);
+        color: var(--amber);
+      }
+
+      .diagram-flow .d-node-green,
+      .diagram-vertical .d-node-green {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      .diagram-flow .d-node-purple,
+      .diagram-vertical .d-node-purple {
+        border-color: var(--purple);
+        color: var(--purple);
+      }
+
+      .diagram-flow .d-node-pink,
+      .diagram-vertical .d-node-pink {
+        border-color: var(--pink);
+        color: var(--pink);
+      }
+
+      .diagram-flow .d-node-big,
+      .diagram-vertical .d-node-big {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        min-width: 120px;
+      }
+
+      .diagram-flow .d-label {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        text-align: center;
+        width: 100%;
+        margin-top: 4px;
+      }
+
+      .diagram-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        margin: 24px auto;
+        max-width: 500px;
+        padding: 24px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+      }
+
+      .diagram-vertical .d-node {
+        background: rgba(255, 255, 255, 0.04);
+        border: 2px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-align: center;
+        width: 100%;
+        max-width: 360px;
+        color: var(--text);
+      }
+
+      .diagram-vertical .d-arrow {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      .diagram-parallel {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 12px;
+        align-items: start;
+        margin: 24px 0;
+        padding: 24px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+      }
+
+      .diagram-parallel .d-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .diagram-parallel .d-merge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        padding-top: 40px;
+      }
+
+      @media (max-width: 600px) {
+        .diagram-parallel {
+          grid-template-columns: 1fr;
+        }
+        .diagram-parallel .d-merge {
+          padding-top: 0;
+          transform: rotate(90deg);
+        }
+      }
+
+      /* UPD SYSTEM */
+      .upd-badge {
+        display: inline-block;
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--green);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+
+      .upd-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1000;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        color: var(--green);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 10px 18px;
+        border-radius: 12px;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s;
+      }
+
+      .upd-btn:hover {
+        background: rgba(16, 185, 129, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .upd-btn.active {
+        background: var(--green);
+        color: var(--bg);
+      }
+
+      .upd-filter-active .article h3.art-title:not(.upd-section),
+      .upd-filter-active .article h3.art-title:not(.upd-section) ~ p,
+      .upd-filter-active
+        .article
+        h3.art-title:not(.upd-section)
+        ~ .art-highlight,
+      .upd-filter-active
+        .article
+        h3.art-title:not(.upd-section)
+        ~ .art-highlight-amber,
+      .upd-filter-active
+        .article
+        h3.art-title:not(.upd-section)
+        ~ .art-highlight-red,
+      .upd-filter-active .article h3.art-title:not(.upd-section) ~ .art-code,
+      .upd-filter-active
+        .article
+        h3.art-title:not(.upd-section)
+        ~ .diagram-vertical,
+      .upd-filter-active
+        .article
+        h3.art-title:not(.upd-section)
+        ~ .diagram-flow {
+        display: none;
+      }
+
+      .upd-filter-active .upd-inline-block:not(.upd-content) {
+        display: none;
+      }
+
+      .upd-glow {
+        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+      }
+
+      /* Anti-scrape: hide content until JS renders */
+      #app-root {
+        display: none;
+      }
+      .js-loaded #app-root {
+        display: block;
+      }
+      noscript .noscript-msg {
+        color: var(--text-muted);
+        text-align: center;
+        padding: 100px 24px;
+        font-size: 1.2rem;
+      }
+    </style>
+    <script>
+      // Anti-iframe
+      if (window.top !== window.self) {
+        window.top.location = window.self.location;
+      }
+      // Mark JS-loaded
+      document.documentElement.classList.add("js-loaded");
+    </script>
+  </head>
+
+  <body>
+    <noscript
+      ><div class="noscript-msg">This page requires JavaScript.</div></noscript
+    >
+    <div id="app-root">
+      <div class="hero-bg"></div>
+
+      <!-- NAV -->
+      <nav id="mainNav">
+        <div class="nav-logo">Принципы вайбкодинга</div>
+        <a href="#hero" class="nav-link">Главная</a>
+        <a href="#pipeline" class="nav-link">Pipeline</a>
+        <a href="#deepdive" class="nav-link">Deep Dive</a>
+        <a href="#philosophy" class="nav-link">7 принципов</a>
+        <a href="#routing" class="nav-link">Routing</a>
+      </nav>
+
+      <button class="upd-btn" id="updBtn" onclick="toggleUpd()">
+        UPD #2 — 4 новых
+      </button>
+
+      <!-- ═══ S1: HERO ═══ -->
+      <section id="hero">
+        <div class="hero-eyebrow fade-in">
+          <div class="hero-dot"></div>
+          Персональный манифест &middot; Март 2026
+        </div>
+
+        <h1 class="hero-title fade-in">Оркестратор,<br />а не кодер</h1>
+
+        <p class="hero-subtitle fade-in">
+          Я не пишу код — я дирижирую пятью AI-моделями через единый pipeline.
+          Claude думает, Sonnet кодит, Gemini исследует, Codex ревьюит. Контекст
+          переживает сессии. Код — побочный продукт правильных решений.
+        </p>
+
+        <div class="hero-counters">
+          <div class="counter-card fade-in">
+            <div class="counter-value" style="color: var(--cyan)">
+              <span class="count-up" data-target="5">0</span>
+            </div>
+            <div class="counter-label">AI-моделей в оркестре</div>
+          </div>
+          <div class="counter-card fade-in">
+            <div class="counter-value" style="color: var(--purple)">
+              <span class="count-up" data-target="19">0</span>
+            </div>
+            <div class="counter-label">Native skills</div>
+          </div>
+          <div class="counter-card fade-in">
+            <div class="counter-value" style="color: var(--amber)">
+              <span class="count-up" data-target="7">0</span>
+            </div>
+            <div class="counter-label">Фаз в pipeline</div>
+          </div>
+          <div class="counter-card fade-in">
+            <div class="counter-value" style="color: var(--green)">
+              <span class="count-up" data-target="8">0</span>+
+            </div>
+            <div class="counter-label">Продуктов built this way</div>
+          </div>
+        </div>
+
+        <div class="hero-quote fade-in">
+          "Вайбкодинг работает, когда у тебя есть pipeline, который не даёт AI
+          врать тебе, а тебе — врать себе."
+        </div>
+      </section>
+
+      <!-- ═══ S2: PIPELINE ═══ -->
+      <section id="pipeline">
+        <div class="section-tag fade-in">Методология</div>
+        <h2 class="section-title fade-in">Kurdyuk Pipeline</h2>
+        <p class="section-sub fade-in">
+          7 фаз с жёсткими gates. Ни одну нельзя пропустить. Ни одну нельзя
+          начать без подтверждения предыдущей.
+        </p>
+
+        <div class="pipeline-track fade-in" id="pipelineTrack"></div>
+
+        <div class="bq fade-in">
+          "Boris Tane использует 3 фазы: Research &rarr; Plan &rarr; Implement.
+          У меня 7, потому что между Plan и Implement живёт Annotation Cycle —
+          1-6 раундов мультиагентного ревью. А после Implement — обязательный
+          Final Review, а не 'ну вроде работает'."
+        </div>
+      </section>
+
+      <!-- ═══ DEEP DIVE: ARTICLE ═══ -->
+      <div class="bg-alt">
+        <section id="deepdive" style="padding-bottom: 40px">
+          <div class="section-tag fade-in">Deep Dive</div>
+          <h2 class="section-title fade-in">Как это работает на практике</h2>
+          <p class="section-sub fade-in">
+            Не абстрактная методология. Пошаговый разбор каждого этапа — от
+            первого вопроса до финального review. Написано от первого лица, из
+            реального опыта.
+          </p>
+          <p
+            class="fade-in"
+            style="
+              font-size: 0.85rem;
+              color: var(--text-muted);
+              max-width: 600px;
+              margin-bottom: 32px;
+              border-left: 2px solid var(--amber);
+              padding-left: 12px;
+            "
+          >
+            <span class="upd-badge" style="margin-left: 0; margin-right: 6px"
+              >UPD</span
+            >
+            <strong style="color: var(--amber)"
+              >Когда НЕ нужен pipeline:</strong
+            >
+            Pipeline для задач от 3+ шагов. Quick fix, одна команда, ответ на
+            вопрос — просто делай. Не каждый запрос проходит 7 фаз. Если задача
+            помещается в одно сообщение — pipeline избыточен.
+          </p>
+
+          <div class="article">
+            <!-- TOC -->
+            <div class="art-toc">
+              <div class="art-toc-title">Содержание</div>
+              <!-- БЛОК 0: ВХОД -->
+              <a href="#art-error-zero"
+                ><span class="toc-num">00</span> Ошибка #0: начать без контекста
+                <span class="upd-badge">UPD</span></a
+              >
+              <!-- БЛОК 1: ФИЛОСОФИЯ -->
+              <a href="#art-orchestration"
+                ><span class="toc-num">01</span> Оркестрация: почему я не пишу
+                код</a
+              >
+              <a href="#art-nolimits"
+                ><span class="toc-num">02</span> Ограничений нет — есть лень
+                модели</a
+              >
+              <!-- БЛОК 2: РАБОЧЕЕ МЕСТО -->
+              <a href="#art-workspace"
+                ><span class="toc-num">03</span> VS Code + Claude Code: не
+                расширение, а ОС</a
+              >
+              <a href="#art-memory"
+                ><span class="toc-num">04</span> Память, контекст и
+                persistence</a
+              >
+              <a href="#art-skills"
+                ><span class="toc-num">05</span> Система skills: API
+                документируется один раз</a
+              >
+              <a href="#art-subscriptions"
+                ><span class="toc-num">06</span> Подписка vs API: CLI-модели
+                выгоднее</a
+              >
+              <!-- БЛОК 3: PIPELINE -->
+              <a href="#art-discovery"
+                ><span class="toc-num">07</span> Discovery: четыре опоры перед
+                стартом</a
+              >
+              <a href="#art-research"
+                ><span class="toc-num">08</span> Research: Gemini копает, Opus
+                думает</a
+              >
+              <a href="#art-plan"
+                ><span class="toc-num">09</span> Plan: контракт, не черновик</a
+              >
+              <a href="#art-annotation"
+                ><span class="toc-num">10</span> Annotation Cycle: план атакуют
+                четыре агента</a
+              >
+              <a href="#art-readiness"
+                ><span class="toc-num">11</span> Readiness Gate: последний шанс
+                сказать "нет"</a
+              >
+              <a href="#art-implement"
+                ><span class="toc-num">12</span> Implement: Sonnet кодит, Opus
+                молчит</a
+              >
+              <a href="#art-review"
+                ><span class="toc-num">13</span> Review: три слоя проверки</a
+              >
+              <!-- БЛОК 4: ADVANCED -->
+              <a href="#art-sessions"
+                ><span class="toc-num">14</span> Сессии: почему файлы важнее
+                чата</a
+              >
+              <a href="#art-swarm"
+                ><span class="toc-num">15</span> Swarm: много агентов на одну
+                задачу</a
+              >
+              <a href="#art-portals"
+                ><span class="toc-num">16</span> Порталы: данные бесполезны,
+                пока не видишь</a
+              >
+              <a href="#art-discipline"
+                ><span class="toc-num">17</span> Дисциплина: не давай AI
+                перескакивать</a
+              >
+              <a href="#art-arbitrage"
+                ><span class="toc-num">18</span> Арбитраж: когда сам не знаешь
+                как лучше</a
+              >
+              <a href="#art-meta-review"
+                ><span class="toc-num">19</span> Ревью на ревью + мозговой
+                штурм</a
+              >
+              <a href="#art-bug-hunting"
+                ><span class="toc-num">20</span> Итеративная охота за багами</a
+              >
+              <a href="#art-bug-triage"
+                ><span class="toc-num">21</span> Баги в процессе: замечай и
+                документируй</a
+              >
+              <a href="#art-handoff"
+                ><span class="toc-num">22</span> Handoff, cleanup и гигиена
+                сессий</a
+              >
+              <a href="#art-skill-sync"
+                ><span class="toc-num">23</span> Skill Sync: обмен знаниями
+                между коллегами</a
+              >
+              <a href="#art-cli-setup"
+                ><span class="toc-num">24</span> Gemini + Codex CLI: ноль API
+                ключей</a
+              >
+              <a href="#art-debugging"
+                ><span class="toc-num">25</span> Debugging: когда всё сломалось
+                прямо сейчас <span class="upd-badge">UPD</span></a
+              >
+            </div>
+
+            <!-- 00: ERROR ZERO -->
+            <h3 class="art-title upd-section" id="art-error-zero">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(239, 68, 68, 0.2);
+                  color: var(--red);
+                  border: 1px solid rgba(239, 68, 68, 0.3);
+                "
+                >Вход</span
+              >
+              <span class="upd-badge">UPD</span><br />
+              00. Ошибка #0: начать без контекста
+            </h3>
+
+            <p>
+              Открыл Claude. Написал "сделай мне трекер воды на Swift". Получил
+              200 строк кода, который компилируется, но не нужен. Знакомо?
+            </p>
+
+            <p>
+              Это <strong>ошибка #0</strong> — самая распространённая и самая
+              дорогая. Не баг в коде. Не плохой промпт. А отсутствие
+              <strong>контекста</strong>, в котором AI должен работать.
+            </p>
+
+            <p>
+              Чатбот без контекста — это случайный джуниор, который не знает:
+              какой у тебя проект, какие API ты используешь, какие решения ты
+              уже принял, что ты пробовал и что не сработало. Он будет генерить
+              generic output. Правильный синтаксис, нулевая ценность.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Голый промпт → generic output.</strong> Без CLAUDE.md AI
+              не знает твои правила. Без skills — выдумывает endpoints. Без
+              memory — забывает кто ты. Без pipeline — перескакивает к коду до
+              того, как ты определил что строишь. Контекст — это не "nice to
+              have". Это разница между "AI-помощник" и "AI-агент, который
+              реально делает работу".
+            </div>
+
+            <p>
+              Вся система, описанная в этой статье, существует ради одного:
+              <strong>превратить generic AI в специализированного агента</strong
+              >. CLAUDE.md задаёт правила. Skills дают знания API. Memory хранит
+              решения. Pipeline не даёт перескакивать. Run folder держит
+              состояние. Каждый слой добавляет контекст. Контекст делает AI
+              полезным.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Формула:</strong><br />
+              Голый Claude = умный чатбот, средний результат<br />
+              Claude + CLAUDE.md = агент с правилами<br />
+              Claude + CLAUDE.md + Skills = агент, который знает твои API<br />
+              Claude + CLAUDE.md + Skills + Memory = агент, который помнит кто
+              ты<br />
+              Claude + CLAUDE.md + Skills + Memory + Pipeline = оркестратор<br /><br />
+              Каждый слой — это контекст. Чем больше контекста — тем точнее
+              результат. Не "умнее модель" — а "больше контекста". Context >
+              Model.
+            </div>
+
+            <p>
+              <strong>Практический вывод:</strong> если ты только начинаешь — не
+              настраивай всё сразу. Начни с CLAUDE.md (правила проекта). Потом
+              добавь 1-2 skills (API, с которыми работаешь). Потом memory. Потом
+              pipeline. Каждый слой — ощутимый скачок качества. Но даже одного
+              CLAUDE.md достаточно, чтобы AI перестал быть "случайным джуниором"
+              и стал "джуниором, который знает проект".
+            </p>
+
+            <!-- 01: ORCHESTRATION -->
+            <h3 class="art-title" id="art-orchestration">
+              <span class="art-label badge-opus">Философия</span><br />
+              01. Оркестрация: почему я не пишу код
+            </h3>
+
+            <p>
+              Boris Tane сказал:
+              <strong
+                >"Never let Claude write code until you've reviewed and approved
+                a written plan."</strong
+              >
+              Я согласен, но для меня это только начало.
+            </p>
+
+            <p>
+              Моя роль — не писать код и не просить одну модель написать код.
+              Моя роль — <strong>дирижировать пятью AI-моделями</strong>, каждая
+              из которых делает то, в чём она лучше остальных. Claude Opus
+              думает и принимает архитектурные решения. Sonnet пишет код быстро
+              и дёшево. Gemini CLI лезет в интернет, читает PDF, анализирует
+              скриншоты. Codex CLI ревьюит план и код с позиции "а это вообще
+              реализуемо?".
+            </p>
+
+            <p>
+              Это не мультитулинг ради мультитулинга. Это специализация. Когда я
+              просил Opus писать код — он был медленный и дорогой. Когда просил
+              Sonnet думать об архитектуре — он соглашался со всем и не видел
+              проблем. Когда просил Claude искать в интернете — он
+              галлюцинировал ссылки. Каждая модель хороша в своём слоте. Плоха —
+              во всех остальных.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Ключевой insight:</strong> вайбкодинг — это не "AI пишет
+              код за тебя". Это операционная система, где ты — оркестратор. AI =
+              лучший джуниор: делает 80% рутины, но без твоего контекста, вкуса
+              и judgment — результат будет средним. Код — побочный продукт.
+              Главный продукт — правильные решения.
+            </div>
+
+            <p>
+              Boris работает с одной моделью (Claude) в одной длинной сессии.
+              Это работает для него — он Engineering Lead в Cloudflare, он знает
+              архитектуру лучше любой модели. Ему достаточно одного Claude как
+              исполнителя.
+            </p>
+
+            <p>
+              У меня другая ситуация. Я строю продукты с нуля — market research,
+              gap analysis, iOS apps, data pipelines. Мне нужен не один
+              исполнитель, а <strong>команда специалистов</strong>. И я собрал
+              эту команду из AI-моделей.
+            </p>
+
+            <!-- 02: NO LIMITS -->
+            <h3 class="art-title" id="art-nolimits">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(236, 72, 153, 0.2);
+                  color: var(--pink);
+                  border: 1px solid rgba(236, 72, 153, 0.3);
+                "
+                >Mindset</span
+              ><br />
+              02. Ограничений нет — есть лень модели
+            </h3>
+
+            <p>
+              Самое частое заблуждение: "AI не может это сделать". Может. Почти
+              всегда может. Но он будет <strong>лениться</strong> — предлагать
+              обходные пути, упрощать задачу, говорить "это невозможно" или "это
+              выходит за рамки моих возможностей".
+            </p>
+
+            <p>
+              Это не ограничение. Это <strong>поведение по умолчанию</strong>.
+              Opus на первый запрос даёт "безопасный" ответ. На второй — чуть
+              лучше. На третий, когда ты давишь и объясняешь что конкретно нужно
+              — он находит оптимальное решение, которое существовало с самого
+              начала.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Паттерн "3 попытки":</strong><br />
+              <strong>Попытка 1:</strong> "Это сложно, попробуйте сделать
+              вручную / используйте другой инструмент"<br />
+              <strong>Попытка 2:</strong> "Ок, вот вариант, но он
+              неоптимальный..." (работает на 70%)<br />
+              <strong>Попытка 3:</strong> "Вот чистое решение" (то, что нужно
+              было с самого начала)
+            </div>
+
+            <p>
+              <strong>Реальный пример: cookies.</strong> Нужно было скачать
+              контент с сервиса, где авторизация через браузер. Первая реакция
+              Claude: "Вам нужно залогиниться в браузере и скачать вручную."
+              Второй запрос: "Можно попробовать через curl с cookie-файлом, но
+              это ненадёжно." Третий: yt-dlp с
+              <code style="color: var(--cyan)">--cookies-from-browser</code> —
+              одна команда, подхватывает cookies прямо из Arc, скачивает всё
+              автоматически. 460 файлов. Без единого ручного клика.
+            </p>
+
+            <p>
+              <strong>Ещё пример: PDF.</strong> "Claude не умеет читать PDF." Не
+              умеет — если просишь его напрямую. Но Gemini CLI читает PDF
+              нативно. А yt-dlp качает с Яндекс Диска. А
+              <code style="color: var(--cyan)">ffmpeg</code> конвертирует что
+              угодно. Ограничение одной модели — не ограничение системы. Нужно
+              просто знать, какой инструмент дёрнуть.
+            </p>
+
+            <p>
+              <strong>Whisper на M1.</strong> "MPS не поддерживается для
+              Whisper." Первая попытка — ошибка. Вторая — "используйте CPU".
+              Третья — <code style="color: var(--cyan)">fp16=False</code> и
+              <code style="color: var(--cyan)"
+                >ssl._create_unverified_context</code
+              >
+              — работает. 62x быстрее через Groq API, если локально не хочется
+              возиться.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Принцип:</strong> когда AI говорит "невозможно" — это
+              значит "я не нашёл с первого раза". Давишь — находит. Не давишь —
+              остаёшься с ручной работой. Модель оптимизирует на "не ошибиться",
+              а не на "решить задачу". Твоя работа как оркестратора — сдвинуть
+              этот приоритет.
+            </div>
+
+            <p>Это не только про Claude. Любая модель ленится:</p>
+
+            <p>
+              <strong>Gemini</strong> обрезает длинные ответы без
+              предупреждения. Workaround: разбить prompt на части или
+              использовать flash для длинных ответов.
+            </p>
+
+            <p>
+              <strong>Codex</strong> отказывается работать с файлами вне рабочей
+              директории. Workaround: флаг
+              <code style="color: var(--cyan)">-C path/</code> для смены
+              контекста.
+            </p>
+
+            <p>
+              <strong>Claude в subprocess</strong> теряет auth сессию.
+              Workaround: Anthropic SDK + API key вместо
+              <code style="color: var(--cyan)">claude -p</code> через
+              subprocess.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Антипаттерн:</strong> принять первый ответ как финальный.
+              AI обучен быть helpful и safe. "Safe" = отказать, предложить
+              ручной вариант, упростить. Ты должен быть настойчивым, конкретным
+              и точным в запросе. Не "сделай как-нибудь" — а "сделай именно так,
+              вот контекст, вот ограничения, не предлагай альтернатив — реши эту
+              задачу".
+            </div>
+
+            <p>
+              <strong>Итог:</strong> ограничений нет. Есть лень модели,
+              workarounds для известных багов и правильный инструмент для каждой
+              задачи. 19 skills, 5 моделей, CLI-тулзы — если одна дорога
+              закрыта, всегда есть другая. Оркестратор это знает. Пользователь
+              одной модели — нет.
+            </p>
+
+            <!-- 03: WORKSPACE -->
+            <h3 class="art-title" id="art-workspace">
+              <span class="art-label badge-sonnet">Рабочее место</span><br />
+              03. VS Code + Claude Code: не расширение, а операционная система
+            </h3>
+
+            <p>
+              Большинство людей думают о Claude как о чатботе. Окно, куда пишешь
+              вопрос, получаешь ответ. Или как о расширении VS Code —
+              автокомплит, inline-подсказки, Copilot-стиль.
+            </p>
+
+            <p>
+              <strong>Это не то, как я работаю.</strong>
+            </p>
+
+            <p>
+              Claude Code в VS Code — это не расширение. Это
+              <strong>полноценный AI-агент</strong>, который имеет доступ ко
+              всему: файловая система, терминал, git, интернет (через
+              инструменты), запуск любых команд, чтение и запись файлов,
+              создание процессов. Он не "помогает писать код" — он
+              <strong>выполняет задачи</strong>. Разница как между калькулятором
+              и компьютером.
+            </p>
+
+            <div class="art-highlight">
+              <strong
+                >Что может Claude Code как агент (а обычный чатбот —
+                нет):</strong
+              ><br />
+              — Запустить Gemini CLI в background и продолжить работать<br />
+              — Скачать 460 подкастов через yt-dlp с cookies из браузера<br />
+              — Создать SQLite базу, наполнить данными, запустить миграции<br />
+              — Прочитать 19 skill-файлов и автоматически выбрать нужный API<br />
+              — Открыть URL в Arc, запустить npm build, прочитать логи ошибок<br />
+              — Создать git branch, написать код, прогнать тесты, сделать
+              commit<br />
+              — Параллельно запустить Codex review и Gemini Visual QA в
+              background
+            </div>
+
+            <p>
+              <strong>Вкладки и сессии.</strong> В VS Code у Claude Code есть
+              вкладки — как вкладки в браузере. Каждая вкладка — отдельная
+              сессия с отдельным контекстом. Я использую это так:
+            </p>
+
+            <div class="art-code">
+              Вкладка 1: Teardown Suite — текущая задача Вкладка 2: Gap Pipeline
+              — фоновый research Вкладка 3: Video Extractor — debug проблемы
+              Вкладка 4: Quick task — одноразовая задача
+            </div>
+
+            <p>
+              Каждая вкладка помнит свой контекст в рамках сессии. Но контекст —
+              конечный. Когда он заполняется, Claude сжимает старые сообщения
+              (compression). Это нормально — если ты работаешь через файлы, а не
+              через чат.
+            </p>
+
+            <p>
+              <strong>Permissions.</strong> VS Code спрашивает разрешение на
+              каждое действие: чтение файла, запуск команды, запись. Можно
+              настроить автоматическое разрешение для безопасных операций
+              (чтение, grep, glob) и ручное подтверждение для опасных (запись,
+              удаление, git push). Это не ограничение — это контроль.
+            </p>
+
+            <p>
+              <strong>Multiple working directories.</strong> Claude Code видит
+              не только текущий проект — он может работать с несколькими
+              директориями одновременно. У меня в конфигурации 8 рабочих
+              директорий. Когда я говорю "проверь как это сделано в
+              teardown-suite" — он идёт и читает код оттуда.
+            </p>
+
+            <!-- 04: MEMORY & CONTEXT -->
+            <h3 class="art-title" id="art-memory">
+              <span class="art-label badge-opus">Persistence</span><br />
+              04. Память, контекст и почему Claude помнит кто ты
+            </h3>
+
+            <p>
+              Самый частый вопрос: "Как Claude помнит контекст между сессиями?"
+              Ответ: <strong>файлы</strong>. Четыре слоя persistence, каждый для
+              своего:
+            </p>
+
+            <p>
+              <strong>Слой 1: CLAUDE.md</strong> — operating contract. Живёт в
+              корне проекта. Загружается автоматически в каждую сессию. Здесь:
+              правила pipeline, model routing, annotation cycle, output style,
+              запреты. Это как должностная инструкция для AI. Claude читает её
+              первой и следует ей всю сессию.
+            </p>
+
+            <div class="art-code">
+              // Пример из моего CLAUDE.md: Ты работаешь в режиме Kurdyuk Lite.
+              Не начинай код, пока implementation-readiness не имеет verdict
+              pass. plan.md — канонический implementation contract.
+              Verification: не отмечай задачу ✅ без proof.
+            </div>
+
+            <p>
+              <strong>Слой 2: Memory</strong> — persistent файловая память. Не
+              чат-история, а структурированные markdown-файлы. Четыре типа: user
+              (кто я, как работаю), feedback (что делать / не делать), project
+              (статусы, решения), reference (где что искать). Claude читает их
+              при старте сессии и обновляет по ходу работы.
+            </p>
+
+            <p>
+              У меня сейчас 30+ файлов памяти. Claude знает: какие проекты
+              активны, какие API gotchas найдены, что я предпочитаю русский
+              язык, что не надо мокать базу в тестах, что stale plans нужно
+              удалять. Это не "запомни" в чате — это файлы на диске, которые
+              переживут любое количество сессий.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Важно:</strong> память — не замена контексту сессии.
+              Память хранит cross-session знания (кто я, уроки, решения).
+              Контекст текущей задачи живёт в run-файлах (state.md, plan.md,
+              todo.md). Это разные вещи. Память = "кто ты и что знаешь".
+              Run-файлы = "что делаешь прямо сейчас".
+            </div>
+
+            <p>
+              <strong>Слой 3: Skills</strong> — API-знания. 19 native skills —
+              каждый в своём
+              <code style="color: var(--cyan)"
+                >~/.claude/skills/&lt;name&gt;/SKILL.md</code
+              >. Base URL, auth, endpoints, rate limits, pricing, gotchas.
+              Загружаются автоматически по описанию — когда задача касается API,
+              Claude находит нужный skill и знает как с ним работать.
+            </p>
+
+            <p>
+              <strong>Write-back:</strong> если в процессе работы Claude находит
+              новый gotcha у API — он обновляет SKILL.md. В следующей сессии
+              любой агент уже знает про эту проблему. Skills — живая
+              документация, не статичная.
+            </p>
+
+            <p>
+              <strong>Слой 4: Run folder</strong> — состояние текущего проекта.
+              <code style="color: var(--cyan)"
+                >.kurdyuk-lite/runs/&lt;slug&gt;/</code
+              >
+              — 9 файлов: state, brief, intent, invariants, research, plan,
+              todo, readiness, review. Полный audit trail. Любой агент может
+              войти, прочитать state.md и продолжить с нужного места.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Вход в новую сессию (3 шага):</strong><br />
+              1. MEMORY.md → кто я, что знаю, какие проекты активны<br />
+              2. state.md → на какой фазе, что делаю, есть ли blocker<br />
+              3. Продолжай с нужного места — как будто не уходил<br /><br />
+              Нет потери контекста. Нет "напомни что мы делали". Файлы помнят
+              всё.
+            </div>
+
+            <p>
+              <strong>Hooks и автоматизация.</strong> Claude Code поддерживает
+              hooks — shell-команды, которые запускаются автоматически на
+              определённые события. Можно настроить: "после каждого коммита —
+              запусти линтер", "перед каждым edit — проверь что файл не в .env".
+              Hooks — это программирование поведения Claude, не просто промпты.
+            </p>
+
+            <p>
+              <strong>Settings.</strong> Три уровня: глобальные (для всех
+              проектов), проектные (для конкретного репозитория), и
+              пользовательские (мои личные правила). Permissions, model routing,
+              env переменные, разрешённые команды — всё конфигурируется. Это не
+              чатбот с настройками — это платформа.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Антипаттерн:</strong> полагаться на чат-историю. Чат =
+              volatile. Compression съедает контекст. Новая сессия = чистый
+              лист. Если важная информация живёт только в чате — она пропадёт.
+              Всё ценное должно быть в файлах: CLAUDE.md, memory, skills, run
+              folder. Чат — для текущего диалога. Файлы — для persistent знаний.
+            </div>
+
+            <!-- 05: SKILLS SYSTEM -->
+            <h3 class="art-title" id="art-skills">
+              <span class="art-label badge-gemini">Infrastructure</span><br />
+              05. Система skills: каждый API документируется один раз
+            </h3>
+
+            <p>
+              Когда в проекте появляется внешний API — любой, от Groq до
+              Pinterest — первое что я делаю:
+              <strong>создаю skill</strong>. Не пишу код. Не экспериментирую
+              вслепую. Создаю файл
+              <code style="color: var(--cyan)"
+                >~/.claude/skills/&lt;api-name&gt;/SKILL.md</code
+              >
+              и заполняю его.
+            </p>
+
+            <p>
+              Зачем? Потому что AI галлюцинирует API endpoints. Уверенно. Он
+              назовёт тебе
+              <code style="color: var(--cyan)">/api/v2/search</code>, которого
+              не существует. Ты потратишь 30 минут на debug, прежде чем поймёшь
+              что endpoint выдуман. Skill — это
+              <strong>source of truth</strong>, который Claude читает вместо
+              того, чтобы выдумывать.
+            </p>
+
+            <div class="art-code">
+              ~/.claude/skills/groq-api/SKILL.md --- name: groq-api description:
+              Groq API — сверхбыстрая транскрипция через Whisper (217-228x
+              realtime) user-invocable: false --- ## Base URL
+              https://api.groq.com/openai/v1 ## Auth Authorization: Bearer
+              $GROQ_KEY_1 Keys: /Documents/cursore/skill-prompts/apis/keys.env
+              ## Endpoints POST /audio/transcriptions model: whisper-large-v3
+              file: binary (max 25MB) response_format: verbose_json ... ## Rate
+              Limits 20 req/min, 2h audio/day per key Workaround: multi-key
+              rotation ## Gotchas - Max file 25MB → split with ffmpeg -
+              timestamps: word-level only with verbose_json - VERIFIED:
+              2026-03-19
+            </div>
+
+            <p>
+              <strong>Как создаётся skill:</strong> не из памяти модели. Из
+              <strong>максимального research официальных источников</strong>.
+              Процесс выглядит так:
+            </p>
+
+            <p>
+              <strong>Шаг 1: Gemini CLI (background)</strong> — идёт в интернет,
+              находит официальную документацию API. Читает docs, quickstart,
+              reference, changelog. Вытаскивает: base URL, auth, все endpoints с
+              request/response, rate limits, pricing.
+            </p>
+
+            <p>
+              <strong>Шаг 2: GitHub repos</strong> — Gemini ищет SDK, примеры
+              использования, issues. В issues — реальные баги, workarounds, edge
+              cases, которых нет в документации. В примерах — рабочий код, не
+              теоретические endpoints.
+            </p>
+
+            <p>
+              <strong>Шаг 3: Социальные сети и Reddit</strong> — опыт реальных
+              людей. "У Groq rate limit 2h/day, но если ротировать ключи..."
+              "Soniox context.terms принимает только английские произношения,
+              транслитерации — через regex post-processing." Этого нет ни в
+              docs, ни в GitHub — только в обсуждениях.
+            </p>
+
+            <p>
+              <strong>Шаг 4: Opus (inline)</strong> — синтезирует всё в
+              структурированный SKILL.md. Убирает мусор, оставляет actionable
+              знания: endpoints, gotchas, workarounds.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Результат:</strong> когда через 2 недели я (или другой
+              проект) снова работаю с этим API — Claude автоматически подгружает
+              skill по описанию и знает всё: endpoints, auth, gotchas. Ноль
+              галлюцинаций. Ноль потерянного времени на re-research. У меня 19
+              таких skills и каждый экономит часы при каждом использовании.
+            </div>
+
+            <p>
+              <strong>Write-back:</strong> нашёл новый gotcha в процессе работы
+              → тут же обновил SKILL.md, поставил новую дату VERIFIED. Skills —
+              живая документация, не архив.
+            </p>
+
+            <!-- 06: CLI SUBSCRIPTIONS -->
+            <h3 class="art-title" id="art-subscriptions">
+              <span class="art-label badge-codex">Экономика</span><br />
+              06. Подписка vs API: почему CLI-модели выгоднее
+            </h3>
+
+            <p>
+              Codex CLI (OpenAI) и Gemini CLI (Google) — это не API с оплатой за
+              токены. Это
+              <strong>CLI-инструменты, которые работают по подписке</strong>.
+              ChatGPT Plus ($20/мес) даёт доступ к Codex CLI. Google AI Studio
+              (бесплатно) даёт доступ к Gemini CLI.
+            </p>
+
+            <p>
+              Почему это важно: один run через Kurdyuk pipeline — это Research
+              (Gemini) + Annotation (Codex) + Post-Review (Codex) + Visual QA
+              (Gemini). Через API это стоило бы $5-15 за run. Через подписку —
+              <strong>$0 сверх фиксированной платы</strong>.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Экономика sub-агентов:</strong><br />
+              — <strong>Gemini CLI:</strong> бесплатно (Google AI Studio OAuth).
+              2M контекст, web search, PDF, vision<br />
+              — <strong>Codex CLI:</strong> $20/мес (ChatGPT Plus).
+              GPT-5.4-mini, 30% квоты на code review<br />
+              — <strong>Claude Code:</strong> $20/мес (Pro) или $100/мес (Max).
+              Opus + Sonnet без лимитов<br />
+              — <strong>Итого:</strong> $40-120/мес за полный AI-оркестр из 5
+              моделей<br />
+              — <strong>Через API:</strong> те же задачи = $200-500/мес при
+              активном использовании
+            </div>
+
+            <p>
+              <strong>Как это работает технически:</strong> Claude Code
+              запускает Codex и Gemini как background sub-agents через
+              <code style="color: var(--cyan)"
+                >Bash(run_in_background=true)</code
+              >. CLI-инструмент наследует auth сессию пользователя (OAuth для
+              Gemini, ChatGPT login для Codex). Никаких API ключей, никаких rate
+              limits по токенам — только limits самой подписки.
+            </p>
+
+            <p>
+              <strong>Auth один раз:</strong> Gemini CLI — OAuth через браузер,
+              один раз, потом работает. Codex CLI — логин ChatGPT, один раз.
+              Дальше Claude запускает их сам, без твоего участия.
+            </p>
+
+            <!-- 07: DISCOVERY -->
+            <h3 class="art-title" id="art-discovery">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              07. Discovery: четыре опоры перед стартом
+            </h3>
+
+            <p>
+              Boris начинает с research: "Read this folder in depth, understand
+              how it works deeply." У него уже есть codebase, есть контекст,
+              есть задача. Ему нужно только понять код глубже.
+            </p>
+
+            <p>
+              Я часто начинаю с нуля. Новая ниша, новый продукт, новый API.
+              Поэтому перед research мне нужен Discovery —
+              <strong>зафиксировать 4 вещи</strong>, прежде чем тратить время:
+            </p>
+
+            <div class="art-code">
+              1. Что строим — конкретно, одним предложением 2. Для кого —
+              целевой пользователь 3. Что НЕ строим — scope рамка 4. Что
+              считается первым успехом — measurable outcome
+            </div>
+
+            <p>
+              Это звучит банально, но без этого AI разъезжается моментально. Ты
+              говоришь "сделай трекер воды", а к концу сессии у тебя социальная
+              сеть с gamification, leaderboard и интеграцией с Apple Watch. AI
+              обожает добавлять scope.
+              <strong
+                >Discovery — это scope рамка, которая не даёт этому
+                случиться.</strong
+              >
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Правило:</strong> максимум 1 вопрос за сообщение. Максимум
+              3 вопроса, если задача простая. Обязательно предложить recommended
+              approach + alternative. Если вход слабый — сказать это прямо.
+            </div>
+
+            <p>
+              Discovery делает Opus inline. Не Sonnet — тот соглашается со всем.
+              Не Gemini — тот полезет в интернет до того, как мы определили что
+              ищем. Opus задаёт правильные вопросы и видит слабый вход.
+            </p>
+
+            <p>
+              Результат: <strong>brief.md</strong> (4 опоры) +
+              <strong>intent.md</strong> (зачем это вообще нужно) +
+              <strong>invariants.md</strong> (что не должно меняться). Три
+              файла, которые держат рамку на всём протяжении pipeline.
+            </p>
+
+            <!-- 08: RESEARCH (merged with research-deep) -->
+            <h3 class="art-title" id="art-research">
+              <span class="art-label badge-gemini">Gemini background</span
+              ><br />
+              08. Research: Gemini копает, Opus думает
+            </h3>
+
+            <p>
+              Вот где я принципиально разошёлся с Boris. Он делает research
+              внутри Claude: "Read this folder, study this system." Его research
+              — это чтение кода. Мой research — это чтение интернета, PDF,
+              документации API, скриншотов конкурентов.
+            </p>
+
+            <p>
+              Claude не умеет искать в интернете. Он галлюцинирует URL,
+              выдумывает статистику, уверенно цитирует несуществующие
+              исследования. Поэтому для research у меня
+              <strong>Gemini CLI</strong> — запускается в background через Bash,
+              ходит в интернет, читает PDF нативно, анализирует скриншоты.
+            </p>
+
+            <div class="art-code">
+              Bash( command="source ~/.claude/keys.env && \
+              GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p 'Research: [тема].
+              Find: market size, key players, \ pricing, technical approach,
+              gotchas. \ Be specific with numbers and sources.' \ -m
+              gemini-2.5-pro -o text \ > /tmp/gemini-research.md 2>/dev/null",
+              run_in_background=true )
+            </div>
+
+            <p>
+              Gemini приносит сырые данные: ссылки, числа, цитаты, сравнительные
+              таблицы. Но Gemini не думает — он собирает.
+              <strong>Думает Opus.</strong>
+            </p>
+
+            <p>
+              Когда Gemini завершил background task, я читаю его output и
+              передаю Opus для синтеза: "Вот research, вот brief. Какие
+              архитектурные альтернативы? Какие trade-offs? Что выбрать и
+              почему?" Opus видит картину целиком и принимает обоснованное
+              решение.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Паттерн "Gemini → Opus":</strong> Gemini = raw material
+              (background). Opus = synthesis и decisions (inline). Это как
+              аналитик приносит данные, а директор принимает решение. Никогда
+              наоборот.
+            </div>
+
+            <p>
+              Результат: <strong>research.md</strong> — не стена текста, а
+              структурированный анализ: что нашли, какие варианты, что
+              рекомендуем и почему. Этот файл — input для Plan.
+            </p>
+
+            <p>
+              Это один из самых контринтуитивных принципов. Ты сидишь в Claude
+              Code — зачем тебе другая модель для research? Claude же умный.
+              Claude может всё. Нет. Не может.
+            </p>
+
+            <p>
+              <strong>Claude не имеет доступа к интернету.</strong> Точка. Когда
+              ты спрашиваешь Claude "какой сейчас market size AI code tools?" —
+              он не гуглит. Он вспоминает. Из training data, которая обрезана на
+              определённой дате. И он не скажет "я не знаю" — он уверенно
+              назовёт число. Часто правдоподобное. Иногда правильное. Но ты
+              никогда не знаешь, когда он врёт.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Реальный случай:</strong> Claude уверенно процитировал
+              "исследование Gartner 2025" с конкретными числами. Исследование не
+              существовало. Числа были похожи на правду — достаточно, чтобы я
+              построил на них целый research.md. Gemini нашёл реальный отчёт за
+              30 секунд — числа отличались в 3 раза.
+            </div>
+
+            <p>
+              <strong>Codex CLI (OpenAI)</strong> — та же проблема. GPT-модели
+              не ходят в интернет через CLI. Codex отлично ревьюит код, но для
+              research он бесполезен — он тоже "вспоминает", а не ищет.
+            </p>
+
+            <p>
+              <strong>Opus</strong> — идеален для синтеза research, но не для
+              сбора. Он великолепно анализирует данные, видит trade-offs, строит
+              аргументацию. Но данные ему нужно дать. Без данных — галлюцинации.
+            </p>
+
+            <p>Кто реально умеет искать?</p>
+
+            <p>
+              <strong>Gemini CLI</strong> — нативный web search. Когда ты
+              запускаешь Gemini, он ходит в Google, находит свежие источники,
+              цитирует их с URL. Он видит PDF нативно — загрузил, прочитал,
+              структурировал. 2M контекст позволяет скормить ему целую
+              документацию API. И он работает в background — пока Gemini копает,
+              я продолжаю работать с Opus.
+            </p>
+
+            <div class="art-code">
+              // Gemini для market research: Bash( command="source
+              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
+              'Find: OBD2 diagnostic app market 2026. \ Market size, top 10 apps
+              by revenue, \ pricing models, technical requirements. \ Include
+              sources with URLs.' \ -m gemini-2.5-pro -o text \ >
+              /tmp/gemini-market.md 2>/dev/null", run_in_background=true ) //
+              Gemini для API documentation: Bash( command="source
+              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
+              'Read this API docs page completely. \ Extract: base URL, auth
+              method, \ all endpoints with request/response, \ rate limits,
+              pricing, known gotchas.' \ https://docs.example.com/api \ -m
+              gemini-2.5-pro -o text \ > /tmp/gemini-api-docs.md 2>/dev/null",
+              run_in_background=true )
+            </div>
+
+            <p>
+              <strong>Exa.ai</strong> — альтернатива для semantic search. Exa
+              ищет не по ключевым словам, а по смыслу: "найди все
+              инди-разработчики, которые написали про свой pipeline разработки
+              iOS apps". Google этого не умеет. Gemini использует Google под
+              капотом — значит, тоже не умеет. Exa закрывает этот gap. На
+              практике Gemini хватает для 90% задач, Exa — для оставшихся 10%.
+            </p>
+
+            <p>
+              <strong>Паттерн research фазы:</strong>
+            </p>
+
+            <div class="art-code">
+              1. Brief готов → формулируем research questions 2. Gemini CLI
+              (background) → raw data: числа, ссылки, цитаты, документация 3.
+              [Если нужно] Exa → semantic search по нишевым источникам 4. Opus
+              (inline) → синтез: "вот 3 альтернативы, вот trade-offs, рекомендую
+              X потому что Y" 5. Результат → research.md (структурированный, с
+              источниками)
+            </div>
+
+            <p>
+              Каждый слой делает своё. Gemini/Exa — сборщики. Они приносят
+              сырьё. Opus — аналитик. Он видит картину и принимает решение.
+              <strong
+                >Никогда не проси аналитика собирать данные. Никогда не проси
+                сборщика принимать решения.</strong
+              >
+            </p>
+
+            <div class="art-highlight">
+              <strong>Почему не один инструмент для всего?</strong>
+              Потому что "умный" ≠ "всезнающий". Claude Opus — самая умная
+              модель для рассуждений. Но он слеп без данных. Gemini —
+              посредственный аналитик, но отличный исследователь. Codex — плохой
+              исследователь, но точный ревьюер кода. Специализация >
+              универсальность. Это главный принцип мультимодельной оркестрации.
+            </div>
+
+            <!-- 09: PLAN -->
+            <h3 class="art-title" id="art-plan">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              09. Plan: контракт, не черновик
+            </h3>
+
+            <p>
+              Boris правильно говорит:
+              <strong
+                >"The built-in plan mode sucks. My markdown file gives me full
+                control."</strong
+              >
+              Я полностью согласен. plan.md — это файл в проекте, не
+              чат-сообщение и не built-in фича IDE.
+            </p>
+
+            <p>
+              Но у Boris plan.md — это единственный документ. У меня plan.md —
+              часть целого <strong>run folder</strong>:
+            </p>
+
+            <div class="art-code">
+              .kurdyuk-lite/runs/my-project/ ├── state.md ← фаза, текущий шаг,
+              blocker ├── brief.md ← 4 опоры (что / для кого / что НЕ / успех)
+              ├── intent.md ← зачем это вообще нужно ├── invariants.md ← что НЕ
+              должно меняться ├── research.md ← результаты research фазы ├──
+              plan.md ← КАНОНИЧЕСКИЙ IMPLEMENTATION CONTRACT ├── todo.md ←
+              execution surface с verification ├── implementation-readiness.md ←
+              verdict: pass/fail └── final-review.md ← честный verdict финала
+            </div>
+
+            <p>
+              plan.md не живёт в вакууме. Он проверяется против brief.md (scope
+              drift?), invariants.md (не нарушаем ли инварианты?), research.md
+              (все ли данные учтены?). Это не один документ — это
+              <strong>система документов с перекрёстными проверками</strong>.
+            </p>
+
+            <p>
+              Boris пишет план и аннотирует его сам. Я тоже аннотирую — но не
+              только я. Plan.md проходит через Annotation Cycle, где его атакуют
+              4+ агента. Об этом — дальше.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Антипаттерн:</strong> тихая подмена scope. AI обожает в
+              plan.md добавлять фичи, которых не было в brief.md. "Давайте ещё
+              добавим кэширование" — когда brief говорит "простой MVP". Поэтому
+              plan проверяется против brief явно.
+            </div>
+
+            <!-- 10: ANNOTATION CYCLE -->
+            <h3 class="art-title" id="art-annotation">
+              <span class="art-label badge-codex">Multi-agent</span><br />
+              10. Annotation Cycle: план атакуют четыре агента
+            </h3>
+
+            <p>
+              Это самое ценное, что я взял у Boris и расширил. Его идея
+              гениально проста:
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Boris Tane:</strong> "Claude writes plan.md → I review in
+              editor → I add inline notes → Send Claude back: 'address all the
+              notes, update the document, don't implement yet' → Repeat 1-6
+              times."
+            </div>
+
+            <p>
+              Один человек + один агент. Markdown как shared mutable state.
+              Простая, мощная идея. Но у неё есть ограничение:
+              <strong>один взгляд на проблему</strong>. Человек видит план через
+              свою призму. Claude соглашается с большей частью (он обучен быть
+              helpful, не critical).
+            </p>
+
+            <p>
+              Я добавил <strong>мультиагентные проходы</strong>. Каждый проход —
+              другой агент, другая перспектива, другие вопросы:
+            </p>
+
+            <p>
+              <strong>Red Team</strong> — атакует план. Ищет scope creep, wrong
+              assumptions, failure modes. "Ты заложил 3 API, но brief говорит
+              только про один. Это conscious decision или drift?" Red Team не
+              предлагает решения — он ломает. Это его работа.
+            </p>
+
+            <p>
+              <strong>Architect</strong> — проверяет структуру. Trade-offs,
+              wrong abstractions, overengineering. "SQLite хватит для этого
+              scope. PostgreSQL — это не техническое решение, это anxiety."
+              Architect думает о том, что будет через 3 месяца, не через 3 часа.
+            </p>
+
+            <p>
+              <strong>Codex CLI (background)</strong> — implementation review.
+              Запускается через Bash в background, читает план и сравнивает с
+              brief. "Phase 3 зависит от API, которого нет в research.md. Вы
+              планируете его добавить или это ошибка?" Codex — прагматик. Его не
+              интересует красота плана, его интересует: это вообще можно
+              реализовать?
+            </p>
+
+            <div class="art-code">
+              Bash( command="codex exec \ 'Review plan.md as implementation
+              expert: \ check feasibility, find pitfalls, \ compare with
+              brief.md for scope drift. \ Be direct.' \ -s read-only \ -C
+              .kurdyuk-lite/runs/my-project/ \ -o /tmp/codex-plan-review.md",
+              run_in_background=true )
+            </div>
+
+            <p>
+              <strong>Gemini Design (background)</strong> — если в задаче есть
+              UI, Gemini смотрит mockups/скриншоты. "Touch target 38pt — минимум
+              44pt по HIG. Contrast ratio 2.8:1 — нужно 4.5:1." Gemini видит
+              пиксели, Claude видит код. Разные глаза на одну проблему.
+            </p>
+
+            <p>
+              <strong>Я (User)</strong> — продуктовые решения. "Убери
+              регистрацию, сделай проще." Или: "Нет, кэш здесь не нужен, мы это
+              делаем один раз." AI не знает мой бизнес-контекст. Я знаю.
+            </p>
+
+            <div class="diagram-vertical">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                  margin-bottom: 8px;
+                "
+              >
+                Annotation Cycle
+              </div>
+              <div
+                class="d-node"
+                style="border-color: var(--purple); color: var(--purple)"
+              >
+                Claude пишет plan.md
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-red">Red Team атакует</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-purple">Architect проверяет</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-amber">Codex ревьюит (bg)</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-green">Gemini Design (bg)</div>
+              <div class="d-arrow">↓</div>
+              <div
+                class="d-node"
+                style="border-color: var(--blue); color: var(--blue)"
+              >
+                User: продуктовые правки
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-highlight">
+                Claude обновляет plan.md
+              </div>
+              <div class="d-arrow">↻ ещё цикл?</div>
+            </div>
+
+            <p>
+              После каждого цикла Claude применяет коррекции к plan.md и
+              спрашивает:
+              <strong>"Нужен ещё цикл или план готов?"</strong> Не решает сам.
+              1-6 итераций — нормально.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Почему это работает:</strong> один ревьюер может
+              пропустить проблему. Четыре — маловероятно. Red Team ищет scope
+              drift, Architect — structural issues, Codex — feasibility, Gemini
+              — visual bugs. Каждый смотрит через свою линзу. Это не дороже —
+              Codex и Gemini бегут в background, пока я обсуждаю с Opus.
+            </div>
+
+            <!-- 11: READINESS -->
+            <h3 class="art-title" id="art-readiness">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              11. Readiness Gate: последний шанс сказать "нет"
+            </h3>
+
+            <p>
+              Этого нет у Boris. У него после annotation — сразу implement. У
+              меня между ними стоит <strong>Readiness Gate</strong> — отдельный
+              checkpoint с verdict: pass или fail.
+            </p>
+
+            <p>
+              Зачем? Потому что annotation cycle может закончиться на "вроде ок"
+              вместо "точно ок". Readiness Gate — это
+              <strong>формальная проверка</strong>: все ли dependencies есть?
+              Все ли API researched? Brief не нарушен? Invariants на месте? Todo
+              list готов?
+            </p>
+
+            <div class="art-code">
+              ## Implementation Readiness Assessment **Verdict: PASS / FAIL**
+              Checklist: - [ ] brief.md: 4 опоры заполнены - [ ] research.md:
+              все внешние зависимости researched - [ ] plan.md: прошёл
+              annotation cycle (1+ итераций) - [ ] invariants.md: план не
+              нарушает инварианты - [ ] todo.md: задачи разбиты, verification
+              fields пустые - [ ] Нет open questions или blockers **If FAIL:**
+              что нужно доделать перед implement
+            </div>
+
+            <p>
+              Это последний шанс сказать "стоп" дёшево. Каждая минута в
+              Implement стоит в 10 раз дороже минуты в Planning. Readiness Gate
+              — это
+              <strong>экономия</strong>, не бюрократия.
+            </p>
+
+            <p>
+              Без pass — код запрещён. Не "попробуем и посмотрим", а именно
+              запрещён. Это правило pipeline.
+            </p>
+
+            <!-- 12: IMPLEMENT -->
+            <h3 class="art-title" id="art-implement">
+              <span class="art-label badge-sonnet">Sonnet inline</span><br />
+              12. Implement: Sonnet кодит, Opus молчит
+            </h3>
+
+            <p>
+              Boris делает implement через Opus: "Implement it all. Mark
+              completed tasks. Do not stop." Его промпт великолепен в своей
+              прямоте. Но я использую <strong>Sonnet, не Opus</strong>.
+            </p>
+
+            <p>
+              Почему? Потому что к этому моменту вся сложность уже решена. Plan
+              прошёл 4 агента review. Readiness = pass. Todo list готов с
+              конкретными задачами. Реализация должна быть
+              <strong>boring</strong> — как Boris и говорит: "The creative work
+              happened in the annotation cycles."
+            </p>
+
+            <p>
+              Sonnet быстрее, дешевле и не хуже Opus для написания кода по
+              готовому плану. Opus избыточен здесь — его сила в thinking, а
+              thinking на этом этапе уже произошёл.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Правило Boris (которое я использую дословно):</strong>
+              "Do not add unnecessary comments or jsdocs. Do not stop until all
+              tasks are completed. Continuously run typecheck." — Минимализм в
+              implement промпте.
+            </div>
+
+            <p>
+              Отличие от Boris: я использую
+              <strong>todo.md с verification полями</strong>. Не просто "mark as
+              completed" — а "mark as completed WITH proof".
+            </p>
+
+            <div class="art-code">
+              ## Todo ✅ Реализовать SQLite кэширование **Verify:** 2nd run 0
+              API calls, response from cache 14ms ✅ Добавить integration tests
+              **Verify:** 23 tests passed, 0 mocks, real SQLite in-memory □
+              Оптимизировать N+1 запросы **Verify:** ___
+            </div>
+
+            <p>
+              Каждая галочка — не "AI сказал done", а
+              <strong>"вот proof"</strong>. Тест прошёл — покажи output. Кэш
+              работает — покажи лог. Запросы оптимизированы — покажи EXPLAIN.
+              Без proof — задача не done.
+            </p>
+
+            <!-- 13: REVIEW -->
+            <h3 class="art-title" id="art-review">
+              <span class="art-label badge-opus">Multi-layer</span><br />
+              13. Review: три слоя проверки
+            </h3>
+
+            <p>
+              У Boris нет отдельной фазы review после implement. Его implement
+              включает typecheck, и этого ему достаточно — он сам ревьюит код в
+              процессе.
+            </p>
+
+            <p>У меня <strong>три слоя</strong>, и они бегут параллельно:</p>
+
+            <p>
+              <strong>Слой 1: Codex CLI (background)</strong> — code review.
+              Читает написанный код, сравнивает с планом. "Функция
+              deduplicateByTitle не реализована. В plan.md она есть, в коде —
+              нет." Codex видит расхождения между планом и реализацией, которые
+              человек пропустит.
+            </p>
+
+            <p>
+              <strong>Слой 2: Gemini Visual QA (background)</strong> — если есть
+              UI. Сравнивает скриншот реализации с mockup/brief. "Кнопка
+              сместилась на 8px влево. Шрифт заголовка 16pt вместо 18pt."
+              Pixel-level проверка, которую ни один code review не поймает.
+            </p>
+
+            <p>
+              <strong>Слой 3: Opus Final Review (inline)</strong> — честный
+              verdict. Opus читает весь run folder (brief → plan → todo → код) и
+              выносит judgment. "Реализация соответствует плану. Два deferred
+              item из Codex review — некритичные, можно в v1.1."
+            </p>
+
+            <div class="art-code">
+              // Слои 1 и 2 бегут параллельно в background: Bash(command="codex
+              exec 'Review code...' -o /tmp/codex-review.md",
+              run_in_background=true) Bash(command="gemini -p 'Compare
+              screenshot vs mockup...' -o text > /tmp/gemini-qa.md",
+              run_in_background=true) // Когда оба завершились → Opus читает и
+              выносит verdict: Read /tmp/codex-review.md Read /tmp/gemini-qa.md
+              → Opus: final-review.md с verdict
+            </div>
+
+            <p>
+              Всё, что нашли Codex и Gemini, фиксируется в final-review.md как
+              "accepted" или "deferred". Ничего не теряется. Если deferred — это
+              explicit decision, не забытый bug.
+            </p>
+
+            <!-- 14: SESSIONS -->
+            <h3 class="art-title" id="art-sessions">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(236, 72, 153, 0.2);
+                  color: var(--pink);
+                  border: 1px solid rgba(236, 72, 153, 0.3);
+                "
+                >Архитектура</span
+              ><br />
+              14. Сессии: почему файлы важнее чата
+            </h3>
+
+            <p>
+              Boris предпочитает одну длинную сессию: "No performance
+              degradation at 50% context window." Он прав — plan.md выживает
+              auto-compaction, и в рамках одного проекта это работает.
+            </p>
+
+            <p>
+              Но я работаю над <strong>8+ проектами параллельно</strong>.
+              Teardown Suite, Gap Pipeline, Video Methodology Extractor, Expert
+              RAG Portal, Kurdyuk Mobile, порталы, research. Длинная сессия на
+              один проект — роскошь, которую я не могу себе позволить.
+            </p>
+
+            <p>
+              Поэтому мой pipeline — <strong>session-agnostic</strong>. Всё
+              ценное живёт в файлах:
+            </p>
+
+            <p>
+              <strong>state.md</strong> — точка входа. Фаза, текущий шаг,
+              blocker. Новая сессия = читай state.md.
+            </p>
+
+            <p>
+              <strong>Run folder</strong> — полный audit trail проекта. Brief,
+              intent, invariants, research, plan, todo, readiness, review. Любой
+              агент (или я через неделю) может войти, прочитать state.md и
+              продолжить с нужного места.
+            </p>
+
+            <p>
+              <strong>Memory</strong> — persistent cross-session знания. Не
+              дублирует run-файлы. Хранит: кто я, что предпочитаю, какие lessons
+              learned, где какие API gotchas. Загружается автоматически в каждую
+              сессию.
+            </p>
+
+            <p>
+              <strong>Skills (19 штук)</strong> — API-знания. Base URL, auth,
+              endpoints, pricing, gotchas. Нашёл gotcha → обновил SKILL.md. В
+              следующей сессии любой агент уже знает про эту gotcha.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Hard-won lesson:</strong> stale plan опаснее
+              отсутствующего. Завершённый plan.md в контексте = AI думает работа
+              не сделана и предлагает её снова. 3+ сессии подряд Claude
+              предлагал batch regen, который давно завершён. Теперь правило:
+              реализованный план → удалить файл. Plan = живой контракт, не
+              архив.
+            </div>
+
+            <p>
+              Handoff protocol при смене сессии: обновить state.md → обновить
+              memory (если есть cross-session value) → обновить skills (если
+              нашёлся API gotcha) → cleanup (удалить stale). Вход в новую
+              сессию: MEMORY.md → state.md → продолжай.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Итог:</strong> Boris оптимизирует для глубины одной
+              сессии. Я оптимизирую для ширины — много проектов, много сессий,
+              много агентов. Оба подхода работают. Выбор зависит от того, как ты
+              работаешь.
+            </div>
+
+            <!-- 15: AGENT SWARM -->
+            <h3 class="art-title" id="art-swarm">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(236, 72, 153, 0.2);
+                  color: var(--pink);
+                  border: 1px solid rgba(236, 72, 153, 0.3);
+                "
+                >Advanced</span
+              ><br />
+              15. Swarm: много агентов на одну задачу
+            </h3>
+
+            <p>
+              Стандартный паттерн: один агент делает одну задачу. Но что если
+              тебе нужно
+              <strong>10 разных мнений</strong> на один и тот же вопрос?
+            </p>
+
+            <p>
+              Пример: ты сделал UI для нового экрана приложения. Вместо того
+              чтобы спросить одного Claude "как тебе?" — запусти
+              <strong>5-10 агентов параллельно</strong>, каждый с разной
+              persona:
+            </p>
+
+            <div class="art-code">
+              # Запускаем 6 агентов параллельно: Agent("Casual user, 25, uses
+              phone 4h/day. Look at this screen. Is it obvious what to do? What
+              confuses you? Be honest.") Agent("Power user, developer, very
+              picky. Review this UI. What's broken? What's slow? What would you
+              change?") Agent("Mom, 55, not tech-savvy. Can you figure out how
+              to track water here? What's unclear?") Agent("Designer, worked at
+              Apple. Rate this UI 1-10. What breaks iOS HIG? What's the weakest
+              element?") Agent("Competitor analyst. Compare this to top 3 water
+              trackers. What's missing? What's better?") Agent("Accessibility
+              tester. Can a VoiceOver user navigate this? Dynamic Type breaks
+              anything?")
+            </div>
+
+            <p>
+              Это не абстракция. Каждый агент — реальный sub-agent с контекстом.
+              Он видит скриншот, читает brief, понимает задачу. И отвечает
+              <strong>из своей перспективы</strong>. 6 агентов = 6 разных
+              взглядов на один экран. За 2 минуты. Бесплатно (подписка).
+            </p>
+
+            <div class="art-highlight">
+              <strong>Где это работает:</strong><br />
+              — <strong>UI feedback:</strong> 5-10 persona-агентов дают "user
+              testing" без реальных пользователей<br />
+              — <strong>Copy review:</strong> агенты-"читатели" с разным уровнем
+              грамотности проверяют текст<br />
+              — <strong>Architecture review:</strong> агент-"junior",
+              агент-"senior", агент-"SRE" смотрят на один план<br />
+              — <strong>Market research:</strong> агенты ищут информацию в
+              разных нишах параллельно<br />
+              — <strong>ASO:</strong> агенты-"пользователи" оценивают скриншоты
+              и описание в App Store
+            </div>
+
+            <p>
+              <strong>Это не A/B тест.</strong> Это A/B/C/D/E/F тест, где каждый
+              "пользователь" — AI-агент с настроенной persona. Дешевле, быстрее
+              и доступнее, чем UserTesting.com. Не заменяет реальных
+              пользователей на 100% — но закрывает 80% очевидных проблем до
+              того, как реальный пользователь их увидит.
+            </p>
+
+            <p>
+              <strong>Параллельность:</strong> все агенты запускаются
+              одновременно. Не последовательно. Claude Code поддерживает
+              множественный запуск Agent tool в одном сообщении. 5 агентов = 5
+              параллельных процессов = результат за время самого медленного, не
+              за сумму всех.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Принцип swarm:</strong> когда тебе нужно не "правильное
+              решение", а "спектр мнений" — не проси одного агента думать за
+              всех. Запусти много агентов с разными ролями. Один пропустит
+              проблему. Шестеро — маловероятно. Тот же принцип что в Annotation
+              Cycle, но масштабированный.
+            </div>
+
+            <!-- 16: PORTALS -->
+            <h3 class="art-title" id="art-portals">
+              <span class="art-label badge-sonnet">Визуализация</span><br />
+              16. Порталы: данные бесполезны, пока ты их не видишь
+            </h3>
+
+            <p>
+              Pipeline генерит данные. Много данных. Gap analysis находит 1169
+              gaps. Teardown Suite разбирает 10 конкурентов. RAG-система
+              индексирует 50 часов видео. Это всё JSON-файлы, SQLite базы,
+              markdown.
+              <strong>Ты их не откроешь.</strong> Не потому что не можешь —
+              потому что 1169 строк JSON невозможно "просмотреть".
+            </p>
+
+            <p>
+              Поэтому каждый серьёзный output pipeline →
+              <strong>HTML-портал</strong>. Единый файл, Chart.js,
+              glass-morphism, интерактивные таблицы, фильтры. Открыл в браузере
+              — видишь всю картину.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Порталы которые я уже построил:</strong><br />
+              — <strong>Gap Analysis Portal:</strong> 417 ниш, tiered layout,
+              unified competitors, badges, depth warnings<br />
+              — <strong>Vibe Coding Portal:</strong> 12 секций, 6 charts,
+              timeline, expert quotes, ~4500 строк<br />
+              — <strong>CarPlay OBD Templates:</strong> 10 CPTemplate mockups,
+              HIG compliant<br />
+              — <strong>Этот портал:</strong> принципы вайбкодинга, 26 глав<br />
+              — <strong>Expert RAG Portal:</strong> semantic search по 50+ видео
+              с tag filtering
+            </div>
+
+            <p>
+              <strong>Smoke test — первая точка.</strong> Не строй портал сразу.
+              Сначала smoke test: "покажи мне 5 записей из результата в читаемом
+              виде". Если данные мусорные — портал не нужен, нужен fix pipeline.
+              Если данные хорошие — строй портал.
+            </p>
+
+            <div class="art-code">
+              Smoke test flow: 1. Pipeline отработал → JSON/SQLite output 2.
+              Claude: "покажи 5 примеров в таблице" 3. Проверяю: данные
+              валидные? Есть мусор? 4. Если ок → "построй портал" 5. Если мусор
+              → "почини pipeline, вот проблемы" Portal flow: 1. Claude Sonnet
+              генерит HTML (один файл, self-contained) 2. Данные в JS-объекте
+              наверху script — легко обновить 3. Chart.js для визуализаций 4.
+              Открыл в браузере → полная картина 5. Нашёл проблему → fix →
+              re-run → обновить данные
+            </div>
+
+            <p>
+              <strong>Публикация: GitHub Pages + приватное репо.</strong>
+              Портал — один HTML файл. Его можно выгрузить на GitHub Pages из
+              приватного репо. Доступ только у тебя (и тех, кого добавишь). Плюс
+              — закрыть от индексации:
+            </p>
+
+            <div class="art-code">
+              # В корне репо: robots.txt User-agent: * Disallow: / # Или в head
+              портала: &lt;meta name="robots" content="noindex, nofollow"&gt; #
+              Результат: # https://username.github.io/my-portal/ # Доступен по
+              ссылке, не индексируется поисковиками # Репо приватное → только
+              collaborators видят код
+            </div>
+
+            <p>
+              <strong>Почему не Notion / Google Docs / Confluence?</strong>
+              Потому что HTML-портал — это код. Claude его генерит, обновляет,
+              рефакторит. Данные в JS-объекте — обновить = заменить объект.
+              Charts перестроятся автоматически. В Notion ты будешь руками
+              таскать таблицы. В HTML — одна команда и всё обновилось.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Принцип:</strong> pipeline без визуализации — чёрный ящик.
+              Ты не знаешь что внутри. Портал — это окно внутрь. Smoke test →
+              портал → iterate. Не наоборот. И не "когда-нибудь потом сделаю
+              дашборд" — сразу. Иначе ты работаешь вслепую.
+            </div>
+
+            <!-- 17: DISCIPLINE -->
+            <h3 class="art-title" id="art-discipline">
+              <span class="art-label badge-opus">Контроль</span><br />
+              17. Дисциплина: не давай AI перескакивать
+            </h3>
+
+            <p>
+              AI хочет писать код. Прямо сейчас. Ты ещё на фазе обсуждения, а он
+              уже редактирует файлы. Ты задал вопрос про архитектуру, а он выдал
+              "вот, я уже всё реализовал". Это
+              <strong>самая опасная привычка</strong> AI-агентов — склонность
+              перескакивать к следующему действию.
+            </p>
+
+            <p>
+              Типичный сценарий: ты утвердил план. AI написал код. Ты говоришь
+              "хм, вот тут не так". AI: "Исправил! И заодно рефакторнул три
+              соседних файла, добавил кэширование и переименовал API." Ты не
+              просил. Но он уже это сделал. И откатить сложнее, чем было бы не
+              делать.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Правило:</strong> фаза обсуждения ≠ разрешение на
+              implement. "Что думаешь?" ≠ "делай". "Посмотри на это" ≠ "правь".
+              AI должен показать что планирует — и ждать явного "делай" / "ок" /
+              "приступай". Без этого слова — руки прочь от файлов.
+            </div>
+
+            <p>
+              <strong>Annotation cycle — главный защитный механизм.</strong>
+              Между Plan и Implement стоят 1-6 циклов ревью. После каждого
+              Claude спрашивает: "Нужен ещё цикл или план готов?" Не решает сам.
+              Ты гоняешь циклы, пока план не станет таким, что доработки мелкие
+              или их нет совсем. Только тогда — implement.
+            </p>
+
+            <div class="art-code">
+              Типичная сессия annotation cycle: Цикл 1: Red Team → "scope drift
+              в Phase 3, 2 лишних API" Claude обновляет plan → "ещё цикл?" Цикл
+              2: Codex (bg) → "endpoint /api/v2/sync не существует" Claude
+              обновляет plan → "ещё цикл?" Цикл 3: Architect → "SQLite хватит,
+              Postgres избыточен" Claude обновляет plan → "ещё цикл?" Цикл 4:
+              User → "убери регистрацию, сделай проще" Claude обновляет plan →
+              "ещё цикл?" Цикл 5: Мелкие правки, ничего structural → "план
+              готов, переходи к readiness"
+            </div>
+
+            <p>
+              <strong>5 циклов</strong> — не бюрократия. Каждый цикл ловил
+              реальную проблему. Без них я бы начал кодить с несуществующим
+              endpoint, лишней базой данных и фичей, которую никто не просил. А
+              потом откатывал бы 3 часа работы.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Когда остановиться:</strong> когда замечания мелкие
+              (форматирование, naming) или их нет. Если каждый цикл находит
+              structural issue — план ещё сырой. Если находит только cosmetic —
+              план готов. Readiness Gate подтвердит.
+            </div>
+
+            <!-- 18: ARBITRAGE -->
+            <h3 class="art-title" id="art-arbitrage">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(236, 72, 153, 0.2);
+                  color: var(--pink);
+                  border: 1px solid rgba(236, 72, 153, 0.3);
+                "
+                >Decision-making</span
+              ><br />
+              18. Арбитраж: когда сам не знаешь как лучше
+            </h3>
+
+            <p>
+              Opus спрашивает: "Делать через WebSocket или polling? Оба варианта
+              рабочие." Ты не знаешь. У тебя нет опыта с обоими подходами в этом
+              конкретном контексте. Что делать?
+            </p>
+
+            <p>
+              <strong
+                >Не угадывать. Не гуглить 2 часа. Запустить арбитраж.</strong
+              >
+            </p>
+
+            <div class="art-code">
+              Шаг 1: Запусти 3 агента параллельно с разными моделями Agent("Ты
+              архитектор. Вот контекст: [brief + plan]. Вопрос: WebSocket vs
+              polling для этого кейса. Аргументируй ЗА WebSocket. Будь
+              конкретен.") Agent("Ты архитектор. Вот контекст: [brief + plan].
+              Вопрос: WebSocket vs polling для этого кейса. Аргументируй ЗА
+              polling. Будь конкретен.") Bash("gemini -p 'WebSocket vs polling
+              для [контекст]. Найди реальные кейсы, benchmarks, опыт команд. Что
+              выбирают в production и почему.' -m gemini-2.5-pro -o text >
+              /tmp/gemini-ws-poll.md", run_in_background=true) Шаг 2: Когда все
+              завершились → арбитр Agent("Вот 3 мнения по вопросу WebSocket vs
+              polling: [вставить output всех трёх] Ты арбитр. Какое решение
+              лучше для нашего конкретного контекста? Почему? Какие риски у
+              выбранного варианта?")
+            </div>
+
+            <div class="diagram-flow" style="flex-direction: column; gap: 16px">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                "
+              >
+                Flow арбитража
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 8px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div class="d-node d-node-purple">
+                  Opus<br /><span style="font-size: 0.7rem; opacity: 0.7"
+                    >за вариант A</span
+                  >
+                </div>
+                <div class="d-node d-node-amber">
+                  Opus<br /><span style="font-size: 0.7rem; opacity: 0.7"
+                    >за вариант B</span
+                  >
+                </div>
+                <div class="d-node d-node-green">
+                  Gemini<br /><span style="font-size: 0.7rem; opacity: 0.7"
+                    >данные из web</span
+                  >
+                </div>
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-big d-node-highlight">
+                Арбитр (Opus)<br /><span style="font-size: 0.7rem; opacity: 0.8"
+                  >синтез + verdict</span
+                >
+              </div>
+              <div class="d-arrow">↓</div>
+              <div
+                class="d-node d-node-big"
+                style="border-color: #f1f5f9; color: #f1f5f9"
+              >
+                Решение + аргументация
+              </div>
+            </div>
+
+            <p>
+              <strong>Почему это работает:</strong> каждый агент думает в одном
+              направлении, без компромиссов. Один защищает WebSocket с лучшими
+              аргументами. Другой — polling. Третий (Gemini) приносит реальные
+              данные из интернета. Арбитр видит всё и принимает обоснованное
+              решение.
+            </p>
+
+            <p>
+              Ты не мог бы сам придумать все эти аргументы. AI-агент один тоже
+              не мог бы — он бы дал "balanced view" с заключением "depends on
+              your needs". Арбитраж даёт
+              <strong>конкретное решение с аргументацией</strong>.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Ревью на ревью:</strong> тот же принцип работает для
+              ревью. Система выдала code review — "всё ок, мелкие замечания". Не
+              верь. Запусти второго агента: "Вот code review. Ты мета-ревьюер.
+              Что пропущено? Какие замечания поверхностные? Где ревьюер был
+              ленив?" Мета-ревью ловит то, что первый ревью пропустил. Ревью на
+              ревью — не паранойя, а <strong>calibration</strong>.
+            </div>
+
+            <p>
+              <strong>Когда использовать арбитраж:</strong>
+            </p>
+
+            <p>
+              — Архитектурное решение с 2+ равносильными вариантами<br />
+              — Выбор технологии (какая БД, какой фреймворк, какой API)<br />
+              — Дизайн-решение, когда оба варианта "нормальные"<br />
+              — Любой момент, когда ты ловишь себя на "а хрен его знает"
+            </p>
+
+            <!-- 19: META-REVIEW + BRAINSTORM -->
+            <h3 class="art-title" id="art-meta-review">
+              <span class="art-label badge-codex">Multi-model</span><br />
+              19. Мозговой штурм: 10 агентов думают параллельно
+            </h3>
+
+            <p>
+              Annotation cycle — это последовательные проходы. Один агент →
+              коррекции → другой агент. Но иногда нужно не последовательно, а
+              <strong>параллельно</strong>. 10 агентов думают над одной
+              проблемой одновременно. Разные модели, разные промпты.
+            </p>
+
+            <p>
+              <strong>Когда:</strong> проблема сложная, решение неочевидное,
+              один агент буксует. Вместо того чтобы гонять одного Opus в 10
+              итераций — запусти 10 агентов сразу.
+            </p>
+
+            <div class="art-code">
+              # Проблема: "Как организовать multi-transcriber routing # в video
+              extractor, чтобы fallback работал надёжно?" # 3 Opus агента с
+              разными углами: Agent("Ты backend-архитектор. Предложи
+              routing...") Agent("Ты SRE. Предложи routing с фокусом на
+              reliability...") Agent("Ты data engineer. Предложи routing с
+              фокусом на cost...") # 2 Gemini (через Bash background):
+              Bash("gemini -p 'Как крупные проекты делают multi-provider
+              transcription routing? Примеры из open source.' > /tmp/g1.md",
+              run_in_background=true) Bash("gemini -p 'Soniox vs Groq vs
+              Whisper: когда какой выбирать? Benchmarks, WER, стоимость.' >
+              /tmp/g2.md", run_in_background=true) # 1 Codex: Bash("codex exec
+              'Review current transcriber code. What breaks if provider is down?
+              Suggest fixes.' -s read-only -C /path/to/project/ -o
+              /tmp/codex-routing.md", run_in_background=true) # Все 6
+              завершились → собрать и синтезировать: Agent("Вот 6 предложений по
+              routing. Синтезируй: что общего? Где расходятся? Какой подход
+              закрывает больше edge cases?")
+            </div>
+
+            <div class="diagram-flow" style="flex-direction: column; gap: 16px">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                "
+              >
+                Мозговой штурм: параллельный запуск
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 8px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                "
+              >
+                <div class="d-node d-node-purple">
+                  Opus<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >архитектор</span
+                  >
+                </div>
+                <div class="d-node d-node-purple">
+                  Opus<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >SRE</span
+                  >
+                </div>
+                <div class="d-node d-node-purple">
+                  Opus<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >data eng</span
+                  >
+                </div>
+                <div class="d-node d-node-green">
+                  Gemini<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >open source</span
+                  >
+                </div>
+                <div class="d-node d-node-green">
+                  Gemini<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >benchmarks</span
+                  >
+                </div>
+                <div class="d-node d-node-amber">
+                  Codex<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >code review</span
+                  >
+                </div>
+              </div>
+              <div class="d-arrow">↓ все параллельно ↓</div>
+              <div class="d-node d-node-big d-node-highlight">
+                Синтез: что общего? Где расходятся?
+              </div>
+            </div>
+
+            <p>
+              6 агентов, 3 разных модели, 6 разных перспектив. Результат за 2-3
+              минуты. Один Opus думал бы в одном направлении. Шестеро —
+              покрывают пространство решений.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Ключевая разница от Swarm (глава 15):</strong>
+              Swarm — это persona-агенты для <em>feedback</em> ("что думает
+              пользователь"). Мозговой штурм — это <em>разные AI-модели</em> для
+              <em>решения проблемы</em>. Swarm = "как это воспринимается".
+              Brainstorm = "как это построить".
+            </div>
+
+            <!-- 20: BUG HUNTING -->
+            <h3 class="art-title" id="art-bug-hunting">
+              <span class="art-label badge-opus">Quality</span><br />
+              20. Итеративная охота за багами
+            </h3>
+
+            <p>
+              AI написал код. Тесты проходят. Ты думаешь — готово.
+              <strong>Нет.</strong> Это только начало.
+            </p>
+
+            <p>
+              Один проход code review ловит очевидные баги. Два прохода —
+              находят logic errors. Три — находят edge cases. Четыре — находят
+              integration issues. Каждый следующий проход ловит то, что
+              предыдущие пропустили. Потому что
+              <strong>каждый проход смотрит свежими глазами</strong>.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Реальный пример: Video Methodology Extractor.</strong>
+              Проект прошёл через десятки итераций ревью. Вот что находилось на
+              каждом уровне:
+            </div>
+
+            <p>
+              <strong>Уровень 1: Очевидные баги</strong><br />
+              — Whisper на MPS падал с ошибкой. Fix:
+              <code style="color: var(--cyan)">fp16=False</code>. Нашли на
+              первом прогоне.<br />
+              — SSL-сертификат не проходил на macOS. Fix:
+              <code style="color: var(--cyan)"
+                >ssl._create_unverified_context</code
+              >.
+            </p>
+
+            <p>
+              <strong>Уровень 2: Плохой research → баги в логике</strong><br />
+              — Не знали что в подкасте <strong>2 спикера</strong>, не один.
+              Весь transcription pipeline был заточен под single speaker.
+              Пришлось добавлять diarization (разделение спикеров). Это не баг в
+              коде — это баг в research: не нашли что в аудио несколько
+              голосов.<br />
+              — Не знали что Soniox поддерживает
+              <strong>context window для словаря</strong> (до 8000 tokens).
+              Первая интеграция не использовала context.terms. Результат:
+              "AdMob" транскрибировался как "ad mob", "Applovin" как "app
+              lovin". Пришлось добавлять custom vocabulary.
+            </p>
+
+            <p>
+              <strong>Уровень 3: Плохой skill → неправильные вызовы API</strong
+              ><br />
+              — Skill для Soniox не документировал что
+              <code style="color: var(--cyan)">context.terms</code> принимает
+              <strong>только английские произношения</strong>, не
+              транслитерации. Писали "АдМоб" в terms — Soniox игнорировал. Нужно
+              "AdMob". Это нюанс, которого нет в документации — только в issues
+              на GitHub.<br />
+              — Skill для Groq не документировал max file size 25MB. Файлы по
+              40MB падали молча. Fix: ffmpeg split перед отправкой. Skill
+              обновлён.
+            </p>
+
+            <p>
+              <strong>Уровень 4: Regex и post-processing edge cases</strong
+              ><br />
+              — "адмоб" → "AdMob" работало. Но "admob" → "AdMob" — нет (другой
+              регистр). Пришлось делать 3-tier regex: Tier 1 (always), Tier 2
+              (common), Tier 3 (context-gated).<br />
+              — Спикеры путались при коротких репликах (&lt; 2 секунды).
+              Diarization считала это одним спикером.
+            </p>
+
+            <div class="diagram-vertical">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                  margin-bottom: 8px;
+                "
+              >
+                Уровни багов (от поверхности вглубь)
+              </div>
+              <div
+                class="d-node"
+                style="border-color: var(--green); color: var(--green)"
+              >
+                Уровень 1: Crash-level баги<br /><span
+                  style="font-size: 0.7rem; opacity: 0.7"
+                  >fp16, SSL, runtime errors</span
+                >
+              </div>
+              <div class="d-arrow">↓ глубже</div>
+              <div class="d-node d-node-amber">
+                Уровень 2: Плохой research<br /><span
+                  style="font-size: 0.7rem; opacity: 0.7"
+                  >2 спикера, custom vocab</span
+                >
+              </div>
+              <div class="d-arrow">↓ глубже</div>
+              <div class="d-node d-node-red">
+                Уровень 3: Плохой skill<br /><span
+                  style="font-size: 0.7rem; opacity: 0.7"
+                  >terms ≠ транслитерации, max 25MB</span
+                >
+              </div>
+              <div class="d-arrow">↓ глубже</div>
+              <div class="d-node d-node-purple">
+                Уровень 4: Edge cases<br /><span
+                  style="font-size: 0.7rem; opacity: 0.7"
+                  >regex tiers, short utterances</span
+                >
+              </div>
+              <div class="d-arrow">↓ глубже</div>
+              <div
+                class="d-node upd-glow"
+                style="border-color: var(--green); color: var(--green)"
+              >
+                Уровень 5: Cost estimation <span class="upd-badge">UPD</span
+                ><br /><span style="font-size: 0.7rem; opacity: 0.7"
+                  >оценки занижены 5-10x</span
+                >
+              </div>
+            </div>
+
+            <div class="art-code">
+              Цикл ревью для VME: Проход 1: "Код работает?" → fix crash-level
+              баги Проход 2: "Логика правильная?" → fix speaker count, pipeline
+              flow Проход 3: "API вызовы корректные?" → fix Soniox terms, Groq
+              file size Проход 4: "Edge cases?" → fix regex tiers, short
+              utterances Проход 5: "Skills актуальные?" → update Soniox, Groq,
+              Voicee skills Проход 6: "Research полный?" → добавить diarization,
+              custom vocab Каждый проход → новые находки → fix → следующий
+              проход. Остановка: когда проход не находит ничего нового.
+            </div>
+
+            <div class="art-highlight">
+              <strong>Три источника багов (по убыванию коварности):</strong
+              ><br /><br />
+              <strong>1. Плохой research</strong> — самый опасный. Ты не знал
+              что спикеров двое. Код идеальный, но решает не ту задачу. Fix:
+              глубже копать на research фазе. Gemini + Reddit + GitHub
+              issues.<br /><br />
+              <strong>2. Плохой skill</strong> — API работает не так, как ты
+              думал. Endpoint есть, но параметр принимает не то. Fix: писать
+              skills из документации + issues, не из памяти модели.<br /><br />
+              <strong>3. Плохой код</strong> — самый безобидный. Тесты ловят,
+              code review ловит. Fix: ещё один проход ревью.<br /><br />
+              <span class="upd-badge" style="margin-left: 0">UPD</span>
+              <strong>4. Плохие оценки стоимости</strong> — невидимый баг. AI
+              уверенно считает: "это будет ~23K credits, $14". Реальность: 0
+              credits (всё из cache) или наоборот — 5-10x от оценки. Credit
+              estimates AI занижает систематически. Fix: всегда перепроверять.
+              Запустить маленький тест (10 записей) → экстраполировать реальные
+              числа. Не верить калькуляции модели — считать самому.
+            </div>
+
+            <p>
+              <strong>Принцип:</strong> не "один ревью и в продакшн". А "ревью,
+              пока не перестанут находиться проблемы". Каждый проход дешёвый
+              (Codex background, 2 минуты). Каждый пропущенный баг — дорогой
+              (hours of debugging в production). Математика очевидна.
+            </p>
+
+            <!-- 21: BUG TRIAGE -->
+            <h3 class="art-title" id="art-bug-triage">
+              <span class="art-label badge-codex">Ops</span><br />
+              21. Баги в процессе: замечай, фиксируй, документируй
+            </h3>
+
+            <p>
+              Ты работаешь над фичей. Claude пытается вызвать Gemini CLI — и тот
+              падает. Или skill загрузился, но endpoint изменился. Или
+              background agent завис без ошибки. Это
+              <strong>баги процесса</strong>, не баги продукта. И они самые
+              коварные — потому что ты в потоке, хочешь продолжить работу, и
+              соблазн "потом разберусь" огромный.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Антипаттерн:</strong> заметил баг → обошёл → забыл. Через
+              неделю тот же баг. Ещё через неделю — опять. Три раза потратил 15
+              минут. А fix — 5 минут. Но "потом".
+            </div>
+
+            <p>
+              <strong
+                >Правило: заметил баг → отдельная сессия → fix →
+                документируй.</strong
+              >
+            </p>
+
+            <div class="art-code">
+              Баг замечен в рабочей сессии: 1. НЕ чини прямо здесь (контекст
+              забит текущей задачей) 2. Запиши кратко: "Gemini CLI падает на -o
+              text с файлом >30KB" 3. Открой новую вкладку Claude Code 4. В
+              новой сессии: "Fix this: [описание бага]" 5. Claude фиксит →
+              обновляет skill/memory/CLAUDE.md 6. Вернись в рабочую сессию →
+              продолжай Что обновить после fix: - SKILL.md → добавить gotcha +
+              дату VERIFIED - Memory → если это cross-project lesson - CLAUDE.md
+              → если это правило для pipeline - settings.json → если нужен hook
+              или permission
+            </div>
+
+            <p>
+              <strong>Реальные баги которые я фиксировал так:</strong>
+            </p>
+
+            <p>
+              — <strong>Agent(run_in_background=true)</strong> не наследовал
+              permissions в VS Code. Codex и Gemini падали молча. Fix:
+              переключиться на
+              <code style="color: var(--cyan)"
+                >Bash(run_in_background=true)</code
+              >. Задокументировано в memory, обновлены routing tables в
+              CLAUDE.md для Lite и Full v2, обновлены оба skills.<br />
+              — <strong>Gemini обрезал output</strong> без предупреждения. Файл
+              на 30KB превращался в 6KB. Fix: разбивать prompt на части или
+              использовать flash. Задокументировано в gemini-cli skill.<br />
+              — <strong>sync-skills --delete</strong> удалял локальные skills
+              при синхронизации. 4 skills пропали. Fix: убрать --delete из
+              rsync. Задокументировано в memory.<br />
+              — <strong>Codex gpt-5.4-nano</strong> возвращал 400 ошибку. Только
+              gpt-5.4-mini работает на подписке. Fix: обновить codex-cli skill с
+              корректной моделью.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Каждый баг — это знание.</strong> Если ты его только
+              обошёл — знание потеряно. Если задокументировал в skill/memory —
+              оно живёт вечно. Следующая сессия, следующий проект, даже другой
+              человек с твоим claude-setup — все получат это знание
+              автоматически. 5 минут на документацию = бесконечная экономия.
+            </div>
+
+            <!-- 22: HANDOFF & SESSION HYGIENE -->
+            <h3 class="art-title" id="art-handoff">
+              <span class="art-label badge-opus">Session Mgmt</span><br />
+              22. Handoff, cleanup и гигиена сессий
+            </h3>
+
+            <p>
+              Сессия Claude Code — не бесконечная. Контекст заполняется.
+              Compression съедает детали. Через 40-50 сообщений модель начинает
+              "забывать" начало разговора. Это нормально. Но к этому нужно быть
+              готовым.
+            </p>
+
+            <p>
+              <strong>Handoff</strong> — протокол передачи состояния при
+              завершении сессии. Не "закрыл вкладку и ушёл", а осознанная
+              фиксация:
+            </p>
+
+            <div class="art-code">
+              Handoff checklist (конец сессии): 1. STATE (всегда): - Обновить
+              state.md: phase, current step, blocker - Run COMPLETE → status:
+              complete, убрать "in progress" 2. MEMORY (если есть cross-session
+              value): - Записать decisions/lessons, которых нет в run-файлах -
+              Удалить stale: завершённые планы, устаревшие TODO - Обновить
+              статус проекта в memory-файле 3. SKILLS (если работал с API): -
+              Нашёл gotcha → обновить SKILL.md + дату VERIFIED - Новый API в
+              проекте → создать skill 4. CLEANUP: - Реализованный plan → удалить
+              файл - Stale state.md → убрать "NEXT" / "in progress" -
+              Завершённые TODO в memory → убрать или пометить DONE
+            </div>
+
+            <div class="art-highlight-red">
+              <strong>Hard-won lesson:</strong> stale plan в контексте — AI
+              думает работа не сделана и предлагает её снова. 3+ сессии подряд
+              Claude предлагал batch regen, который давно завершён. Завершённый
+              артефакт опаснее отсутствующего. Cleanup — не опционально.
+            </div>
+
+            <p>
+              <strong>/compact</strong> — команда для ручного сжатия контекста.
+              Используй когда сессия длинная, но задача не закончена. Claude
+              сожмёт старые сообщения, оставив последний контекст. Перед compact
+              — убедись что всё важное в файлах, а не только в чате.
+            </p>
+
+            <p>
+              <strong>Когда начинать новую сессию:</strong>
+            </p>
+
+            <p>
+              — Задача завершена → handoff → новая сессия для новой задачи<br />
+              — Контекст забит (40+ сообщений, модель "тупит") → handoff → новая
+              сессия<br />
+              — Смена проекта → новая вкладка (не засоряй контекст другим
+              проектом)<br />
+              — Баг в процессе → новая вкладка для fix (не мешай рабочую сессию)
+            </p>
+
+            <p>
+              <strong>Когда НЕ начинать новую сессию:</strong>
+            </p>
+
+            <p>
+              — Середина annotation cycle (контекст плана важен)<br />
+              — Implement в процессе (Sonnet помнит план и todo)<br />
+              — Debug с accumulation context (каждый шаг debug добавляет
+              понимание)
+            </p>
+
+            <div class="diagram-vertical">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                  margin-bottom: 8px;
+                "
+              >
+                Handoff → New Session
+              </div>
+              <div class="d-node d-node-red">Конец сессии</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-amber">state.md: phase + step</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-purple">
+                memory: lessons + decisions
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-green">skills: gotchas + VERIFIED</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-pink">
+                cleanup: stale plans, done TODOs
+              </div>
+              <div class="d-arrow" style="margin: 8px 0; font-size: 1.4rem">
+                ⟱
+              </div>
+              <div class="d-node d-node-highlight d-node-big">Новая сессия</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node" style="border-color: var(--cyan)">
+                MEMORY.md → state.md → продолжай
+              </div>
+            </div>
+
+            <div class="art-highlight">
+              <strong>Вход в новую сессию (3 шага):</strong><br />
+              1. Claude читает MEMORY.md → кто ты, что знаешь, какие проекты<br />
+              2. Claude читает state.md → на какой фазе, что делать дальше<br />
+              3. Продолжай — как будто не уходил<br /><br />
+              Если handoff сделан правильно — потери контекста нет. Вообще.
+              Файлы помнят всё. Чат — нет. Поэтому файлы > чат. Всегда.
+            </div>
+
+            <!-- 23: SKILL SYNC -->
+            <h3 class="art-title" id="art-skill-sync">
+              <span class="art-label badge-gemini">Collaboration</span><br />
+              23. Skill Sync: обмен знаниями между коллегами
+            </h3>
+
+            <p>
+              19 skills — это не только мои знания. Это
+              <strong>пакет, которым можно делиться</strong>. Коллега
+              подключился к проекту — ему не нужно заново исследовать каждый
+              API. Он получает все 19 skills + agents + hooks за одну команду.
+            </p>
+
+            <p>
+              <strong>Как работает:</strong> private GitHub repo (<code
+                style="color: var(--cyan)"
+                >claude-setup</code
+              >) как центральное хранилище. Локальные skills синхронизируются
+              двусторонне.
+            </p>
+
+            <div class="diagram-flow" style="flex-direction: column; gap: 16px">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                "
+              >
+                Skill Sync Flow
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div class="d-node d-node-purple">
+                  ~/.claude/skills/<br /><span
+                    style="font-size: 0.65rem; opacity: 0.7"
+                    >локальные правки</span
+                  >
+                </div>
+                <div class="d-arrow">→ rsync →</div>
+                <div class="d-node d-node-highlight">
+                  GitHub repo<br /><span
+                    style="font-size: 0.65rem; opacity: 0.7"
+                    >claude-setup (private)</span
+                  >
+                </div>
+                <div class="d-arrow">→ rsync →</div>
+                <div class="d-node d-node-green">
+                  Коллега<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >~/.claude/skills/</span
+                  >
+                </div>
+              </div>
+              <div class="d-arrow">↕ git pull --rebase + push</div>
+              <div class="d-label">
+                Git = merge engine. Конфликты не теряются — показываются.
+              </div>
+            </div>
+
+            <div class="art-code">
+              Одна команда: /sync-skills Что происходит: 1. local → repo: rsync
+              локальных skills в repo 2. git commit (если есть изменения) 3. git
+              pull --rebase (подтянуть правки коллег) 4. git push (отправить
+              свои) 5. repo → local: финальное merged состояние обратно
+              Результат: оба видят одинаковые skills
+            </div>
+
+            <p>
+              <strong>Что синхронизируется:</strong> skills (19 шт), agents (6
+              шт), hooks. Не синхронизируется: memory (личное), API keys (в
+              отдельном keys.env), settings.json (у каждого свои permissions).
+            </p>
+
+            <p>
+              <strong>Плюсы:</strong>
+            </p>
+
+            <p>
+              — <strong>Onboarding за 5 минут:</strong> новый коллега клонирует
+              repo, запускает install script — получает все skills, agents,
+              hooks. Не нужно неделю изучать каждый API.<br />
+              — <strong>Collective knowledge:</strong> я нашёл gotcha в Soniox,
+              обновил skill, запушил. Коллега получил при следующем sync. Он не
+              наступит на те же грабли.<br />
+              — <strong>Versioned:</strong> git history показывает когда что
+              изменилось. Skill сломался после обновления — git diff покажет что
+              поменяли.<br />
+              — <strong>Offline-first:</strong> skills — это файлы. Работают без
+              интернета. Sync нужен только для обмена.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Коварность #1: --delete убивает.</strong>
+              rsync с флагом --delete удаляет файлы, которых нет в источнике.
+              Коллега создал новый skill локально, но не запушил. Ты запустил
+              sync с --delete — его skill удалён у тебя, а при следующем sync —
+              удалён и у него.
+              <strong>Fix:</strong> никогда не использовать --delete. Только
+              добавлять, не удалять. Удаление — явное, вручную.
+            </div>
+
+            <div class="art-highlight-red">
+              <strong>Коварность #2: skills грузятся при старте.</strong>
+              Обновил skill через sync — но текущая сессия Claude не видит
+              изменений. Skills загружаются в контекст при старте сессии, не в
+              runtime.
+              <strong>Fix:</strong> после sync начни новую сессию. Или синкайся
+              в начале работы, не в середине.
+            </div>
+
+            <div class="art-highlight-amber">
+              <strong>Коварность #3: merge conflicts.</strong>
+              Два человека обновили один skill одновременно. Git попытается
+              merge через rebase. Если конфликт — rebase абортится.
+              <strong>Но Claude Code может зарезолвить сам:</strong> зайти в
+              repo директорию, посмотреть конфликтные файлы, объединить оба
+              изменения и завершить rebase. Ручной резолв нужен только если оба
+              изменили одну и ту же строку с противоречащим смыслом — тогда
+              Claude спросит что оставить. На практике — редкость.
+            </div>
+
+            <p>
+              <strong>Когда синхронизироваться:</strong>
+            </p>
+
+            <p>
+              — <strong>Начало рабочего дня</strong> — подтянуть что коллеги
+              запушили вчера<br />
+              — <strong>После правки skill</strong> — сразу push, не копить<br />
+              — <strong>После нового API</strong> — создал skill → sync →
+              коллега уже имеет<br />
+              — <strong>Не в середине задачи</strong> — skills грузятся при
+              старте, sync mid-session бесполезен
+            </p>
+
+            <div class="art-highlight">
+              <strong>Итог:</strong> skill sync превращает индивидуальные знания
+              в командные. Каждый gotcha, каждый workaround, каждый новый
+              endpoint — документируется один раз, доступен всем. Это не wiki,
+              которую никто не читает. Это файлы, которые Claude читает
+              автоматически. Написал — все знают.
+            </div>
+
+            <!-- 24: GEMINI & CODEX WITHOUT API KEYS -->
+            <h3 class="art-title" id="art-cli-setup">
+              <span class="art-label badge-gemini">Zero API Keys</span><br />
+              24. Gemini CLI и Codex CLI: полный оркестр без единого API ключа
+            </h3>
+
+            <p>
+              Главная фишка моего стека:
+              <strong>ни один sub-agent не требует API ключа</strong>. Gemini
+              CLI работает через Google аккаунт. Codex CLI — через ChatGPT
+              подписку. Оба авторизуются один раз через браузер, дальше Claude
+              запускает их сам.
+            </p>
+
+            <p>
+              Почему это важно? API ключи = pay-per-token. Каждый запрос —
+              деньги. Research через Gemini API стоит $0.01-0.05 за запрос. 50
+              запросов в день — $2.50. В месяц — $75 только на research.
+              Подписка Google One AI Premium — $20/мес, безлимит.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Экономика:</strong><br />
+              — Gemini через API: ~$75-150/мес при активном research<br />
+              — Gemini через подписку (CLI): $0 (Google AI Studio бесплатен) или
+              $20/мес (Google One AI Premium)<br />
+              — Codex через API: ~$100-200/мес при активном review<br />
+              — Codex через подписку (CLI): $20/мес (ChatGPT Plus), всё
+              включено<br /><br />
+              <strong>Итого: $20-40/мес вместо $175-350/мес</strong> за те же
+              задачи.
+            </div>
+
+            <h4
+              style="
+                color: var(--green);
+                font-weight: 700;
+                margin: 32px 0 16px;
+                font-size: 1.1rem;
+              "
+            >
+              Gemini CLI: setup за 3 минуты
+            </h4>
+
+            <p>
+              <strong>Предварительно:</strong> нужна подписка Google One AI
+              Premium ($20/мес). Без неё — free tier с 1,000 RPD и deprecated
+              моделями. С подпиской — ~2,000 RPD, все модели, 2M контекст.
+              Подписка оформляется через Google One.
+            </p>
+
+            <div class="art-code">
+              # 1. Установка npm install -g @google/gemini-cli # 2. Первый
+              запуск — OAuth через Google One аккаунт (один раз)
+              GOOGLE_GENAI_USE_GCA=true gemini # Откроется браузер → войди в
+              Google аккаунт (тот, где подписка) → разреши доступ → готово # CLI
+              наследует лимиты подписки, не free tier! # 3. Проверка gemini -p
+              "say ok" -m gemini-2.5-flash -o text # Должно вывести "ok" # Всё.
+              Дальше Claude запускает сам.
+            </div>
+
+            <p>
+              <strong>Фишка #1: 2M контекст.</strong> Claude Opus — 1M. Sonnet —
+              200K. Gemini — 2M. Когда нужно скормить целую кодовую базу или
+              200-страничный PDF — Gemini держит всё в одном запросе. Claude на
+              Sonnet физически не может.
+            </p>
+
+            <p>
+              <strong>Фишка #2: web search встроен.</strong> Не нужен отдельный
+              API (Exa, Tavily, SerpAPI). Gemini с флагом
+              <code style="color: var(--cyan)">--yolo</code> сам ходит в Google,
+              находит свежие источники, цитирует с URL. Бесплатно. В рамках
+              подписки.
+            </p>
+
+            <p>
+              <strong>Фишка #3: PDF нативно.</strong> Claude не читает бинарные
+              PDF. Gemini — читает. Загрузил PDF в workspace, скормил Gemini —
+              получил структурированный markdown. Без pdftotext, без
+              конвертации, без потери форматирования.
+            </p>
+
+            <p>
+              <strong>Фишка #4: background.</strong> Gemini бежит в фоне через
+              <code style="color: var(--cyan)"
+                >Bash(run_in_background=true)</code
+              >. Пока он 30 секунд ресёрчит тему — я продолжаю работать с Opus.
+              Когда завершился — читаю результат и использую.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Gotcha: output truncation.</strong> Gemini CLI по
+              умолчанию обрезает ответ на 8K токенов. Длинный research приходит
+              обрезанным без предупреждения. <strong>Fix:</strong> добавить в
+              <code style="color: var(--cyan)">~/.gemini/settings.json</code>
+              custom aliases с
+              <code style="color: var(--cyan)">maxOutputTokens: 65535</code>.
+              Модели
+              <code style="color: var(--cyan)">gemini-2.5-pro-long</code> и
+              <code style="color: var(--cyan)">gemini-2.5-flash-long</code> — до
+              65K токенов output.
+            </div>
+
+            <div class="art-highlight-red">
+              <strong
+                >Коварство Gemini CLI: OAuth vs API key vs подписка.</strong
+              >
+              Здесь главный нюанс, без которого ничего не работает как надо.<br /><br />
+              <strong>API key (free tier):</strong> 1,000 запросов/день,
+              deprecated модели, урезанный контекст. Для серьёзной работы —
+              бесполезен. Кончается за час активного research.<br /><br />
+              <strong>API key (платный):</strong> pay-per-token. Работает, но
+              дорого. $75-150/мес при активном использовании. И нет доступа к
+              премиум-лимитам подписчиков.<br /><br />
+              <strong
+                >OAuth через подписку Google One AI Premium ($20/мес):</strong
+              >
+              вот это наш путь. ~2,000 запросов/день, ~60 RPM, 2M контекст, все
+              модели включая Gemini 3. Лимитов хватает на полный рабочий день
+              research + PDF + vision. Фишка: CLI с OAuth наследует лимиты
+              подписки, а не free tier. Это тот же аккаунт что для Google AI
+              Studio — один логин на всё.<br /><br />
+              <strong>Gotcha:</strong> OAuth токен живёт ~1 час, авто-рефреш
+              нестабилен (bug #8096). Но
+              <strong>Claude обрабатывает это автоматически:</strong> если
+              Gemini вернул пустой ответ или ошибку — Claude сам запускает
+              refresh-команду (<code style="color: var(--cyan)"
+                >echo "Y" | GOOGLE_GENAI_USE_GCA=true gemini -p "ok" -o
+                text</code
+              >), проверяет что токен обновился и повторяет исходный запрос.
+              Задержка 5-10 секунд, ты даже не заметишь. Прописано в skill —
+              работает из коробки.
+            </div>
+
+            <h4
+              style="
+                color: var(--amber);
+                font-weight: 700;
+                margin: 32px 0 16px;
+                font-size: 1.1rem;
+              "
+            >
+              Codex CLI: setup за 2 минуты
+            </h4>
+
+            <div class="art-code">
+              # 1. Установка npm install -g @openai/codex # 2. Авторизация через
+              ChatGPT аккаунт (один раз) codex login --device-auth # CLI покажет
+              код + URL → открой в браузере → введи код → войди в ChatGPT # 3.
+              Проверка codex login status # Должно показать "Logged in" # Всё.
+              API ключ НЕ нужен. Подписка ChatGPT Plus = доступ к Codex CLI.
+            </div>
+
+            <p>
+              <strong>Фишка #1: review из коробки.</strong>
+              <code style="color: var(--cyan)">codex review --uncommitted</code>
+              — одна команда, полный code review всех незакоммиченных изменений.
+              С кастомным промптом, с выводом в файл, с фокусом на security /
+              edge cases / whatever.
+            </p>
+
+            <p>
+              <strong>Фишка #2: план-ревью.</strong>
+              <code style="color: var(--cyan)"
+                >codex exec "Review plan.md..." -C path/ -s read-only</code
+              >
+              — Codex читает план и brief, ищет feasibility issues, scope drift,
+              пропущенные зависимости. Независимый взгляд другой модели (GPT) на
+              план Claude (Opus).
+            </p>
+
+            <p>
+              <strong>Фишка #3: image analysis.</strong>
+              <code style="color: var(--cyan)"
+                >codex exec "Analyze this screenshot" -i screenshot.png</code
+              >
+              — принимает любой путь к изображению, без workspace-ограничений (в
+              отличие от Gemini).
+            </p>
+
+            <p>
+              <strong>Фишка #4: 30% квоты на mini.</strong>
+              <code style="color: var(--cyan)">gpt-5.4-mini</code> съедает
+              только 30% квоты подписки. Для review этого более чем достаточно.
+              Full <code style="color: var(--cyan)">gpt-5.4</code> — для сложных
+              задач.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Gotcha: модели.</strong> На подписке работают только
+              Codex-модели: gpt-5.4, gpt-5.4-mini, gpt-5.3-codex, gpt-5.2-codex.
+              <code style="color: var(--cyan)">gpt-5.4-nano</code> → ошибка 400.
+              API-модели (o4-mini, o3) → ошибка 400. Только с API key
+              (pay-per-token).
+            </div>
+
+            <div class="diagram-flow" style="flex-direction: column; gap: 16px">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                "
+              >
+                Полный стек без API ключей
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                "
+              >
+                <div class="d-node d-node-purple d-node-big">
+                  Claude Code<br /><span
+                    style="font-size: 0.65rem; opacity: 0.7"
+                    >$20/мес Pro</span
+                  >
+                </div>
+                <div class="d-node d-node-green d-node-big">
+                  Gemini CLI<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >$0-20/мес OAuth</span
+                  >
+                </div>
+                <div class="d-node d-node-amber d-node-big">
+                  Codex CLI<br /><span style="font-size: 0.65rem; opacity: 0.7"
+                    >$20/мес ChatGPT+</span
+                  >
+                </div>
+              </div>
+              <div class="d-arrow">↓</div>
+              <div
+                class="d-node d-node-highlight d-node-big"
+                style="max-width: 400px"
+              >
+                5 моделей, web search, PDF, vision, code review<br /><span
+                  style="font-size: 0.75rem; opacity: 0.8"
+                  >$40-60/мес total. Ноль API ключей.</span
+                >
+              </div>
+            </div>
+
+            <!-- 25: DEBUGGING -->
+            <h3 class="art-title upd-section" id="art-debugging">
+              <span class="art-label badge-opus">Emergency</span>
+              <span class="upd-badge">UPD</span><br />
+              25. Debugging: когда всё сломалось прямо сейчас
+            </h3>
+
+            <p>
+              Bug hunting (глава 20) — это про проактивный поиск. Ты сидишь,
+              гоняешь ревью, находишь скрытое. Debugging — другое. Stack trace в
+              лицо. Ничего не работает. Нужно чинить
+              <strong>прямо сейчас</strong>.
+            </p>
+
+            <p>
+              AI отличный дебаггер — если знаешь как его использовать. Проблема:
+              по умолчанию AI пытается угадать причину по описанию. "Наверное
+              дело в X." Нет.
+              <strong>Не угадывай — изолируй.</strong>
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Debugging flow (от быстрого к глубокому):</strong
+              ><br /><br />
+              <strong>Шаг 1: Reproduce.</strong> "Запусти эту команду. Покажи
+              полный output." Если не воспроизводится — проблема не в коде. Если
+              воспроизводится — идём дальше.<br /><br />
+              <strong>Шаг 2: Isolate.</strong> Убери всё лишнее. Минимальный
+              пример, который падает. Чем меньше код — тем виднее баг. Claude
+              хорош в этом: "сократи до минимального воспроизводимого
+              примера".<br /><br />
+              <strong>Шаг 3: Bisect.</strong> Если раньше работало — git bisect.
+              Claude может запустить
+              <code style="color: var(--cyan)">git bisect</code>
+              автоматически: "найди коммит, который сломал тест X". Бинарный
+              поиск по истории — быстрее чтения diff на 50 коммитов.<br /><br />
+              <strong>Шаг 4: Multi-agent debug.</strong> Один агент смотрит на
+              stack trace. Другой — на последние изменения. Третий (Gemini) —
+              ищет аналогичный баг в интернете. Параллельно. Кто первый найдёт —
+              тот и прав.
+            </div>
+
+            <div class="art-code">
+              # Реальный пример: Soniox API вернул пустой результат # Шаг 1:
+              Reproduce Claude: "Запусти transcribe с этим файлом" → Пустой
+              JSON. Воспроизведено. # Шаг 2: Isolate Claude: "Попробуй с
+              коротким файлом (10 сек)" → Работает. Значит проблема в размере.
+              Claude: "Попробуй 5 минут" → Пустой. Граница где-то между 10сек и
+              5мин. # Шаг 3: Bisect (по размеру, не по git) Claude: "ffmpeg —
+              нарежь на 30сек, 1мин, 2мин, 3мин" → 2мин работает, 3мин — нет.
+              Rate limit по длине. # Шаг 4: Gemini background Bash("gemini -p
+              'Soniox API empty result for files longer than 2 minutes. Known
+              issue?' -o text > /tmp/g-debug.md", run_in_background=true) →
+              Gemini нашёл: нужен async mode для файлов >2мин. Fix за 10 минут
+              вместо 2 часов угадывания.
+            </div>
+
+            <p>
+              <strong>Ключевой принцип:</strong> не давай AI угадывать. AI
+              обучен быть confident — он скажет "проблема в X" с такой
+              уверенностью, что ты поверишь. И потратишь час на fix X, который
+              не был сломан. Вместо этого: reproduce → isolate → данные → fix.
+              Каждый шаг даёт <strong>информацию</strong>, не гипотезу.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Когда что использовать:</strong><br />
+              — <strong>Stack trace + очевидная ошибка:</strong> Opus inline,
+              один промпт. "Вот ошибка, вот код. Fix."<br />
+              — <strong>Работало, перестало:</strong> git bisect через Claude.
+              Находит коммит за минуту.<br />
+              — <strong>Непонятная ошибка:</strong> multi-agent. Один смотрит
+              код, другой ищет в интернете, третий проверяет skill/API
+              изменения.<br />
+              — <strong>Intermittent bug:</strong> сначала reproduce 5 раз
+              подряд. Если не стабильно — race condition или external
+              dependency. Claude может добавить логирование и прогнать 50 раз.
+            </div>
+
+            <p>
+              <strong>Debugging + skill system:</strong> 40% моих багов — не
+              баги в коде, а расхождение между skill и реальностью API. Endpoint
+              поменялся. Rate limit изменился. Новый параметр стал обязательным.
+              Поэтому первое что проверяю при странном поведении API:
+              <strong>актуален ли skill?</strong> Дата VERIFIED старше недели?
+              Перепроверь. Это не debugging кода — это debugging контекста.
+            </p>
+
+            <!-- VERDICT -->
+            <div class="verdict-card" style="margin-top: 56px">
+              <div class="verdict-title">
+                Вайбкодинг — это не "AI пишет код за тебя"
+              </div>
+              <div class="verdict-text">
+                Это операционная система, где ты — оркестратор. AI = лучший
+                джуниор: делает 80% рутины, но без твоего контекста, вкуса и
+                judgment — результат будет средним. Pipeline не даёт AI врать
+                тебе, phase gates не дают тебе врать себе, а verification не
+                даёт обоим прятать проблемы за галочками.
+                <br /><br />
+                Код — побочный продукт. Главный продукт — правильные решения.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ═══ S3: PHILOSOPHY (after Deep Dive) ═══ -->
+      <section id="philosophy">
+        <div class="section-tag fade-in">Фундамент</div>
+        <h2 class="section-title fade-in">7 принципов</h2>
+        <p class="section-sub fade-in">
+          Не теория. Каждый принцип — шрам от реального провала.
+        </p>
+
+        <div class="grid-2 fade-in" id="principlesGrid"></div>
+      </section>
+
+      <!-- ═══ S4: MULTI-MODEL ROUTING ═══ -->
+      <div class="bg-alt">
+        <section id="routing">
+          <div class="section-tag fade-in">Оркестрация</div>
+          <h2 class="section-title fade-in">Multi-Model Routing</h2>
+          <p class="section-sub fade-in">
+            Каждая модель — специалист. Opus не пишет код. Sonnet не принимает
+            архитектурных решений. Gemini не генерит дизайн. Codex не думает —
+            он ревьюит.
+          </p>
+
+          <div class="card fade-in" style="overflow-x: auto">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Фаза</th>
+                  <th>Модель</th>
+                  <th>Режим</th>
+                  <th>Почему именно она</th>
+                </tr>
+              </thead>
+              <tbody id="routingTable"></tbody>
+            </table>
+          </div>
+
+          <div class="grid-2 fade-in" style="margin-top: 32px">
+            <div class="card">
+              <h3 style="font-weight: 700; margin-bottom: 16px; color: #f1f5f9">
+                Нагрузка по моделям
+              </h3>
+              <div class="chart-wrap">
+                <canvas id="chartRouting"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="font-weight: 700; margin-bottom: 16px; color: #f1f5f9">
+                Стоимость за run
+              </h3>
+              <div class="chart-wrap">
+                <canvas id="chartCost"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer
+        style="
+          text-align: center;
+          padding: 40px 24px;
+          color: var(--text-muted);
+          font-size: 0.8rem;
+          border-top: 1px solid var(--glass-border);
+        "
+      >
+        Built with Claude Code &middot; Kurdyuk Lite pipeline &middot; Март 2026
+        <br />
+        <span style="font-size: 0.7rem; opacity: 0.6">
+          Inspired by Boris Tane &middot; Sources:
+          <a
+            href="https://boristane.com/blog/how-i-use-claude-code/"
+            style="color: var(--purple); text-decoration: none"
+            >How I Use Claude Code</a
+          >
+          &middot;
+          <a
+            href="https://boristane.com/blog/context-engineering/"
+            style="color: var(--purple); text-decoration: none"
+            >Context Engineering</a
+          >
+          &middot;
+          <a
+            href="https://boristane.com/blog/the-software-development-lifecycle-is-dead/"
+            style="color: var(--purple); text-decoration: none"
+            >SDLC Is Dead</a
+          >
+        </span>
+      </footer>
+
+      <!-- ═══ SCRIPT ═══ -->
+      <script>
+        /* ── DATA ── */
+        const DATA = {
+          principles: [
+            {
+              title: "AI = лучший джуниор",
+              text: "AI генерит 80% рутины. Человек = архитектор + polish + 'last 10%' magic. AI бесполезен для: анимационные кривые, сила haptics, sound design, pixel-perfect. Vibe coding работает для v0.1, не для production.",
+              source: "Из опыта Kurdyuk Mobile pipeline",
+            },
+            {
+              title: "Phase gates — после КАЖДОЙ фазы",
+              text: "Показать результат. Дождаться подтверждения. Не перескакивать фазы молча. Если я позволяю AI пропустить gate — я теряю контроль, и дальше всё едет.",
+              source: "Потеряно 3+ сессии на stale plans",
+            },
+            {
+              title: "Plan = канонический contract",
+              text: "plan.md — не черновик, а контракт. Если по пути всплыл material change — обнови plan явно. Не делай тихую подмену смысла. AI обожает тихо менять scope.",
+              source: "Boris Tane + собственные шрамы",
+            },
+            {
+              title: "Нет галочки без proof",
+              text: "Не отмечай задачу done без доказательства: тест прошёл, лог корректный, скриншот приложен. Заполни поле 'Verify:' результатом проверки. AI врёт уверенно.",
+              source: "Teardown Suite: AI 'оптимизировал' и сломал",
+            },
+            {
+              title: "Session-agnostic: файлы persist, чат — нет",
+              text: "Длинная сессия не даёт преимущества. При compression — контекст съедается. Единственный надёжный handoff: state.md + run-файлы + memory + skills.",
+              source: "5+ проектов через handoff",
+            },
+            {
+              title: "Context > Model",
+              text: "Не меняй модель — чини контекст. 19 skills, CLAUDE.md как contract, state.md как точка входа, memory для cross-session знаний. Правильный контекст делает любую модель полезной.",
+              source: "Boris Tane: Context Engineering",
+            },
+            {
+              title: "Агент = исполнитель, не советчик",
+              text: "Вместо 'выполните команду X' — запусти сам. Вместо 'вам нужно авторизоваться' — запусти авторизацию. Делегируй человеку только то, что физически нельзя автоматизировать.",
+              source: "Принцип агентского поведения",
+            },
+          ],
+
+          pipeline: [
+            {
+              name: "Discovery",
+              icon: "?",
+              color: "var(--purple)",
+              model: "Opus",
+              modelClass: "badge-opus",
+            },
+            {
+              name: "Research",
+              icon: "🔍",
+              color: "var(--green)",
+              model: "Gemini",
+              modelClass: "badge-gemini",
+            },
+            {
+              name: "Plan",
+              icon: "📐",
+              color: "var(--purple)",
+              model: "Opus",
+              modelClass: "badge-opus",
+            },
+            {
+              name: "Annotate",
+              icon: "✏️",
+              color: "var(--amber)",
+              model: "Multi",
+              modelClass: "badge-codex",
+            },
+            {
+              name: "Readiness",
+              icon: "✓",
+              color: "var(--purple)",
+              model: "Opus",
+              modelClass: "badge-opus",
+            },
+            {
+              name: "Implement",
+              icon: "⚡",
+              color: "var(--cyan)",
+              model: "Sonnet",
+              modelClass: "badge-sonnet",
+            },
+            {
+              name: "Review",
+              icon: "🔬",
+              color: "var(--purple)",
+              model: "Opus",
+              modelClass: "badge-opus",
+            },
+          ],
+
+          routing: [
+            {
+              phase: "Discovery",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Правильные вопросы, оценка входа, scope control",
+            },
+            {
+              phase: "Research (web/PDF)",
+              model: "Gemini CLI",
+              badge: "badge-gemini",
+              mode: "background",
+              why: "Свежие данные, PDF, 2M контекст, web search",
+            },
+            {
+              phase: "Research (синтез)",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Анализ собранного, trade-offs, архитектурные альтернативы",
+            },
+            {
+              phase: "Plan",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Архитектурные решения, scope control",
+            },
+            {
+              phase: "Annotation (impl)",
+              model: "Codex CLI",
+              badge: "badge-codex",
+              mode: "background",
+              why: "Implementation review + brief drift check",
+            },
+            {
+              phase: "Annotation (design)",
+              model: "Gemini CLI",
+              badge: "badge-gemini",
+              mode: "background",
+              why: "Visual review mockups, UI consistency",
+            },
+            {
+              phase: "Annotation (arch)",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Red team, structural review",
+            },
+            {
+              phase: "Readiness",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Критическая оценка без rubber-stamp",
+            },
+            {
+              phase: "Implement",
+              model: "Sonnet",
+              badge: "badge-sonnet",
+              mode: "inline",
+              why: "Быстрый, хорош в кодировании",
+            },
+            {
+              phase: "Post-Implement",
+              model: "Codex CLI",
+              badge: "badge-codex",
+              mode: "background",
+              why: "Code review перед финалом",
+            },
+            {
+              phase: "Visual QA",
+              model: "Gemini CLI",
+              badge: "badge-gemini",
+              mode: "background",
+              why: "Скриншот vs mockup, pixel-level",
+            },
+            {
+              phase: "Final Review",
+              model: "Opus",
+              badge: "badge-opus",
+              mode: "inline",
+              why: "Честный verdict, ловить пропущенное",
+            },
+          ],
+
+          routingChart: {
+            labels: ["Opus", "Sonnet", "Gemini CLI", "Codex CLI"],
+            values: [45, 25, 18, 12],
+            colors: ["#7c3aed", "#00d2ff", "#10b981", "#f59e0b"],
+          },
+
+          costChart: {
+            labels: [
+              "Opus (thinking)",
+              "Sonnet (coding)",
+              "Gemini (research)",
+              "Codex (review)",
+            ],
+            values: [60, 20, 5, 15],
+            colors: ["#7c3aed", "#00d2ff", "#10b981", "#f59e0b"],
+          },
+
+          // Removed: context, projects, antipatterns, comparison, stack data (covered in Deep Dive article)
+        };
+
+        /* ── BUILD FUNCTIONS ── */
+
+        function buildPrinciples() {
+          const grid = document.getElementById("principlesGrid");
+          grid.innerHTML = DATA.principles
+            .map(
+              (p, i) => `
+          <div class="principle-card">
+            <div class="principle-num">${String(i + 1).padStart(2, "0")}</div>
+            <div class="principle-title">${p.title}</div>
+            <div class="principle-text">${p.text}</div>
+            <div class="principle-source">${p.source}</div>
+          </div>
+        `,
+            )
+            .join("");
+        }
+
+        function buildPipeline() {
+          const track = document.getElementById("pipelineTrack");
+          let html = "";
+          DATA.pipeline.forEach((step, i) => {
+            if (i > 0) html += `<div class="pipeline-arrow">&rarr;</div>`;
+            html += `
+            <div class="pipeline-step">
+              <div class="pipeline-icon" style="border-color: ${step.color}; color: ${step.color}; background: ${step.color}11">
+                ${step.icon}
+              </div>
+              <div class="pipeline-step-name">${step.name}</div>
+              <span class="model-badge ${step.modelClass}">${step.model}</span>
+            </div>
+          `;
+          });
+          track.innerHTML = html;
+        }
+
+        function buildRouting() {
+          const tbody = document.getElementById("routingTable");
+          tbody.innerHTML = DATA.routing
+            .map(
+              (r) => `
+          <tr>
+            <td style="font-weight: 600">${r.phase}</td>
+            <td><span class="model-badge ${r.badge}">${r.model}</span></td>
+            <td><span style="font-size: 0.8rem; color: ${r.mode === "background" ? "var(--amber)" : "var(--text-muted)"}">${r.mode}</span></td>
+            <td style="color: var(--text-muted); font-size: 0.85rem">${r.why}</td>
+          </tr>
+        `,
+            )
+            .join("");
+        }
+
+        /* ── CHARTS ── */
+
+        function initCharts() {
+          // Model routing donut
+          new Chart(document.getElementById("chartRouting"), {
+            type: "doughnut",
+            data: {
+              labels: DATA.routingChart.labels,
+              datasets: [
+                {
+                  data: DATA.routingChart.values,
+                  backgroundColor: DATA.routingChart.colors.map(
+                    (c) => c + "40",
+                  ),
+                  borderColor: DATA.routingChart.colors,
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "65%",
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: { color: "#94a3b8", font: { size: 11 }, padding: 16 },
+                },
+              },
+            },
+          });
+
+          // Cost donut
+          new Chart(document.getElementById("chartCost"), {
+            type: "doughnut",
+            data: {
+              labels: DATA.costChart.labels,
+              datasets: [
+                {
+                  data: DATA.costChart.values,
+                  backgroundColor: DATA.costChart.colors.map((c) => c + "40"),
+                  borderColor: DATA.costChart.colors,
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "65%",
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: { color: "#94a3b8", font: { size: 11 }, padding: 16 },
+                },
+              },
+            },
+          });
+        }
+
+        /* ── ANIMATIONS ── */
+
+        function animateCounter(el) {
+          const target = parseInt(el.dataset.target);
+          const duration = 1800;
+          const start = performance.now();
+          function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased);
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        function initObservers() {
+          const fadeObs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("visible");
+                  fadeObs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.1 },
+          );
+
+          document
+            .querySelectorAll(".fade-in")
+            .forEach((el) => fadeObs.observe(el));
+
+          const counterObs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  animateCounter(e.target);
+                  counterObs.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.5 },
+          );
+
+          document
+            .querySelectorAll(".count-up")
+            .forEach((el) => counterObs.observe(el));
+        }
+
+        /* ── NAV ACTIVE STATE ── */
+        function initNav() {
+          const links = document.querySelectorAll(".nav-link");
+          const sections = document.querySelectorAll("section");
+
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  links.forEach((l) => l.classList.remove("active"));
+                  const active = document.querySelector(
+                    `.nav-link[href="#${e.target.id}"]`,
+                  );
+                  if (active) active.classList.add("active");
+                }
+              });
+            },
+            { threshold: 0.3 },
+          );
+
+          sections.forEach((s) => obs.observe(s));
+        }
+
+        /* ── UPD TOGGLE ── */
+        let updActive = false;
+        function toggleUpd() {
+          updActive = !updActive;
+          const btn = document.getElementById("updBtn");
+          const root = document.documentElement;
+          if (updActive) {
+            btn.classList.add("active");
+            btn.textContent = "Показать всё";
+            // Scroll to first UPD section and highlight all UPD items
+            const firstUpd = document.querySelector(".upd-section");
+            if (firstUpd)
+              firstUpd.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Hide non-UPD chapters by dimming them
+            document.querySelectorAll(".article h3.art-title").forEach((h3) => {
+              let el = h3;
+              const isUpd = h3.classList.contains("upd-section");
+              // Walk siblings until next h3
+              el = el.nextElementSibling;
+              while (el && el.tagName !== "H3") {
+                if (!isUpd) {
+                  el.style.opacity = "0.15";
+                  el.style.pointerEvents = "none";
+                } else {
+                  el.style.opacity = "1";
+                  el.style.pointerEvents = "auto";
+                }
+                el = el.nextElementSibling;
+              }
+              h3.style.opacity = isUpd ? "1" : "0.15";
+              h3.style.pointerEvents = isUpd ? "auto" : "none";
+            });
+            // Also highlight UPD badges in existing sections
+            document.querySelectorAll(".upd-badge").forEach((b) => {
+              b.style.animation = "pulse 1.5s ease-in-out infinite";
+            });
+          } else {
+            btn.classList.remove("active");
+            btn.textContent = "UPD #2 — 4 новых";
+            // Restore all
+            document.querySelectorAll(".article h3.art-title").forEach((h3) => {
+              h3.style.opacity = "1";
+              h3.style.pointerEvents = "auto";
+              let el = h3.nextElementSibling;
+              while (el && el.tagName !== "H3") {
+                el.style.opacity = "1";
+                el.style.pointerEvents = "auto";
+                el = el.nextElementSibling;
+              }
+            });
+            document.querySelectorAll(".upd-badge").forEach((b) => {
+              b.style.animation = "none";
+            });
+          }
+        }
+
+        /* ── INIT ── */
+        document.addEventListener("DOMContentLoaded", () => {
+          buildPrinciples();
+          buildPipeline();
+          buildRouting();
+          initCharts();
+          initObservers();
+          initNav();
+        });
+      </script>
+    </div>
+    <!-- /app-root -->
+  </body>
+</html>
