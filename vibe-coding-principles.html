@@ -1245,36 +1245,133 @@
             <!-- TOC Part 1 -->
             <div class="art-toc">
               <div class="art-toc-title">Содержание</div>
-              <div style="font-weight:800; font-size:0.85rem; color:var(--cyan); margin:16px 0 8px; letter-spacing:0.05em;">ЧАСТЬ 1: Принципы</div>
-              <a href="#art-error-zero"><span class="toc-num">01</span> Ошибка #0: начать без контекста <span class="upd-badge">UPD</span></a>
-              <a href="#art-orchestration"><span class="toc-num">02</span> Оркестрация: почему я не пишу код</a>
-              <a href="#art-nolimits"><span class="toc-num">03</span> Ограничений нет — есть лень модели</a>
-              <a href="#art-workspace"><span class="toc-num">04</span> VS Code + Claude Code: не расширение, а ОС</a>
-              <a href="#art-memory"><span class="toc-num">05</span> Память, контекст и persistence</a>
-              <a href="#art-skills"><span class="toc-num">06</span> Система skills: API документируется один раз</a>
-              <a href="#art-subscriptions"><span class="toc-num">07</span> Подписка vs API: CLI-модели выгоднее</a>
-              <a href="#art-sessions"><span class="toc-num">08</span> Сессии: почему файлы важнее чата</a>
-              <a href="#art-discipline"><span class="toc-num">09</span> Дисциплина: не давай AI перескакивать</a>
-              <a href="#art-swarm"><span class="toc-num">10</span> Swarm: много агентов на одну задачу</a>
-              <a href="#art-arbitrage"><span class="toc-num">11</span> Арбитраж: когда сам не знаешь как лучше</a>
-              <a href="#art-meta-review"><span class="toc-num">12</span> Ревью на ревью + мозговой штурм</a>
-              <a href="#art-bug-hunting"><span class="toc-num">13</span> Итеративная охота за багами</a>
-              <a href="#art-bug-triage"><span class="toc-num">14</span> Баги в процессе: замечай и документируй</a>
-              <a href="#art-portals"><span class="toc-num">15</span> Порталы: данные бесполезны, пока не видишь</a>
-              <a href="#art-handoff"><span class="toc-num">16</span> Handoff, cleanup и гигиена сессий</a>
-              <a href="#art-skill-sync"><span class="toc-num">17</span> Skill Sync: обмен знаниями между коллегами</a>
-              <a href="#art-cli-setup"><span class="toc-num">18</span> Gemini + Codex CLI: ноль API ключей</a>
-              <a href="#art-debugging"><span class="toc-num">19</span> Debugging: когда всё сломалось прямо сейчас <span class="upd-badge">UPD</span></a>
-              <div style="font-weight:800; font-size:0.85rem; color:var(--purple); margin:16px 0 8px; padding-top:12px; border-top:1px solid var(--glass-border); letter-spacing:0.05em;">ЧАСТЬ 2: Kurdyuk Pipeline</div>
-              <a href="#art-discovery"><span class="toc-num">П2.01</span> Discovery: четыре опоры перед стартом</a>
-              <a href="#art-research"><span class="toc-num">П2.02</span> Research: Gemini копает, Opus думает</a>
-              <a href="#art-plan"><span class="toc-num">П2.03</span> Plan: контракт, не черновик</a>
-              <a href="#art-annotation"><span class="toc-num">П2.04</span> Annotation Cycle: план атакуют четыре агента</a>
-              <a href="#art-readiness"><span class="toc-num">П2.05</span> Readiness Gate: последний шанс сказать "нет"</a>
-              <a href="#art-implement"><span class="toc-num">П2.06</span> Implement: Sonnet кодит, Opus молчит</a>
-              <a href="#art-review"><span class="toc-num">П2.07</span> Review: три слоя проверки</a>
+              <div
+                style="
+                  font-weight: 800;
+                  font-size: 0.85rem;
+                  color: var(--cyan);
+                  margin: 16px 0 8px;
+                  letter-spacing: 0.05em;
+                "
+              >
+                ЧАСТЬ 1: Принципы
+              </div>
+              <a href="#art-error-zero"
+                ><span class="toc-num">01</span> Ошибка #0: начать без контекста
+                <span class="upd-badge">UPD</span></a
+              >
+              <a href="#art-orchestration"
+                ><span class="toc-num">02</span> Оркестрация: почему я не пишу
+                код</a
+              >
+              <a href="#art-nolimits"
+                ><span class="toc-num">03</span> Ограничений нет — есть лень
+                модели</a
+              >
+              <a href="#art-workspace"
+                ><span class="toc-num">04</span> VS Code + Claude Code: не
+                расширение, а ОС</a
+              >
+              <a href="#art-memory"
+                ><span class="toc-num">05</span> Память, контекст и
+                persistence</a
+              >
+              <a href="#art-skills"
+                ><span class="toc-num">06</span> Система skills: API
+                документируется один раз</a
+              >
+              <a href="#art-subscriptions"
+                ><span class="toc-num">07</span> Подписка vs API: CLI-модели
+                выгоднее</a
+              >
+              <a href="#art-sessions"
+                ><span class="toc-num">08</span> Сессии: почему файлы важнее
+                чата</a
+              >
+              <a href="#art-discipline"
+                ><span class="toc-num">09</span> Дисциплина: не давай AI
+                перескакивать</a
+              >
+              <a href="#art-swarm"
+                ><span class="toc-num">10</span> Swarm: много агентов на одну
+                задачу</a
+              >
+              <a href="#art-arbitrage"
+                ><span class="toc-num">11</span> Арбитраж: когда сам не знаешь
+                как лучше</a
+              >
+              <a href="#art-meta-review"
+                ><span class="toc-num">12</span> Ревью на ревью + мозговой
+                штурм</a
+              >
+              <a href="#art-bug-hunting"
+                ><span class="toc-num">13</span> Итеративная охота за багами</a
+              >
+              <a href="#art-bug-triage"
+                ><span class="toc-num">14</span> Баги в процессе: замечай и
+                документируй</a
+              >
+              <a href="#art-portals"
+                ><span class="toc-num">15</span> Порталы: данные бесполезны,
+                пока не видишь</a
+              >
+              <a href="#art-handoff"
+                ><span class="toc-num">16</span> Handoff, cleanup и гигиена
+                сессий</a
+              >
+              <a href="#art-skill-sync"
+                ><span class="toc-num">17</span> Skill Sync: обмен знаниями
+                между коллегами</a
+              >
+              <a href="#art-cli-setup"
+                ><span class="toc-num">18</span> Gemini + Codex CLI: ноль API
+                ключей</a
+              >
+              <a href="#art-debugging"
+                ><span class="toc-num">19</span> Debugging: когда всё сломалось
+                прямо сейчас <span class="upd-badge">UPD</span></a
+              >
+              <div
+                style="
+                  font-weight: 800;
+                  font-size: 0.85rem;
+                  color: var(--purple);
+                  margin: 16px 0 8px;
+                  padding-top: 12px;
+                  border-top: 1px solid var(--glass-border);
+                  letter-spacing: 0.05em;
+                "
+              >
+                ЧАСТЬ 2: Kurdyuk Pipeline
+              </div>
+              <a href="#art-discovery"
+                ><span class="toc-num">П2.01</span> Discovery: четыре опоры
+                перед стартом</a
+              >
+              <a href="#art-research"
+                ><span class="toc-num">П2.02</span> Research: Gemini копает,
+                Opus думает</a
+              >
+              <a href="#art-plan"
+                ><span class="toc-num">П2.03</span> Plan: контракт, не
+                черновик</a
+              >
+              <a href="#art-annotation"
+                ><span class="toc-num">П2.04</span> Annotation Cycle: план
+                атакуют четыре агента</a
+              >
+              <a href="#art-readiness"
+                ><span class="toc-num">П2.05</span> Readiness Gate: последний
+                шанс сказать "нет"</a
+              >
+              <a href="#art-implement"
+                ><span class="toc-num">П2.06</span> Implement: Sonnet кодит,
+                Opus молчит</a
+              >
+              <a href="#art-review"
+                ><span class="toc-num">П2.07</span> Review: три слоя проверки</a
+              >
             </div>
-
 
             <!-- 00: ERROR ZERO -->
             <h3 class="art-title upd-section" id="art-error-zero">
@@ -3115,7 +3212,8 @@
             <div class="art-highlight-red">
               <strong>Gotcha: модели.</strong> На подписке работают только
               Codex-модели: gpt-5.4, gpt-5.4-mini, gpt-5.3-codex, gpt-5.2-codex.
-              <code style="color: var(--cyan)">gpt-5.4-nano</code> → ошибка 418.               API-модели (o4-mini, o3) → ошибка 418. Только с API key
+              <code style="color: var(--cyan)">gpt-5.4-nano</code> → ошибка 418.
+              API-модели (o4-mini, o3) → ошибка 418. Только с API key
               (pay-per-token).
             </div>
 
@@ -3257,22 +3355,101 @@
               Перепроверь. Это не debugging кода — это debugging контекста.
             </p>
 
-
             <!-- ═══ PART 2: KURDYUK PIPELINE ═══ -->
-            <div id="part2-divider" style="margin:80px 0 60px; text-align:center; position:relative;">
-              <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--purple), transparent);"></div>
-              <div style="position:relative; display:inline-block; background:var(--bg2); padding:0 32px;">
-                <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--purple); background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); border-radius:4px; padding:4px 10px; margin-bottom:8px; display:inline-block;">Методология</div>
-                <h2 style="font-size:clamp(1.4rem,2.5vw,2rem); font-weight:800; color:#f1f5f9; margin:0;">Kurdyuk Pipeline</h2>
-                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px; max-width:500px;">7 фаз. Конкретная реализация принципов выше — файлы, routing, sequence.</p>
+            <div
+              id="part2-divider"
+              style="
+                margin: 80px 0 60px;
+                text-align: center;
+                position: relative;
+              "
+            >
+              <div
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 0;
+                  right: 0;
+                  height: 1px;
+                  background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--purple),
+                    transparent
+                  );
+                "
+              ></div>
+              <div
+                style="
+                  position: relative;
+                  display: inline-block;
+                  background: var(--bg2);
+                  padding: 0 32px;
+                "
+              >
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    letter-spacing: 0.12em;
+                    text-transform: uppercase;
+                    color: var(--purple);
+                    background: rgba(124, 58, 237, 0.1);
+                    border: 1px solid rgba(124, 58, 237, 0.2);
+                    border-radius: 4px;
+                    padding: 4px 10px;
+                    margin-bottom: 8px;
+                    display: inline-block;
+                  "
+                >
+                  Методология
+                </div>
+                <h2
+                  style="
+                    font-size: clamp(1.4rem, 2.5vw, 2rem);
+                    font-weight: 800;
+                    color: #f1f5f9;
+                    margin: 0;
+                  "
+                >
+                  Kurdyuk Pipeline
+                </h2>
+                <p
+                  style="
+                    color: var(--text-muted);
+                    font-size: 0.9rem;
+                    margin-top: 8px;
+                    max-width: 500px;
+                  "
+                >
+                  7 фаз. Конкретная реализация принципов выше — файлы, routing,
+                  sequence.
+                </p>
               </div>
             </div>
 
-            <p style="font-size:0.85rem; color:var(--text-muted); max-width:600px; margin-bottom:32px; border-left:2px solid var(--amber); padding-left:12px;">
-              <strong style="color:var(--amber)">Когда НЕ нужен pipeline:</strong>
+            <div
+              class="pipeline-track"
+              id="pipelineTrack"
+              style="margin-bottom: 32px"
+            ></div>
+
+            <p
+              style="
+                font-size: 0.85rem;
+                color: var(--text-muted);
+                max-width: 600px;
+                margin-bottom: 32px;
+                border-left: 2px solid var(--amber);
+                padding-left: 12px;
+              "
+            >
+              <strong style="color: var(--amber)"
+                >Когда НЕ нужен pipeline:</strong
+              >
               Pipeline для задач от 3+ шагов. Quick fix, одна команда, ответ на
-              вопрос — просто делай. Не каждый запрос проходит 7 фаз. Если задача
-              помещается в одно сообщение — pipeline избыточен.
+              вопрос — просто делай. Не каждый запрос проходит 7 фаз. Если
+              задача помещается в одно сообщение — pipeline избыточен.
             </p>
 
             <!-- 07: DISCOVERY -->
@@ -3437,9 +3614,9 @@
             <div class="art-code">
               // Gemini для market research: Bash( command="source
               ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
-              'Find: OBD2 diagnostic app market 20П2.02. \ Market size, top 10 apps
-              by revenue, \ pricing models, technical requirements. \ Include
-              sources with URLs.' \ -m gemini-2.5-pro -o text \ >
+              'Find: OBD2 diagnostic app market 20П2.02. \ Market size, top 10
+              apps by revenue, \ pricing models, technical requirements. \
+              Include sources with URLs.' \ -m gemini-2.5-pro -o text \ >
               /tmp/gemini-market.md 2>/dev/null", run_in_background=true ) //
               Gemini для API documentation: Bash( command="source
               ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
@@ -4155,6 +4332,7 @@
 
         function buildPipeline() {
           const track = document.getElementById("pipelineTrack");
+          if (!track) return;
           let html = "";
           DATA.pipeline.forEach((step, i) => {
             if (i > 0) html += `<div class="pipeline-arrow">&rarr;</div>`;
