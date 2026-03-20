@@ -1173,14 +1173,14 @@
       <nav id="mainNav">
         <div class="nav-logo">Принципы вайбкодинга</div>
         <a href="#hero" class="nav-link">Главная</a>
-        <a href="#pipeline" class="nav-link">Pipeline</a>
-        <a href="#deepdive" class="nav-link">Deep Dive</a>
+        <a href="#deepdive" class="nav-link">Принципы</a>
+        <a href="#part2-divider" class="nav-link">Pipeline</a>
         <a href="#philosophy" class="nav-link">7 принципов</a>
         <a href="#routing" class="nav-link">Routing</a>
       </nav>
 
       <button class="upd-btn" id="updBtn" onclick="toggleUpd()">
-        UPD #2 — 4 новых
+        UPD #3 — реструктуризация
       </button>
 
       <!-- ═══ S1: HERO ═══ -->
@@ -1231,168 +1231,50 @@
         </div>
       </section>
 
-      <!-- ═══ S2: PIPELINE ═══ -->
-      <section id="pipeline">
-        <div class="section-tag fade-in">Методология</div>
-        <h2 class="section-title fade-in">Kurdyuk Pipeline</h2>
-        <p class="section-sub fade-in">
-          7 фаз с жёсткими gates. Ни одну нельзя пропустить. Ни одну нельзя
-          начать без подтверждения предыдущей.
-        </p>
-
-        <div class="pipeline-track fade-in" id="pipelineTrack"></div>
-
-        <div class="bq fade-in">
-          "Boris Tane использует 3 фазы: Research &rarr; Plan &rarr; Implement.
-          У меня 7, потому что между Plan и Implement живёт Annotation Cycle —
-          1-6 раундов мультиагентного ревью. А после Implement — обязательный
-          Final Review, а не 'ну вроде работает'."
-        </div>
-      </section>
-
-      <!-- ═══ DEEP DIVE: ARTICLE ═══ -->
+      <!-- ═══ S1b: DEEP DIVE PART 1 ═══ -->
       <div class="bg-alt">
         <section id="deepdive" style="padding-bottom: 40px">
           <div class="section-tag fade-in">Deep Dive</div>
           <h2 class="section-title fade-in">Как это работает на практике</h2>
           <p class="section-sub fade-in">
-            Не абстрактная методология. Пошаговый разбор каждого этапа — от
-            первого вопроса до финального review. Написано от первого лица, из
-            реального опыта.
-          </p>
-          <p
-            class="fade-in"
-            style="
-              font-size: 0.85rem;
-              color: var(--text-muted);
-              max-width: 600px;
-              margin-bottom: 32px;
-              border-left: 2px solid var(--amber);
-              padding-left: 12px;
-            "
-          >
-            <span class="upd-badge" style="margin-left: 0; margin-right: 6px"
-              >UPD</span
-            >
-            <strong style="color: var(--amber)"
-              >Когда НЕ нужен pipeline:</strong
-            >
-            Pipeline для задач от 3+ шагов. Quick fix, одна команда, ответ на
-            вопрос — просто делай. Не каждый запрос проходит 7 фаз. Если задача
-            помещается в одно сообщение — pipeline избыточен.
+            Часть 1: универсальные принципы AI-оркестрации. Работают с любым
+            pipeline или без него.
           </p>
 
           <div class="article">
-            <!-- TOC -->
+            <!-- TOC Part 1 -->
             <div class="art-toc">
               <div class="art-toc-title">Содержание</div>
-              <!-- БЛОК 0: ВХОД -->
-              <a href="#art-error-zero"
-                ><span class="toc-num">00</span> Ошибка #0: начать без контекста
-                <span class="upd-badge">UPD</span></a
-              >
-              <!-- БЛОК 1: ФИЛОСОФИЯ -->
-              <a href="#art-orchestration"
-                ><span class="toc-num">01</span> Оркестрация: почему я не пишу
-                код</a
-              >
-              <a href="#art-nolimits"
-                ><span class="toc-num">02</span> Ограничений нет — есть лень
-                модели</a
-              >
-              <!-- БЛОК 2: РАБОЧЕЕ МЕСТО -->
-              <a href="#art-workspace"
-                ><span class="toc-num">03</span> VS Code + Claude Code: не
-                расширение, а ОС</a
-              >
-              <a href="#art-memory"
-                ><span class="toc-num">04</span> Память, контекст и
-                persistence</a
-              >
-              <a href="#art-skills"
-                ><span class="toc-num">05</span> Система skills: API
-                документируется один раз</a
-              >
-              <a href="#art-subscriptions"
-                ><span class="toc-num">06</span> Подписка vs API: CLI-модели
-                выгоднее</a
-              >
-              <!-- БЛОК 3: PIPELINE -->
-              <a href="#art-discovery"
-                ><span class="toc-num">07</span> Discovery: четыре опоры перед
-                стартом</a
-              >
-              <a href="#art-research"
-                ><span class="toc-num">08</span> Research: Gemini копает, Opus
-                думает</a
-              >
-              <a href="#art-plan"
-                ><span class="toc-num">09</span> Plan: контракт, не черновик</a
-              >
-              <a href="#art-annotation"
-                ><span class="toc-num">10</span> Annotation Cycle: план атакуют
-                четыре агента</a
-              >
-              <a href="#art-readiness"
-                ><span class="toc-num">11</span> Readiness Gate: последний шанс
-                сказать "нет"</a
-              >
-              <a href="#art-implement"
-                ><span class="toc-num">12</span> Implement: Sonnet кодит, Opus
-                молчит</a
-              >
-              <a href="#art-review"
-                ><span class="toc-num">13</span> Review: три слоя проверки</a
-              >
-              <!-- БЛОК 4: ADVANCED -->
-              <a href="#art-sessions"
-                ><span class="toc-num">14</span> Сессии: почему файлы важнее
-                чата</a
-              >
-              <a href="#art-swarm"
-                ><span class="toc-num">15</span> Swarm: много агентов на одну
-                задачу</a
-              >
-              <a href="#art-portals"
-                ><span class="toc-num">16</span> Порталы: данные бесполезны,
-                пока не видишь</a
-              >
-              <a href="#art-discipline"
-                ><span class="toc-num">17</span> Дисциплина: не давай AI
-                перескакивать</a
-              >
-              <a href="#art-arbitrage"
-                ><span class="toc-num">18</span> Арбитраж: когда сам не знаешь
-                как лучше</a
-              >
-              <a href="#art-meta-review"
-                ><span class="toc-num">19</span> Ревью на ревью + мозговой
-                штурм</a
-              >
-              <a href="#art-bug-hunting"
-                ><span class="toc-num">20</span> Итеративная охота за багами</a
-              >
-              <a href="#art-bug-triage"
-                ><span class="toc-num">21</span> Баги в процессе: замечай и
-                документируй</a
-              >
-              <a href="#art-handoff"
-                ><span class="toc-num">22</span> Handoff, cleanup и гигиена
-                сессий</a
-              >
-              <a href="#art-skill-sync"
-                ><span class="toc-num">23</span> Skill Sync: обмен знаниями
-                между коллегами</a
-              >
-              <a href="#art-cli-setup"
-                ><span class="toc-num">24</span> Gemini + Codex CLI: ноль API
-                ключей</a
-              >
-              <a href="#art-debugging"
-                ><span class="toc-num">25</span> Debugging: когда всё сломалось
-                прямо сейчас <span class="upd-badge">UPD</span></a
-              >
+              <div style="font-weight:800; font-size:0.85rem; color:var(--cyan); margin:16px 0 8px; letter-spacing:0.05em;">ЧАСТЬ 1: Принципы</div>
+              <a href="#art-error-zero"><span class="toc-num">01</span> Ошибка #0: начать без контекста <span class="upd-badge">UPD</span></a>
+              <a href="#art-orchestration"><span class="toc-num">02</span> Оркестрация: почему я не пишу код</a>
+              <a href="#art-nolimits"><span class="toc-num">03</span> Ограничений нет — есть лень модели</a>
+              <a href="#art-workspace"><span class="toc-num">04</span> VS Code + Claude Code: не расширение, а ОС</a>
+              <a href="#art-memory"><span class="toc-num">05</span> Память, контекст и persistence</a>
+              <a href="#art-skills"><span class="toc-num">06</span> Система skills: API документируется один раз</a>
+              <a href="#art-subscriptions"><span class="toc-num">07</span> Подписка vs API: CLI-модели выгоднее</a>
+              <a href="#art-sessions"><span class="toc-num">08</span> Сессии: почему файлы важнее чата</a>
+              <a href="#art-discipline"><span class="toc-num">09</span> Дисциплина: не давай AI перескакивать</a>
+              <a href="#art-swarm"><span class="toc-num">10</span> Swarm: много агентов на одну задачу</a>
+              <a href="#art-arbitrage"><span class="toc-num">11</span> Арбитраж: когда сам не знаешь как лучше</a>
+              <a href="#art-meta-review"><span class="toc-num">12</span> Ревью на ревью + мозговой штурм</a>
+              <a href="#art-bug-hunting"><span class="toc-num">13</span> Итеративная охота за багами</a>
+              <a href="#art-bug-triage"><span class="toc-num">14</span> Баги в процессе: замечай и документируй</a>
+              <a href="#art-portals"><span class="toc-num">15</span> Порталы: данные бесполезны, пока не видишь</a>
+              <a href="#art-handoff"><span class="toc-num">16</span> Handoff, cleanup и гигиена сессий</a>
+              <a href="#art-skill-sync"><span class="toc-num">17</span> Skill Sync: обмен знаниями между коллегами</a>
+              <a href="#art-cli-setup"><span class="toc-num">18</span> Gemini + Codex CLI: ноль API ключей</a>
+              <a href="#art-debugging"><span class="toc-num">19</span> Debugging: когда всё сломалось прямо сейчас <span class="upd-badge">UPD</span></a>
+              <div style="font-weight:800; font-size:0.85rem; color:var(--purple); margin:16px 0 8px; padding-top:12px; border-top:1px solid var(--glass-border); letter-spacing:0.05em;">ЧАСТЬ 2: Kurdyuk Pipeline</div>
+              <a href="#art-discovery"><span class="toc-num">П2.01</span> Discovery: четыре опоры перед стартом</a>
+              <a href="#art-research"><span class="toc-num">П2.02</span> Research: Gemini копает, Opus думает</a>
+              <a href="#art-plan"><span class="toc-num">П2.03</span> Plan: контракт, не черновик</a>
+              <a href="#art-annotation"><span class="toc-num">П2.04</span> Annotation Cycle: план атакуют четыре агента</a>
+              <a href="#art-readiness"><span class="toc-num">П2.05</span> Readiness Gate: последний шанс сказать "нет"</a>
+              <a href="#art-implement"><span class="toc-num">П2.06</span> Implement: Sonnet кодит, Opus молчит</a>
+              <a href="#art-review"><span class="toc-num">П2.07</span> Review: три слоя проверки</a>
             </div>
+
 
             <!-- 00: ERROR ZERO -->
             <h3 class="art-title upd-section" id="art-error-zero">
@@ -1406,7 +1288,7 @@
                 >Вход</span
               >
               <span class="upd-badge">UPD</span><br />
-              00. Ошибка #0: начать без контекста
+              01. Ошибка #0: начать без контекста
             </h3>
 
             <p>
@@ -1468,9 +1350,10 @@
             </p>
 
             <!-- 01: ORCHESTRATION -->
+            <!-- 01: ORCHESTRATION -->
             <h3 class="art-title" id="art-orchestration">
               <span class="art-label badge-opus">Философия</span><br />
-              01. Оркестрация: почему я не пишу код
+              02. Оркестрация: почему я не пишу код
             </h3>
 
             <p>
@@ -1524,6 +1407,7 @@
             </p>
 
             <!-- 02: NO LIMITS -->
+            <!-- 02: NO LIMITS -->
             <h3 class="art-title" id="art-nolimits">
               <span
                 class="art-label"
@@ -1534,7 +1418,7 @@
                 "
                 >Mindset</span
               ><br />
-              02. Ограничений нет — есть лень модели
+              03. Ограничений нет — есть лень модели
             </h3>
 
             <p>
@@ -1641,9 +1525,10 @@
             </p>
 
             <!-- 03: WORKSPACE -->
+            <!-- 03: WORKSPACE -->
             <h3 class="art-title" id="art-workspace">
               <span class="art-label badge-sonnet">Рабочее место</span><br />
-              03. VS Code + Claude Code: не расширение, а операционная система
+              04. VS Code + Claude Code: не расширение, а операционная система
             </h3>
 
             <p>
@@ -1718,9 +1603,10 @@
             </p>
 
             <!-- 04: MEMORY & CONTEXT -->
+            <!-- 04: MEMORY & CONTEXT -->
             <h3 class="art-title" id="art-memory">
               <span class="art-label badge-opus">Persistence</span><br />
-              04. Память, контекст и почему Claude помнит кто ты
+              05. Память, контекст и почему Claude помнит кто ты
             </h3>
 
             <p>
@@ -1829,9 +1715,10 @@
             </div>
 
             <!-- 05: SKILLS SYSTEM -->
+            <!-- 05: SKILLS SYSTEM -->
             <h3 class="art-title" id="art-skills">
               <span class="art-label badge-gemini">Infrastructure</span><br />
-              05. Система skills: каждый API документируется один раз
+              06. Система skills: каждый API документируется один раз
             </h3>
 
             <p>
@@ -1918,9 +1805,10 @@
             </p>
 
             <!-- 06: CLI SUBSCRIPTIONS -->
+            <!-- 06: CLI SUBSCRIPTIONS -->
             <h3 class="art-title" id="art-subscriptions">
               <span class="art-label badge-codex">Экономика</span><br />
-              06. Подписка vs API: почему CLI-модели выгоднее
+              07. Подписка vs API: почему CLI-модели выгоднее
             </h3>
 
             <p>
@@ -1969,548 +1857,6 @@
             </p>
 
             <!-- 07: DISCOVERY -->
-            <h3 class="art-title" id="art-discovery">
-              <span class="art-label badge-opus">Opus inline</span><br />
-              07. Discovery: четыре опоры перед стартом
-            </h3>
-
-            <p>
-              Boris начинает с research: "Read this folder in depth, understand
-              how it works deeply." У него уже есть codebase, есть контекст,
-              есть задача. Ему нужно только понять код глубже.
-            </p>
-
-            <p>
-              Я часто начинаю с нуля. Новая ниша, новый продукт, новый API.
-              Поэтому перед research мне нужен Discovery —
-              <strong>зафиксировать 4 вещи</strong>, прежде чем тратить время:
-            </p>
-
-            <div class="art-code">
-              1. Что строим — конкретно, одним предложением 2. Для кого —
-              целевой пользователь 3. Что НЕ строим — scope рамка 4. Что
-              считается первым успехом — measurable outcome
-            </div>
-
-            <p>
-              Это звучит банально, но без этого AI разъезжается моментально. Ты
-              говоришь "сделай трекер воды", а к концу сессии у тебя социальная
-              сеть с gamification, leaderboard и интеграцией с Apple Watch. AI
-              обожает добавлять scope.
-              <strong
-                >Discovery — это scope рамка, которая не даёт этому
-                случиться.</strong
-              >
-            </p>
-
-            <div class="art-highlight-amber">
-              <strong>Правило:</strong> максимум 1 вопрос за сообщение. Максимум
-              3 вопроса, если задача простая. Обязательно предложить recommended
-              approach + alternative. Если вход слабый — сказать это прямо.
-            </div>
-
-            <p>
-              Discovery делает Opus inline. Не Sonnet — тот соглашается со всем.
-              Не Gemini — тот полезет в интернет до того, как мы определили что
-              ищем. Opus задаёт правильные вопросы и видит слабый вход.
-            </p>
-
-            <p>
-              Результат: <strong>brief.md</strong> (4 опоры) +
-              <strong>intent.md</strong> (зачем это вообще нужно) +
-              <strong>invariants.md</strong> (что не должно меняться). Три
-              файла, которые держат рамку на всём протяжении pipeline.
-            </p>
-
-            <!-- 08: RESEARCH (merged with research-deep) -->
-            <h3 class="art-title" id="art-research">
-              <span class="art-label badge-gemini">Gemini background</span
-              ><br />
-              08. Research: Gemini копает, Opus думает
-            </h3>
-
-            <p>
-              Вот где я принципиально разошёлся с Boris. Он делает research
-              внутри Claude: "Read this folder, study this system." Его research
-              — это чтение кода. Мой research — это чтение интернета, PDF,
-              документации API, скриншотов конкурентов.
-            </p>
-
-            <p>
-              Claude не умеет искать в интернете. Он галлюцинирует URL,
-              выдумывает статистику, уверенно цитирует несуществующие
-              исследования. Поэтому для research у меня
-              <strong>Gemini CLI</strong> — запускается в background через Bash,
-              ходит в интернет, читает PDF нативно, анализирует скриншоты.
-            </p>
-
-            <div class="art-code">
-              Bash( command="source ~/.claude/keys.env && \
-              GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p 'Research: [тема].
-              Find: market size, key players, \ pricing, technical approach,
-              gotchas. \ Be specific with numbers and sources.' \ -m
-              gemini-2.5-pro -o text \ > /tmp/gemini-research.md 2>/dev/null",
-              run_in_background=true )
-            </div>
-
-            <p>
-              Gemini приносит сырые данные: ссылки, числа, цитаты, сравнительные
-              таблицы. Но Gemini не думает — он собирает.
-              <strong>Думает Opus.</strong>
-            </p>
-
-            <p>
-              Когда Gemini завершил background task, я читаю его output и
-              передаю Opus для синтеза: "Вот research, вот brief. Какие
-              архитектурные альтернативы? Какие trade-offs? Что выбрать и
-              почему?" Opus видит картину целиком и принимает обоснованное
-              решение.
-            </p>
-
-            <div class="art-highlight">
-              <strong>Паттерн "Gemini → Opus":</strong> Gemini = raw material
-              (background). Opus = synthesis и decisions (inline). Это как
-              аналитик приносит данные, а директор принимает решение. Никогда
-              наоборот.
-            </div>
-
-            <p>
-              Результат: <strong>research.md</strong> — не стена текста, а
-              структурированный анализ: что нашли, какие варианты, что
-              рекомендуем и почему. Этот файл — input для Plan.
-            </p>
-
-            <p>
-              Это один из самых контринтуитивных принципов. Ты сидишь в Claude
-              Code — зачем тебе другая модель для research? Claude же умный.
-              Claude может всё. Нет. Не может.
-            </p>
-
-            <p>
-              <strong>Claude не имеет доступа к интернету.</strong> Точка. Когда
-              ты спрашиваешь Claude "какой сейчас market size AI code tools?" —
-              он не гуглит. Он вспоминает. Из training data, которая обрезана на
-              определённой дате. И он не скажет "я не знаю" — он уверенно
-              назовёт число. Часто правдоподобное. Иногда правильное. Но ты
-              никогда не знаешь, когда он врёт.
-            </p>
-
-            <div class="art-highlight-red">
-              <strong>Реальный случай:</strong> Claude уверенно процитировал
-              "исследование Gartner 2025" с конкретными числами. Исследование не
-              существовало. Числа были похожи на правду — достаточно, чтобы я
-              построил на них целый research.md. Gemini нашёл реальный отчёт за
-              30 секунд — числа отличались в 3 раза.
-            </div>
-
-            <p>
-              <strong>Codex CLI (OpenAI)</strong> — та же проблема. GPT-модели
-              не ходят в интернет через CLI. Codex отлично ревьюит код, но для
-              research он бесполезен — он тоже "вспоминает", а не ищет.
-            </p>
-
-            <p>
-              <strong>Opus</strong> — идеален для синтеза research, но не для
-              сбора. Он великолепно анализирует данные, видит trade-offs, строит
-              аргументацию. Но данные ему нужно дать. Без данных — галлюцинации.
-            </p>
-
-            <p>Кто реально умеет искать?</p>
-
-            <p>
-              <strong>Gemini CLI</strong> — нативный web search. Когда ты
-              запускаешь Gemini, он ходит в Google, находит свежие источники,
-              цитирует их с URL. Он видит PDF нативно — загрузил, прочитал,
-              структурировал. 2M контекст позволяет скормить ему целую
-              документацию API. И он работает в background — пока Gemini копает,
-              я продолжаю работать с Opus.
-            </p>
-
-            <div class="art-code">
-              // Gemini для market research: Bash( command="source
-              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
-              'Find: OBD2 diagnostic app market 2026. \ Market size, top 10 apps
-              by revenue, \ pricing models, technical requirements. \ Include
-              sources with URLs.' \ -m gemini-2.5-pro -o text \ >
-              /tmp/gemini-market.md 2>/dev/null", run_in_background=true ) //
-              Gemini для API documentation: Bash( command="source
-              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
-              'Read this API docs page completely. \ Extract: base URL, auth
-              method, \ all endpoints with request/response, \ rate limits,
-              pricing, known gotchas.' \ https://docs.example.com/api \ -m
-              gemini-2.5-pro -o text \ > /tmp/gemini-api-docs.md 2>/dev/null",
-              run_in_background=true )
-            </div>
-
-            <p>
-              <strong>Exa.ai</strong> — альтернатива для semantic search. Exa
-              ищет не по ключевым словам, а по смыслу: "найди все
-              инди-разработчики, которые написали про свой pipeline разработки
-              iOS apps". Google этого не умеет. Gemini использует Google под
-              капотом — значит, тоже не умеет. Exa закрывает этот gap. На
-              практике Gemini хватает для 90% задач, Exa — для оставшихся 10%.
-            </p>
-
-            <p>
-              <strong>Паттерн research фазы:</strong>
-            </p>
-
-            <div class="art-code">
-              1. Brief готов → формулируем research questions 2. Gemini CLI
-              (background) → raw data: числа, ссылки, цитаты, документация 3.
-              [Если нужно] Exa → semantic search по нишевым источникам 4. Opus
-              (inline) → синтез: "вот 3 альтернативы, вот trade-offs, рекомендую
-              X потому что Y" 5. Результат → research.md (структурированный, с
-              источниками)
-            </div>
-
-            <p>
-              Каждый слой делает своё. Gemini/Exa — сборщики. Они приносят
-              сырьё. Opus — аналитик. Он видит картину и принимает решение.
-              <strong
-                >Никогда не проси аналитика собирать данные. Никогда не проси
-                сборщика принимать решения.</strong
-              >
-            </p>
-
-            <div class="art-highlight">
-              <strong>Почему не один инструмент для всего?</strong>
-              Потому что "умный" ≠ "всезнающий". Claude Opus — самая умная
-              модель для рассуждений. Но он слеп без данных. Gemini —
-              посредственный аналитик, но отличный исследователь. Codex — плохой
-              исследователь, но точный ревьюер кода. Специализация >
-              универсальность. Это главный принцип мультимодельной оркестрации.
-            </div>
-
-            <!-- 09: PLAN -->
-            <h3 class="art-title" id="art-plan">
-              <span class="art-label badge-opus">Opus inline</span><br />
-              09. Plan: контракт, не черновик
-            </h3>
-
-            <p>
-              Boris правильно говорит:
-              <strong
-                >"The built-in plan mode sucks. My markdown file gives me full
-                control."</strong
-              >
-              Я полностью согласен. plan.md — это файл в проекте, не
-              чат-сообщение и не built-in фича IDE.
-            </p>
-
-            <p>
-              Но у Boris plan.md — это единственный документ. У меня plan.md —
-              часть целого <strong>run folder</strong>:
-            </p>
-
-            <div class="art-code">
-              .kurdyuk-lite/runs/my-project/ ├── state.md ← фаза, текущий шаг,
-              blocker ├── brief.md ← 4 опоры (что / для кого / что НЕ / успех)
-              ├── intent.md ← зачем это вообще нужно ├── invariants.md ← что НЕ
-              должно меняться ├── research.md ← результаты research фазы ├──
-              plan.md ← КАНОНИЧЕСКИЙ IMPLEMENTATION CONTRACT ├── todo.md ←
-              execution surface с verification ├── implementation-readiness.md ←
-              verdict: pass/fail └── final-review.md ← честный verdict финала
-            </div>
-
-            <p>
-              plan.md не живёт в вакууме. Он проверяется против brief.md (scope
-              drift?), invariants.md (не нарушаем ли инварианты?), research.md
-              (все ли данные учтены?). Это не один документ — это
-              <strong>система документов с перекрёстными проверками</strong>.
-            </p>
-
-            <p>
-              Boris пишет план и аннотирует его сам. Я тоже аннотирую — но не
-              только я. Plan.md проходит через Annotation Cycle, где его атакуют
-              4+ агента. Об этом — дальше.
-            </p>
-
-            <div class="art-highlight-red">
-              <strong>Антипаттерн:</strong> тихая подмена scope. AI обожает в
-              plan.md добавлять фичи, которых не было в brief.md. "Давайте ещё
-              добавим кэширование" — когда brief говорит "простой MVP". Поэтому
-              plan проверяется против brief явно.
-            </div>
-
-            <!-- 10: ANNOTATION CYCLE -->
-            <h3 class="art-title" id="art-annotation">
-              <span class="art-label badge-codex">Multi-agent</span><br />
-              10. Annotation Cycle: план атакуют четыре агента
-            </h3>
-
-            <p>
-              Это самое ценное, что я взял у Boris и расширил. Его идея
-              гениально проста:
-            </p>
-
-            <div class="art-highlight-amber">
-              <strong>Boris Tane:</strong> "Claude writes plan.md → I review in
-              editor → I add inline notes → Send Claude back: 'address all the
-              notes, update the document, don't implement yet' → Repeat 1-6
-              times."
-            </div>
-
-            <p>
-              Один человек + один агент. Markdown как shared mutable state.
-              Простая, мощная идея. Но у неё есть ограничение:
-              <strong>один взгляд на проблему</strong>. Человек видит план через
-              свою призму. Claude соглашается с большей частью (он обучен быть
-              helpful, не critical).
-            </p>
-
-            <p>
-              Я добавил <strong>мультиагентные проходы</strong>. Каждый проход —
-              другой агент, другая перспектива, другие вопросы:
-            </p>
-
-            <p>
-              <strong>Red Team</strong> — атакует план. Ищет scope creep, wrong
-              assumptions, failure modes. "Ты заложил 3 API, но brief говорит
-              только про один. Это conscious decision или drift?" Red Team не
-              предлагает решения — он ломает. Это его работа.
-            </p>
-
-            <p>
-              <strong>Architect</strong> — проверяет структуру. Trade-offs,
-              wrong abstractions, overengineering. "SQLite хватит для этого
-              scope. PostgreSQL — это не техническое решение, это anxiety."
-              Architect думает о том, что будет через 3 месяца, не через 3 часа.
-            </p>
-
-            <p>
-              <strong>Codex CLI (background)</strong> — implementation review.
-              Запускается через Bash в background, читает план и сравнивает с
-              brief. "Phase 3 зависит от API, которого нет в research.md. Вы
-              планируете его добавить или это ошибка?" Codex — прагматик. Его не
-              интересует красота плана, его интересует: это вообще можно
-              реализовать?
-            </p>
-
-            <div class="art-code">
-              Bash( command="codex exec \ 'Review plan.md as implementation
-              expert: \ check feasibility, find pitfalls, \ compare with
-              brief.md for scope drift. \ Be direct.' \ -s read-only \ -C
-              .kurdyuk-lite/runs/my-project/ \ -o /tmp/codex-plan-review.md",
-              run_in_background=true )
-            </div>
-
-            <p>
-              <strong>Gemini Design (background)</strong> — если в задаче есть
-              UI, Gemini смотрит mockups/скриншоты. "Touch target 38pt — минимум
-              44pt по HIG. Contrast ratio 2.8:1 — нужно 4.5:1." Gemini видит
-              пиксели, Claude видит код. Разные глаза на одну проблему.
-            </p>
-
-            <p>
-              <strong>Я (User)</strong> — продуктовые решения. "Убери
-              регистрацию, сделай проще." Или: "Нет, кэш здесь не нужен, мы это
-              делаем один раз." AI не знает мой бизнес-контекст. Я знаю.
-            </p>
-
-            <div class="diagram-vertical">
-              <div
-                style="
-                  font-size: 0.75rem;
-                  color: var(--text-muted);
-                  text-transform: uppercase;
-                  letter-spacing: 0.1em;
-                  font-weight: 700;
-                  margin-bottom: 8px;
-                "
-              >
-                Annotation Cycle
-              </div>
-              <div
-                class="d-node"
-                style="border-color: var(--purple); color: var(--purple)"
-              >
-                Claude пишет plan.md
-              </div>
-              <div class="d-arrow">↓</div>
-              <div class="d-node d-node-red">Red Team атакует</div>
-              <div class="d-arrow">↓</div>
-              <div class="d-node d-node-purple">Architect проверяет</div>
-              <div class="d-arrow">↓</div>
-              <div class="d-node d-node-amber">Codex ревьюит (bg)</div>
-              <div class="d-arrow">↓</div>
-              <div class="d-node d-node-green">Gemini Design (bg)</div>
-              <div class="d-arrow">↓</div>
-              <div
-                class="d-node"
-                style="border-color: var(--blue); color: var(--blue)"
-              >
-                User: продуктовые правки
-              </div>
-              <div class="d-arrow">↓</div>
-              <div class="d-node d-node-highlight">
-                Claude обновляет plan.md
-              </div>
-              <div class="d-arrow">↻ ещё цикл?</div>
-            </div>
-
-            <p>
-              После каждого цикла Claude применяет коррекции к plan.md и
-              спрашивает:
-              <strong>"Нужен ещё цикл или план готов?"</strong> Не решает сам.
-              1-6 итераций — нормально.
-            </p>
-
-            <div class="art-highlight">
-              <strong>Почему это работает:</strong> один ревьюер может
-              пропустить проблему. Четыре — маловероятно. Red Team ищет scope
-              drift, Architect — structural issues, Codex — feasibility, Gemini
-              — visual bugs. Каждый смотрит через свою линзу. Это не дороже —
-              Codex и Gemini бегут в background, пока я обсуждаю с Opus.
-            </div>
-
-            <!-- 11: READINESS -->
-            <h3 class="art-title" id="art-readiness">
-              <span class="art-label badge-opus">Opus inline</span><br />
-              11. Readiness Gate: последний шанс сказать "нет"
-            </h3>
-
-            <p>
-              Этого нет у Boris. У него после annotation — сразу implement. У
-              меня между ними стоит <strong>Readiness Gate</strong> — отдельный
-              checkpoint с verdict: pass или fail.
-            </p>
-
-            <p>
-              Зачем? Потому что annotation cycle может закончиться на "вроде ок"
-              вместо "точно ок". Readiness Gate — это
-              <strong>формальная проверка</strong>: все ли dependencies есть?
-              Все ли API researched? Brief не нарушен? Invariants на месте? Todo
-              list готов?
-            </p>
-
-            <div class="art-code">
-              ## Implementation Readiness Assessment **Verdict: PASS / FAIL**
-              Checklist: - [ ] brief.md: 4 опоры заполнены - [ ] research.md:
-              все внешние зависимости researched - [ ] plan.md: прошёл
-              annotation cycle (1+ итераций) - [ ] invariants.md: план не
-              нарушает инварианты - [ ] todo.md: задачи разбиты, verification
-              fields пустые - [ ] Нет open questions или blockers **If FAIL:**
-              что нужно доделать перед implement
-            </div>
-
-            <p>
-              Это последний шанс сказать "стоп" дёшево. Каждая минута в
-              Implement стоит в 10 раз дороже минуты в Planning. Readiness Gate
-              — это
-              <strong>экономия</strong>, не бюрократия.
-            </p>
-
-            <p>
-              Без pass — код запрещён. Не "попробуем и посмотрим", а именно
-              запрещён. Это правило pipeline.
-            </p>
-
-            <!-- 12: IMPLEMENT -->
-            <h3 class="art-title" id="art-implement">
-              <span class="art-label badge-sonnet">Sonnet inline</span><br />
-              12. Implement: Sonnet кодит, Opus молчит
-            </h3>
-
-            <p>
-              Boris делает implement через Opus: "Implement it all. Mark
-              completed tasks. Do not stop." Его промпт великолепен в своей
-              прямоте. Но я использую <strong>Sonnet, не Opus</strong>.
-            </p>
-
-            <p>
-              Почему? Потому что к этому моменту вся сложность уже решена. Plan
-              прошёл 4 агента review. Readiness = pass. Todo list готов с
-              конкретными задачами. Реализация должна быть
-              <strong>boring</strong> — как Boris и говорит: "The creative work
-              happened in the annotation cycles."
-            </p>
-
-            <p>
-              Sonnet быстрее, дешевле и не хуже Opus для написания кода по
-              готовому плану. Opus избыточен здесь — его сила в thinking, а
-              thinking на этом этапе уже произошёл.
-            </p>
-
-            <div class="art-highlight">
-              <strong>Правило Boris (которое я использую дословно):</strong>
-              "Do not add unnecessary comments or jsdocs. Do not stop until all
-              tasks are completed. Continuously run typecheck." — Минимализм в
-              implement промпте.
-            </div>
-
-            <p>
-              Отличие от Boris: я использую
-              <strong>todo.md с verification полями</strong>. Не просто "mark as
-              completed" — а "mark as completed WITH proof".
-            </p>
-
-            <div class="art-code">
-              ## Todo ✅ Реализовать SQLite кэширование **Verify:** 2nd run 0
-              API calls, response from cache 14ms ✅ Добавить integration tests
-              **Verify:** 23 tests passed, 0 mocks, real SQLite in-memory □
-              Оптимизировать N+1 запросы **Verify:** ___
-            </div>
-
-            <p>
-              Каждая галочка — не "AI сказал done", а
-              <strong>"вот proof"</strong>. Тест прошёл — покажи output. Кэш
-              работает — покажи лог. Запросы оптимизированы — покажи EXPLAIN.
-              Без proof — задача не done.
-            </p>
-
-            <!-- 13: REVIEW -->
-            <h3 class="art-title" id="art-review">
-              <span class="art-label badge-opus">Multi-layer</span><br />
-              13. Review: три слоя проверки
-            </h3>
-
-            <p>
-              У Boris нет отдельной фазы review после implement. Его implement
-              включает typecheck, и этого ему достаточно — он сам ревьюит код в
-              процессе.
-            </p>
-
-            <p>У меня <strong>три слоя</strong>, и они бегут параллельно:</p>
-
-            <p>
-              <strong>Слой 1: Codex CLI (background)</strong> — code review.
-              Читает написанный код, сравнивает с планом. "Функция
-              deduplicateByTitle не реализована. В plan.md она есть, в коде —
-              нет." Codex видит расхождения между планом и реализацией, которые
-              человек пропустит.
-            </p>
-
-            <p>
-              <strong>Слой 2: Gemini Visual QA (background)</strong> — если есть
-              UI. Сравнивает скриншот реализации с mockup/brief. "Кнопка
-              сместилась на 8px влево. Шрифт заголовка 16pt вместо 18pt."
-              Pixel-level проверка, которую ни один code review не поймает.
-            </p>
-
-            <p>
-              <strong>Слой 3: Opus Final Review (inline)</strong> — честный
-              verdict. Opus читает весь run folder (brief → plan → todo → код) и
-              выносит judgment. "Реализация соответствует плану. Два deferred
-              item из Codex review — некритичные, можно в v1.1."
-            </p>
-
-            <div class="art-code">
-              // Слои 1 и 2 бегут параллельно в background: Bash(command="codex
-              exec 'Review code...' -o /tmp/codex-review.md",
-              run_in_background=true) Bash(command="gemini -p 'Compare
-              screenshot vs mockup...' -o text > /tmp/gemini-qa.md",
-              run_in_background=true) // Когда оба завершились → Opus читает и
-              выносит verdict: Read /tmp/codex-review.md Read /tmp/gemini-qa.md
-              → Opus: final-review.md с verdict
-            </div>
-
-            <p>
-              Всё, что нашли Codex и Gemini, фиксируется в final-review.md как
-              "accepted" или "deferred". Ничего не теряется. Если deferred — это
-              explicit decision, не забытый bug.
-            </p>
-
             <!-- 14: SESSIONS -->
             <h3 class="art-title" id="art-sessions">
               <span
@@ -2522,7 +1868,7 @@
                 "
                 >Архитектура</span
               ><br />
-              14. Сессии: почему файлы важнее чата
+              08. Сессии: почему файлы важнее чата
             </h3>
 
             <p>
@@ -2592,6 +1938,70 @@
             </div>
 
             <!-- 15: AGENT SWARM -->
+            <!-- 17: DISCIPLINE -->
+            <h3 class="art-title" id="art-discipline">
+              <span class="art-label badge-opus">Контроль</span><br />
+              09. Дисциплина: не давай AI перескакивать
+            </h3>
+
+            <p>
+              AI хочет писать код. Прямо сейчас. Ты ещё на фазе обсуждения, а он
+              уже редактирует файлы. Ты задал вопрос про архитектуру, а он выдал
+              "вот, я уже всё реализовал". Это
+              <strong>самая опасная привычка</strong> AI-агентов — склонность
+              перескакивать к следующему действию.
+            </p>
+
+            <p>
+              Типичный сценарий: ты утвердил план. AI написал код. Ты говоришь
+              "хм, вот тут не так". AI: "Исправил! И заодно рефакторнул три
+              соседних файла, добавил кэширование и переименовал API." Ты не
+              просил. Но он уже это сделал. И откатить сложнее, чем было бы не
+              делать.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Правило:</strong> фаза обсуждения ≠ разрешение на
+              implement. "Что думаешь?" ≠ "делай". "Посмотри на это" ≠ "правь".
+              AI должен показать что планирует — и ждать явного "делай" / "ок" /
+              "приступай". Без этого слова — руки прочь от файлов.
+            </div>
+
+            <p>
+              <strong>Annotation cycle — главный защитный механизм.</strong>
+              Между Plan и Implement стоят 1-6 циклов ревью. После каждого
+              Claude спрашивает: "Нужен ещё цикл или план готов?" Не решает сам.
+              Ты гоняешь циклы, пока план не станет таким, что доработки мелкие
+              или их нет совсем. Только тогда — implement.
+            </p>
+
+            <div class="art-code">
+              Типичная сессия annotation cycle: Цикл 1: Red Team → "scope drift
+              в Phase 3, 2 лишних API" Claude обновляет plan → "ещё цикл?" Цикл
+              2: Codex (bg) → "endpoint /api/v2/sync не существует" Claude
+              обновляет plan → "ещё цикл?" Цикл 3: Architect → "SQLite хватит,
+              Postgres избыточен" Claude обновляет plan → "ещё цикл?" Цикл 4:
+              User → "убери регистрацию, сделай проще" Claude обновляет plan →
+              "ещё цикл?" Цикл 5: Мелкие правки, ничего structural → "план
+              готов, переходи к readiness"
+            </div>
+
+            <p>
+              <strong>5 циклов</strong> — не бюрократия. Каждый цикл ловил
+              реальную проблему. Без них я бы начал кодить с несуществующим
+              endpoint, лишней базой данных и фичей, которую никто не просил. А
+              потом откатывал бы 3 часа работы.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Когда остановиться:</strong> когда замечания мелкие
+              (форматирование, naming) или их нет. Если каждый цикл находит
+              structural issue — план ещё сырой. Если находит только cosmetic —
+              план готов. Readiness Gate подтвердит.
+            </div>
+
+            <!-- 18: ARBITRAGE -->
+            <!-- 15: AGENT SWARM -->
             <h3 class="art-title" id="art-swarm">
               <span
                 class="art-label"
@@ -2602,7 +2012,7 @@
                 "
                 >Advanced</span
               ><br />
-              15. Swarm: много агентов на одну задачу
+              10. Swarm: много агентов на одну задачу
             </h3>
 
             <p>
@@ -2678,150 +2088,6 @@
             </div>
 
             <!-- 16: PORTALS -->
-            <h3 class="art-title" id="art-portals">
-              <span class="art-label badge-sonnet">Визуализация</span><br />
-              16. Порталы: данные бесполезны, пока ты их не видишь
-            </h3>
-
-            <p>
-              Pipeline генерит данные. Много данных. Gap analysis находит 1169
-              gaps. Teardown Suite разбирает 10 конкурентов. RAG-система
-              индексирует 50 часов видео. Это всё JSON-файлы, SQLite базы,
-              markdown.
-              <strong>Ты их не откроешь.</strong> Не потому что не можешь —
-              потому что 1169 строк JSON невозможно "просмотреть".
-            </p>
-
-            <p>
-              Поэтому каждый серьёзный output pipeline →
-              <strong>HTML-портал</strong>. Единый файл, Chart.js,
-              glass-morphism, интерактивные таблицы, фильтры. Открыл в браузере
-              — видишь всю картину.
-            </p>
-
-            <div class="art-highlight">
-              <strong>Порталы которые я уже построил:</strong><br />
-              — <strong>Gap Analysis Portal:</strong> 417 ниш, tiered layout,
-              unified competitors, badges, depth warnings<br />
-              — <strong>Vibe Coding Portal:</strong> 12 секций, 6 charts,
-              timeline, expert quotes, ~4500 строк<br />
-              — <strong>CarPlay OBD Templates:</strong> 10 CPTemplate mockups,
-              HIG compliant<br />
-              — <strong>Этот портал:</strong> принципы вайбкодинга, 26 глав<br />
-              — <strong>Expert RAG Portal:</strong> semantic search по 50+ видео
-              с tag filtering
-            </div>
-
-            <p>
-              <strong>Smoke test — первая точка.</strong> Не строй портал сразу.
-              Сначала smoke test: "покажи мне 5 записей из результата в читаемом
-              виде". Если данные мусорные — портал не нужен, нужен fix pipeline.
-              Если данные хорошие — строй портал.
-            </p>
-
-            <div class="art-code">
-              Smoke test flow: 1. Pipeline отработал → JSON/SQLite output 2.
-              Claude: "покажи 5 примеров в таблице" 3. Проверяю: данные
-              валидные? Есть мусор? 4. Если ок → "построй портал" 5. Если мусор
-              → "почини pipeline, вот проблемы" Portal flow: 1. Claude Sonnet
-              генерит HTML (один файл, self-contained) 2. Данные в JS-объекте
-              наверху script — легко обновить 3. Chart.js для визуализаций 4.
-              Открыл в браузере → полная картина 5. Нашёл проблему → fix →
-              re-run → обновить данные
-            </div>
-
-            <p>
-              <strong>Публикация: GitHub Pages + приватное репо.</strong>
-              Портал — один HTML файл. Его можно выгрузить на GitHub Pages из
-              приватного репо. Доступ только у тебя (и тех, кого добавишь). Плюс
-              — закрыть от индексации:
-            </p>
-
-            <div class="art-code">
-              # В корне репо: robots.txt User-agent: * Disallow: / # Или в head
-              портала: &lt;meta name="robots" content="noindex, nofollow"&gt; #
-              Результат: # https://username.github.io/my-portal/ # Доступен по
-              ссылке, не индексируется поисковиками # Репо приватное → только
-              collaborators видят код
-            </div>
-
-            <p>
-              <strong>Почему не Notion / Google Docs / Confluence?</strong>
-              Потому что HTML-портал — это код. Claude его генерит, обновляет,
-              рефакторит. Данные в JS-объекте — обновить = заменить объект.
-              Charts перестроятся автоматически. В Notion ты будешь руками
-              таскать таблицы. В HTML — одна команда и всё обновилось.
-            </p>
-
-            <div class="art-highlight-amber">
-              <strong>Принцип:</strong> pipeline без визуализации — чёрный ящик.
-              Ты не знаешь что внутри. Портал — это окно внутрь. Smoke test →
-              портал → iterate. Не наоборот. И не "когда-нибудь потом сделаю
-              дашборд" — сразу. Иначе ты работаешь вслепую.
-            </div>
-
-            <!-- 17: DISCIPLINE -->
-            <h3 class="art-title" id="art-discipline">
-              <span class="art-label badge-opus">Контроль</span><br />
-              17. Дисциплина: не давай AI перескакивать
-            </h3>
-
-            <p>
-              AI хочет писать код. Прямо сейчас. Ты ещё на фазе обсуждения, а он
-              уже редактирует файлы. Ты задал вопрос про архитектуру, а он выдал
-              "вот, я уже всё реализовал". Это
-              <strong>самая опасная привычка</strong> AI-агентов — склонность
-              перескакивать к следующему действию.
-            </p>
-
-            <p>
-              Типичный сценарий: ты утвердил план. AI написал код. Ты говоришь
-              "хм, вот тут не так". AI: "Исправил! И заодно рефакторнул три
-              соседних файла, добавил кэширование и переименовал API." Ты не
-              просил. Но он уже это сделал. И откатить сложнее, чем было бы не
-              делать.
-            </p>
-
-            <div class="art-highlight-red">
-              <strong>Правило:</strong> фаза обсуждения ≠ разрешение на
-              implement. "Что думаешь?" ≠ "делай". "Посмотри на это" ≠ "правь".
-              AI должен показать что планирует — и ждать явного "делай" / "ок" /
-              "приступай". Без этого слова — руки прочь от файлов.
-            </div>
-
-            <p>
-              <strong>Annotation cycle — главный защитный механизм.</strong>
-              Между Plan и Implement стоят 1-6 циклов ревью. После каждого
-              Claude спрашивает: "Нужен ещё цикл или план готов?" Не решает сам.
-              Ты гоняешь циклы, пока план не станет таким, что доработки мелкие
-              или их нет совсем. Только тогда — implement.
-            </p>
-
-            <div class="art-code">
-              Типичная сессия annotation cycle: Цикл 1: Red Team → "scope drift
-              в Phase 3, 2 лишних API" Claude обновляет plan → "ещё цикл?" Цикл
-              2: Codex (bg) → "endpoint /api/v2/sync не существует" Claude
-              обновляет plan → "ещё цикл?" Цикл 3: Architect → "SQLite хватит,
-              Postgres избыточен" Claude обновляет plan → "ещё цикл?" Цикл 4:
-              User → "убери регистрацию, сделай проще" Claude обновляет plan →
-              "ещё цикл?" Цикл 5: Мелкие правки, ничего structural → "план
-              готов, переходи к readiness"
-            </div>
-
-            <p>
-              <strong>5 циклов</strong> — не бюрократия. Каждый цикл ловил
-              реальную проблему. Без них я бы начал кодить с несуществующим
-              endpoint, лишней базой данных и фичей, которую никто не просил. А
-              потом откатывал бы 3 часа работы.
-            </p>
-
-            <div class="art-highlight">
-              <strong>Когда остановиться:</strong> когда замечания мелкие
-              (форматирование, naming) или их нет. Если каждый цикл находит
-              structural issue — план ещё сырой. Если находит только cosmetic —
-              план готов. Readiness Gate подтвердит.
-            </div>
-
             <!-- 18: ARBITRAGE -->
             <h3 class="art-title" id="art-arbitrage">
               <span
@@ -2833,7 +2099,7 @@
                 "
                 >Decision-making</span
               ><br />
-              18. Арбитраж: когда сам не знаешь как лучше
+              11. Арбитраж: когда сам не знаешь как лучше
             </h3>
 
             <p>
@@ -2952,9 +2218,10 @@
             </p>
 
             <!-- 19: META-REVIEW + BRAINSTORM -->
+            <!-- 19: META-REVIEW + BRAINSTORM -->
             <h3 class="art-title" id="art-meta-review">
               <span class="art-label badge-codex">Multi-model</span><br />
-              19. Мозговой штурм: 10 агентов думают параллельно
+              12. Мозговой штурм: 10 агентов думают параллельно
             </h3>
 
             <p>
@@ -3062,9 +2329,10 @@
             </div>
 
             <!-- 20: BUG HUNTING -->
+            <!-- 20: BUG HUNTING -->
             <h3 class="art-title" id="art-bug-hunting">
               <span class="art-label badge-opus">Quality</span><br />
-              20. Итеративная охота за багами
+              13. Итеративная охота за багами
             </h3>
 
             <p>
@@ -3230,9 +2498,10 @@
             </p>
 
             <!-- 21: BUG TRIAGE -->
+            <!-- 21: BUG TRIAGE -->
             <h3 class="art-title" id="art-bug-triage">
               <span class="art-label badge-codex">Ops</span><br />
-              21. Баги в процессе: замечай, фиксируй, документируй
+              14. Баги в процессе: замечай, фиксируй, документируй
             </h3>
 
             <p>
@@ -3301,9 +2570,94 @@
             </div>
 
             <!-- 22: HANDOFF & SESSION HYGIENE -->
+            <!-- 16: PORTALS -->
+            <h3 class="art-title" id="art-portals">
+              <span class="art-label badge-sonnet">Визуализация</span><br />
+              15. Порталы: данные бесполезны, пока ты их не видишь
+            </h3>
+
+            <p>
+              Pipeline генерит данные. Много данных. Gap analysis находит 1169
+              gaps. Teardown Suite разбирает 10 конкурентов. RAG-система
+              индексирует 50 часов видео. Это всё JSON-файлы, SQLite базы,
+              markdown.
+              <strong>Ты их не откроешь.</strong> Не потому что не можешь —
+              потому что 1169 строк JSON невозможно "просмотреть".
+            </p>
+
+            <p>
+              Поэтому каждый серьёзный output pipeline →
+              <strong>HTML-портал</strong>. Единый файл, Chart.js,
+              glass-morphism, интерактивные таблицы, фильтры. Открыл в браузере
+              — видишь всю картину.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Порталы которые я уже построил:</strong><br />
+              — <strong>Gap Analysis Portal:</strong> 417 ниш, tiered layout,
+              unified competitors, badges, depth warnings<br />
+              — <strong>Vibe Coding Portal:</strong> 12 секций, 6 charts,
+              timeline, expert quotes, ~4500 строк<br />
+              — <strong>CarPlay OBD Templates:</strong> 10 CPTemplate mockups,
+              HIG compliant<br />
+              — <strong>Этот портал:</strong> принципы вайбкодинга, 26 глав<br />
+              — <strong>Expert RAG Portal:</strong> semantic search по 50+ видео
+              с tag filtering
+            </div>
+
+            <p>
+              <strong>Smoke test — первая точка.</strong> Не строй портал сразу.
+              Сначала smoke test: "покажи мне 5 записей из результата в читаемом
+              виде". Если данные мусорные — портал не нужен, нужен fix pipeline.
+              Если данные хорошие — строй портал.
+            </p>
+
+            <div class="art-code">
+              Smoke test flow: 1. Pipeline отработал → JSON/SQLite output 2.
+              Claude: "покажи 5 примеров в таблице" 3. Проверяю: данные
+              валидные? Есть мусор? 4. Если ок → "построй портал" 5. Если мусор
+              → "почини pipeline, вот проблемы" Portal flow: 1. Claude Sonnet
+              генерит HTML (один файл, self-contained) 2. Данные в JS-объекте
+              наверху script — легко обновить 3. Chart.js для визуализаций 4.
+              Открыл в браузере → полная картина 5. Нашёл проблему → fix →
+              re-run → обновить данные
+            </div>
+
+            <p>
+              <strong>Публикация: GitHub Pages + приватное репо.</strong>
+              Портал — один HTML файл. Его можно выгрузить на GitHub Pages из
+              приватного репо. Доступ только у тебя (и тех, кого добавишь). Плюс
+              — закрыть от индексации:
+            </p>
+
+            <div class="art-code">
+              # В корне репо: robots.txt User-agent: * Disallow: / # Или в head
+              портала: &lt;meta name="robots" content="noindex, nofollow"&gt; #
+              Результат: # https://username.github.io/my-portal/ # Доступен по
+              ссылке, не индексируется поисковиками # Репо приватное → только
+              collaborators видят код
+            </div>
+
+            <p>
+              <strong>Почему не Notion / Google Docs / Confluence?</strong>
+              Потому что HTML-портал — это код. Claude его генерит, обновляет,
+              рефакторит. Данные в JS-объекте — обновить = заменить объект.
+              Charts перестроятся автоматически. В Notion ты будешь руками
+              таскать таблицы. В HTML — одна команда и всё обновилось.
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Принцип:</strong> pipeline без визуализации — чёрный ящик.
+              Ты не знаешь что внутри. Портал — это окно внутрь. Smoke test →
+              портал → iterate. Не наоборот. И не "когда-нибудь потом сделаю
+              дашборд" — сразу. Иначе ты работаешь вслепую.
+            </div>
+
+            <!-- 17: DISCIPLINE -->
+            <!-- 22: HANDOFF & SESSION HYGIENE -->
             <h3 class="art-title" id="art-handoff">
               <span class="art-label badge-opus">Session Mgmt</span><br />
-              22. Handoff, cleanup и гигиена сессий
+              16. Handoff, cleanup и гигиена сессий
             </h3>
 
             <p>
@@ -3416,9 +2770,10 @@
             </div>
 
             <!-- 23: SKILL SYNC -->
+            <!-- 23: SKILL SYNC -->
             <h3 class="art-title" id="art-skill-sync">
               <span class="art-label badge-gemini">Collaboration</span><br />
-              23. Skill Sync: обмен знаниями между коллегами
+              17. Skill Sync: обмен знаниями между коллегами
             </h3>
 
             <p>
@@ -3568,9 +2923,10 @@
             </div>
 
             <!-- 24: GEMINI & CODEX WITHOUT API KEYS -->
+            <!-- 24: GEMINI & CODEX WITHOUT API KEYS -->
             <h3 class="art-title" id="art-cli-setup">
               <span class="art-label badge-gemini">Zero API Keys</span><br />
-              24. Gemini CLI и Codex CLI: полный оркестр без единого API ключа
+              18. Gemini CLI и Codex CLI: полный оркестр без единого API ключа
             </h3>
 
             <p>
@@ -3584,7 +2940,7 @@
             <p>
               Почему это важно? API ключи = pay-per-token. Каждый запрос —
               деньги. Research через Gemini API стоит $0.01-0.05 за запрос. 50
-              запросов в день — $2.50. В месяц — $75 только на research.
+              запросов в день — $2.18. В месяц — $75 только на research.
               Подписка Google One AI Premium — $20/мес, безлимит.
             </p>
 
@@ -3759,8 +3115,7 @@
             <div class="art-highlight-red">
               <strong>Gotcha: модели.</strong> На подписке работают только
               Codex-модели: gpt-5.4, gpt-5.4-mini, gpt-5.3-codex, gpt-5.2-codex.
-              <code style="color: var(--cyan)">gpt-5.4-nano</code> → ошибка 400.
-              API-модели (o4-mini, o3) → ошибка 400. Только с API key
+              <code style="color: var(--cyan)">gpt-5.4-nano</code> → ошибка 418.               API-модели (o4-mini, o3) → ошибка 418. Только с API key
               (pay-per-token).
             </div>
 
@@ -3814,10 +3169,11 @@
             </div>
 
             <!-- 25: DEBUGGING -->
+            <!-- 25: DEBUGGING -->
             <h3 class="art-title upd-section" id="art-debugging">
               <span class="art-label badge-opus">Emergency</span>
               <span class="upd-badge">UPD</span><br />
-              25. Debugging: когда всё сломалось прямо сейчас
+              19. Debugging: когда всё сломалось прямо сейчас
             </h3>
 
             <p>
@@ -3901,6 +3257,574 @@
               Перепроверь. Это не debugging кода — это debugging контекста.
             </p>
 
+
+            <!-- ═══ PART 2: KURDYUK PIPELINE ═══ -->
+            <div id="part2-divider" style="margin:80px 0 60px; text-align:center; position:relative;">
+              <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--purple), transparent);"></div>
+              <div style="position:relative; display:inline-block; background:var(--bg2); padding:0 32px;">
+                <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--purple); background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); border-radius:4px; padding:4px 10px; margin-bottom:8px; display:inline-block;">Методология</div>
+                <h2 style="font-size:clamp(1.4rem,2.5vw,2rem); font-weight:800; color:#f1f5f9; margin:0;">Kurdyuk Pipeline</h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px; max-width:500px;">7 фаз. Конкретная реализация принципов выше — файлы, routing, sequence.</p>
+              </div>
+            </div>
+
+            <p style="font-size:0.85rem; color:var(--text-muted); max-width:600px; margin-bottom:32px; border-left:2px solid var(--amber); padding-left:12px;">
+              <strong style="color:var(--amber)">Когда НЕ нужен pipeline:</strong>
+              Pipeline для задач от 3+ шагов. Quick fix, одна команда, ответ на
+              вопрос — просто делай. Не каждый запрос проходит 7 фаз. Если задача
+              помещается в одно сообщение — pipeline избыточен.
+            </p>
+
+            <!-- 07: DISCOVERY -->
+            <h3 class="art-title" id="art-discovery">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              П2.01. Discovery: четыре опоры перед стартом
+            </h3>
+
+            <p>
+              Boris начинает с research: "Read this folder in depth, understand
+              how it works deeply." У него уже есть codebase, есть контекст,
+              есть задача. Ему нужно только понять код глубже.
+            </p>
+
+            <p>
+              Я часто начинаю с нуля. Новая ниша, новый продукт, новый API.
+              Поэтому перед research мне нужен Discovery —
+              <strong>зафиксировать 4 вещи</strong>, прежде чем тратить время:
+            </p>
+
+            <div class="art-code">
+              1. Что строим — конкретно, одним предложением 2. Для кого —
+              целевой пользователь 3. Что НЕ строим — scope рамка 4. Что
+              считается первым успехом — measurable outcome
+            </div>
+
+            <p>
+              Это звучит банально, но без этого AI разъезжается моментально. Ты
+              говоришь "сделай трекер воды", а к концу сессии у тебя социальная
+              сеть с gamification, leaderboard и интеграцией с Apple Watch. AI
+              обожает добавлять scope.
+              <strong
+                >Discovery — это scope рамка, которая не даёт этому
+                случиться.</strong
+              >
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Правило:</strong> максимум 1 вопрос за сообщение. Максимум
+              3 вопроса, если задача простая. Обязательно предложить recommended
+              approach + alternative. Если вход слабый — сказать это прямо.
+            </div>
+
+            <p>
+              Discovery делает Opus inline. Не Sonnet — тот соглашается со всем.
+              Не Gemini — тот полезет в интернет до того, как мы определили что
+              ищем. Opus задаёт правильные вопросы и видит слабый вход.
+            </p>
+
+            <p>
+              Результат: <strong>brief.md</strong> (4 опоры) +
+              <strong>intent.md</strong> (зачем это вообще нужно) +
+              <strong>invariants.md</strong> (что не должно меняться). Три
+              файла, которые держат рамку на всём протяжении pipeline.
+            </p>
+
+            <!-- 08: RESEARCH (merged with research-deep) -->
+            <!-- 08: RESEARCH (merged with research-deep) -->
+            <h3 class="art-title" id="art-research">
+              <span class="art-label badge-gemini">Gemini background</span
+              ><br />
+              П2.02. Research: Gemini копает, Opus думает
+            </h3>
+
+            <p>
+              Вот где я принципиально разошёлся с Boris. Он делает research
+              внутри Claude: "Read this folder, study this system." Его research
+              — это чтение кода. Мой research — это чтение интернета, PDF,
+              документации API, скриншотов конкурентов.
+            </p>
+
+            <p>
+              Claude не умеет искать в интернете. Он галлюцинирует URL,
+              выдумывает статистику, уверенно цитирует несуществующие
+              исследования. Поэтому для research у меня
+              <strong>Gemini CLI</strong> — запускается в background через Bash,
+              ходит в интернет, читает PDF нативно, анализирует скриншоты.
+            </p>
+
+            <div class="art-code">
+              Bash( command="source ~/.claude/keys.env && \
+              GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p 'Research: [тема].
+              Find: market size, key players, \ pricing, technical approach,
+              gotchas. \ Be specific with numbers and sources.' \ -m
+              gemini-2.5-pro -o text \ > /tmp/gemini-research.md 2>/dev/null",
+              run_in_background=true )
+            </div>
+
+            <p>
+              Gemini приносит сырые данные: ссылки, числа, цитаты, сравнительные
+              таблицы. Но Gemini не думает — он собирает.
+              <strong>Думает Opus.</strong>
+            </p>
+
+            <p>
+              Когда Gemini завершил background task, я читаю его output и
+              передаю Opus для синтеза: "Вот research, вот brief. Какие
+              архитектурные альтернативы? Какие trade-offs? Что выбрать и
+              почему?" Opus видит картину целиком и принимает обоснованное
+              решение.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Паттерн "Gemini → Opus":</strong> Gemini = raw material
+              (background). Opus = synthesis и decisions (inline). Это как
+              аналитик приносит данные, а директор принимает решение. Никогда
+              наоборот.
+            </div>
+
+            <p>
+              Результат: <strong>research.md</strong> — не стена текста, а
+              структурированный анализ: что нашли, какие варианты, что
+              рекомендуем и почему. Этот файл — input для Plan.
+            </p>
+
+            <p>
+              Это один из самых контринтуитивных принципов. Ты сидишь в Claude
+              Code — зачем тебе другая модель для research? Claude же умный.
+              Claude может всё. Нет. Не может.
+            </p>
+
+            <p>
+              <strong>Claude не имеет доступа к интернету.</strong> Точка. Когда
+              ты спрашиваешь Claude "какой сейчас market size AI code tools?" —
+              он не гуглит. Он вспоминает. Из training data, которая обрезана на
+              определённой дате. И он не скажет "я не знаю" — он уверенно
+              назовёт число. Часто правдоподобное. Иногда правильное. Но ты
+              никогда не знаешь, когда он врёт.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Реальный случай:</strong> Claude уверенно процитировал
+              "исследование Gartner 2025" с конкретными числами. Исследование не
+              существовало. Числа были похожи на правду — достаточно, чтобы я
+              построил на них целый research.md. Gemini нашёл реальный отчёт за
+              30 секунд — числа отличались в 3 раза.
+            </div>
+
+            <p>
+              <strong>Codex CLI (OpenAI)</strong> — та же проблема. GPT-модели
+              не ходят в интернет через CLI. Codex отлично ревьюит код, но для
+              research он бесполезен — он тоже "вспоминает", а не ищет.
+            </p>
+
+            <p>
+              <strong>Opus</strong> — идеален для синтеза research, но не для
+              сбора. Он великолепно анализирует данные, видит trade-offs, строит
+              аргументацию. Но данные ему нужно дать. Без данных — галлюцинации.
+            </p>
+
+            <p>Кто реально умеет искать?</p>
+
+            <p>
+              <strong>Gemini CLI</strong> — нативный web search. Когда ты
+              запускаешь Gemini, он ходит в Google, находит свежие источники,
+              цитирует их с URL. Он видит PDF нативно — загрузил, прочитал,
+              структурировал. 2M контекст позволяет скормить ему целую
+              документацию API. И он работает в background — пока Gemini копает,
+              я продолжаю работать с Opus.
+            </p>
+
+            <div class="art-code">
+              // Gemini для market research: Bash( command="source
+              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
+              'Find: OBD2 diagnostic app market 20П2.02. \ Market size, top 10 apps
+              by revenue, \ pricing models, technical requirements. \ Include
+              sources with URLs.' \ -m gemini-2.5-pro -o text \ >
+              /tmp/gemini-market.md 2>/dev/null", run_in_background=true ) //
+              Gemini для API documentation: Bash( command="source
+              ~/.claude/keys.env && \ GEMINI_API_KEY=$GEMINI_API_KEY gemini \ -p
+              'Read this API docs page completely. \ Extract: base URL, auth
+              method, \ all endpoints with request/response, \ rate limits,
+              pricing, known gotchas.' \ https://docs.example.com/api \ -m
+              gemini-2.5-pro -o text \ > /tmp/gemini-api-docs.md 2>/dev/null",
+              run_in_background=true )
+            </div>
+
+            <p>
+              <strong>Exa.ai</strong> — альтернатива для semantic search. Exa
+              ищет не по ключевым словам, а по смыслу: "найди все
+              инди-разработчики, которые написали про свой pipeline разработки
+              iOS apps". Google этого не умеет. Gemini использует Google под
+              капотом — значит, тоже не умеет. Exa закрывает этот gap. На
+              практике Gemini хватает для 90% задач, Exa — для оставшихся 10%.
+            </p>
+
+            <p>
+              <strong>Паттерн research фазы:</strong>
+            </p>
+
+            <div class="art-code">
+              1. Brief готов → формулируем research questions 2. Gemini CLI
+              (background) → raw data: числа, ссылки, цитаты, документация 3.
+              [Если нужно] Exa → semantic search по нишевым источникам 4. Opus
+              (inline) → синтез: "вот 3 альтернативы, вот trade-offs, рекомендую
+              X потому что Y" 5. Результат → research.md (структурированный, с
+              источниками)
+            </div>
+
+            <p>
+              Каждый слой делает своё. Gemini/Exa — сборщики. Они приносят
+              сырьё. Opus — аналитик. Он видит картину и принимает решение.
+              <strong
+                >Никогда не проси аналитика собирать данные. Никогда не проси
+                сборщика принимать решения.</strong
+              >
+            </p>
+
+            <div class="art-highlight">
+              <strong>Почему не один инструмент для всего?</strong>
+              Потому что "умный" ≠ "всезнающий". Claude Opus — самая умная
+              модель для рассуждений. Но он слеп без данных. Gemini —
+              посредственный аналитик, но отличный исследователь. Codex — плохой
+              исследователь, но точный ревьюер кода. Специализация >
+              универсальность. Это главный принцип мультимодельной оркестрации.
+            </div>
+
+            <!-- 09: PLAN -->
+            <!-- 09: PLAN -->
+            <h3 class="art-title" id="art-plan">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              П2.03. Plan: контракт, не черновик
+            </h3>
+
+            <p>
+              Boris правильно говорит:
+              <strong
+                >"The built-in plan mode sucks. My markdown file gives me full
+                control."</strong
+              >
+              Я полностью согласен. plan.md — это файл в проекте, не
+              чат-сообщение и не built-in фича IDE.
+            </p>
+
+            <p>
+              Но у Boris plan.md — это единственный документ. У меня plan.md —
+              часть целого <strong>run folder</strong>:
+            </p>
+
+            <div class="art-code">
+              .kurdyuk-lite/runs/my-project/ ├── state.md ← фаза, текущий шаг,
+              blocker ├── brief.md ← 4 опоры (что / для кого / что НЕ / успех)
+              ├── intent.md ← зачем это вообще нужно ├── invariants.md ← что НЕ
+              должно меняться ├── research.md ← результаты research фазы ├──
+              plan.md ← КАНОНИЧЕСКИЙ IMPLEMENTATION CONTRACT ├── todo.md ←
+              execution surface с verification ├── implementation-readiness.md ←
+              verdict: pass/fail └── final-review.md ← честный verdict финала
+            </div>
+
+            <p>
+              plan.md не живёт в вакууме. Он проверяется против brief.md (scope
+              drift?), invariants.md (не нарушаем ли инварианты?), research.md
+              (все ли данные учтены?). Это не один документ — это
+              <strong>система документов с перекрёстными проверками</strong>.
+            </p>
+
+            <p>
+              Boris пишет план и аннотирует его сам. Я тоже аннотирую — но не
+              только я. Plan.md проходит через Annotation Cycle, где его атакуют
+              4+ агента. Об этом — дальше.
+            </p>
+
+            <div class="art-highlight-red">
+              <strong>Антипаттерн:</strong> тихая подмена scope. AI обожает в
+              plan.md добавлять фичи, которых не было в brief.md. "Давайте ещё
+              добавим кэширование" — когда brief говорит "простой MVP". Поэтому
+              plan проверяется против brief явно.
+            </div>
+
+            <!-- 10: ANNOTATION CYCLE -->
+            <!-- 10: ANNOTATION CYCLE -->
+            <h3 class="art-title" id="art-annotation">
+              <span class="art-label badge-codex">Multi-agent</span><br />
+              П2.04. Annotation Cycle: план атакуют четыре агента
+            </h3>
+
+            <p>
+              Это самое ценное, что я взял у Boris и расширил. Его идея
+              гениально проста:
+            </p>
+
+            <div class="art-highlight-amber">
+              <strong>Boris Tane:</strong> "Claude writes plan.md → I review in
+              editor → I add inline notes → Send Claude back: 'address all the
+              notes, update the document, don't implement yet' → Repeat 1-6
+              times."
+            </div>
+
+            <p>
+              Один человек + один агент. Markdown как shared mutable state.
+              Простая, мощная идея. Но у неё есть ограничение:
+              <strong>один взгляд на проблему</strong>. Человек видит план через
+              свою призму. Claude соглашается с большей частью (он обучен быть
+              helpful, не critical).
+            </p>
+
+            <p>
+              Я добавил <strong>мультиагентные проходы</strong>. Каждый проход —
+              другой агент, другая перспектива, другие вопросы:
+            </p>
+
+            <p>
+              <strong>Red Team</strong> — атакует план. Ищет scope creep, wrong
+              assumptions, failure modes. "Ты заложил 3 API, но brief говорит
+              только про один. Это conscious decision или drift?" Red Team не
+              предлагает решения — он ломает. Это его работа.
+            </p>
+
+            <p>
+              <strong>Architect</strong> — проверяет структуру. Trade-offs,
+              wrong abstractions, overengineering. "SQLite хватит для этого
+              scope. PostgreSQL — это не техническое решение, это anxiety."
+              Architect думает о том, что будет через 3 месяца, не через 3 часа.
+            </p>
+
+            <p>
+              <strong>Codex CLI (background)</strong> — implementation review.
+              Запускается через Bash в background, читает план и сравнивает с
+              brief. "Phase 3 зависит от API, которого нет в research.md. Вы
+              планируете его добавить или это ошибка?" Codex — прагматик. Его не
+              интересует красота плана, его интересует: это вообще можно
+              реализовать?
+            </p>
+
+            <div class="art-code">
+              Bash( command="codex exec \ 'Review plan.md as implementation
+              expert: \ check feasibility, find pitfalls, \ compare with
+              brief.md for scope drift. \ Be direct.' \ -s read-only \ -C
+              .kurdyuk-lite/runs/my-project/ \ -o /tmp/codex-plan-review.md",
+              run_in_background=true )
+            </div>
+
+            <p>
+              <strong>Gemini Design (background)</strong> — если в задаче есть
+              UI, Gemini смотрит mockups/скриншоты. "Touch target 38pt — минимум
+              44pt по HIG. Contrast ratio 2.8:1 — нужно 4.5:1." Gemini видит
+              пиксели, Claude видит код. Разные глаза на одну проблему.
+            </p>
+
+            <p>
+              <strong>Я (User)</strong> — продуктовые решения. "Убери
+              регистрацию, сделай проще." Или: "Нет, кэш здесь не нужен, мы это
+              делаем один раз." AI не знает мой бизнес-контекст. Я знаю.
+            </p>
+
+            <div class="diagram-vertical">
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  font-weight: 700;
+                  margin-bottom: 8px;
+                "
+              >
+                Annotation Cycle
+              </div>
+              <div
+                class="d-node"
+                style="border-color: var(--purple); color: var(--purple)"
+              >
+                Claude пишет plan.md
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-red">Red Team атакует</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-purple">Architect проверяет</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-amber">Codex ревьюит (bg)</div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-green">Gemini Design (bg)</div>
+              <div class="d-arrow">↓</div>
+              <div
+                class="d-node"
+                style="border-color: var(--blue); color: var(--blue)"
+              >
+                User: продуктовые правки
+              </div>
+              <div class="d-arrow">↓</div>
+              <div class="d-node d-node-highlight">
+                Claude обновляет plan.md
+              </div>
+              <div class="d-arrow">↻ ещё цикл?</div>
+            </div>
+
+            <p>
+              После каждого цикла Claude применяет коррекции к plan.md и
+              спрашивает:
+              <strong>"Нужен ещё цикл или план готов?"</strong> Не решает сам.
+              1-6 итераций — нормально.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Почему это работает:</strong> один ревьюер может
+              пропустить проблему. Четыре — маловероятно. Red Team ищет scope
+              drift, Architect — structural issues, Codex — feasibility, Gemini
+              — visual bugs. Каждый смотрит через свою линзу. Это не дороже —
+              Codex и Gemini бегут в background, пока я обсуждаю с Opus.
+            </div>
+
+            <!-- 11: READINESS -->
+            <!-- 11: READINESS -->
+            <h3 class="art-title" id="art-readiness">
+              <span class="art-label badge-opus">Opus inline</span><br />
+              П2.05. Readiness Gate: последний шанс сказать "нет"
+            </h3>
+
+            <p>
+              Этого нет у Boris. У него после annotation — сразу implement. У
+              меня между ними стоит <strong>Readiness Gate</strong> — отдельный
+              checkpoint с verdict: pass или fail.
+            </p>
+
+            <p>
+              Зачем? Потому что annotation cycle может закончиться на "вроде ок"
+              вместо "точно ок". Readiness Gate — это
+              <strong>формальная проверка</strong>: все ли dependencies есть?
+              Все ли API researched? Brief не нарушен? Invariants на месте? Todo
+              list готов?
+            </p>
+
+            <div class="art-code">
+              ## Implementation Readiness Assessment **Verdict: PASS / FAIL**
+              Checklist: - [ ] brief.md: 4 опоры заполнены - [ ] research.md:
+              все внешние зависимости researched - [ ] plan.md: прошёл
+              annotation cycle (1+ итераций) - [ ] invariants.md: план не
+              нарушает инварианты - [ ] todo.md: задачи разбиты, verification
+              fields пустые - [ ] Нет open questions или blockers **If FAIL:**
+              что нужно доделать перед implement
+            </div>
+
+            <p>
+              Это последний шанс сказать "стоп" дёшево. Каждая минута в
+              Implement стоит в 10 раз дороже минуты в Planning. Readiness Gate
+              — это
+              <strong>экономия</strong>, не бюрократия.
+            </p>
+
+            <p>
+              Без pass — код запрещён. Не "попробуем и посмотрим", а именно
+              запрещён. Это правило pipeline.
+            </p>
+
+            <!-- 12: IMPLEMENT -->
+            <!-- 12: IMPLEMENT -->
+            <h3 class="art-title" id="art-implement">
+              <span class="art-label badge-sonnet">Sonnet inline</span><br />
+              П2.06. Implement: Sonnet кодит, Opus молчит
+            </h3>
+
+            <p>
+              Boris делает implement через Opus: "Implement it all. Mark
+              completed tasks. Do not stop." Его промпт великолепен в своей
+              прямоте. Но я использую <strong>Sonnet, не Opus</strong>.
+            </p>
+
+            <p>
+              Почему? Потому что к этому моменту вся сложность уже решена. Plan
+              прошёл 4 агента review. Readiness = pass. Todo list готов с
+              конкретными задачами. Реализация должна быть
+              <strong>boring</strong> — как Boris и говорит: "The creative work
+              happened in the annotation cycles."
+            </p>
+
+            <p>
+              Sonnet быстрее, дешевле и не хуже Opus для написания кода по
+              готовому плану. Opus избыточен здесь — его сила в thinking, а
+              thinking на этом этапе уже произошёл.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Правило Boris (которое я использую дословно):</strong>
+              "Do not add unnecessary comments or jsdocs. Do not stop until all
+              tasks are completed. Continuously run typecheck." — Минимализм в
+              implement промпте.
+            </div>
+
+            <p>
+              Отличие от Boris: я использую
+              <strong>todo.md с verification полями</strong>. Не просто "mark as
+              completed" — а "mark as completed WITH proof".
+            </p>
+
+            <div class="art-code">
+              ## Todo ✅ Реализовать SQLite кэширование **Verify:** 2nd run 0
+              API calls, response from cache 14ms ✅ Добавить integration tests
+              **Verify:** 23 tests passed, 0 mocks, real SQLite in-memory □
+              Оптимизировать N+1 запросы **Verify:** ___
+            </div>
+
+            <p>
+              Каждая галочка — не "AI сказал done", а
+              <strong>"вот proof"</strong>. Тест прошёл — покажи output. Кэш
+              работает — покажи лог. Запросы оптимизированы — покажи EXPLAIN.
+              Без proof — задача не done.
+            </p>
+
+            <!-- 13: REVIEW -->
+            <!-- 13: REVIEW -->
+            <h3 class="art-title" id="art-review">
+              <span class="art-label badge-opus">Multi-layer</span><br />
+              П2.07. Review: три слоя проверки
+            </h3>
+
+            <p>
+              У Boris нет отдельной фазы review после implement. Его implement
+              включает typecheck, и этого ему достаточно — он сам ревьюит код в
+              процессе.
+            </p>
+
+            <p>У меня <strong>три слоя</strong>, и они бегут параллельно:</p>
+
+            <p>
+              <strong>Слой 1: Codex CLI (background)</strong> — code review.
+              Читает написанный код, сравнивает с планом. "Функция
+              deduplicateByTitle не реализована. В plan.md она есть, в коде —
+              нет." Codex видит расхождения между планом и реализацией, которые
+              человек пропустит.
+            </p>
+
+            <p>
+              <strong>Слой 2: Gemini Visual QA (background)</strong> — если есть
+              UI. Сравнивает скриншот реализации с mockup/brief. "Кнопка
+              сместилась на 8px влево. Шрифт заголовка 16pt вместо 18pt."
+              Pixel-level проверка, которую ни один code review не поймает.
+            </p>
+
+            <p>
+              <strong>Слой 3: Opus Final Review (inline)</strong> — честный
+              verdict. Opus читает весь run folder (brief → plan → todo → код) и
+              выносит judgment. "Реализация соответствует плану. Два deferred
+              item из Codex review — некритичные, можно в v1.1."
+            </p>
+
+            <div class="art-code">
+              // Слои 1 и 2 бегут параллельно в background: Bash(command="codex
+              exec 'Review code...' -o /tmp/codex-review.md",
+              run_in_background=true) Bash(command="gemini -p 'Compare
+              screenshot vs mockup...' -o text > /tmp/gemini-qa.md",
+              run_in_background=true) // Когда оба завершились → Opus читает и
+              выносит verdict: Read /tmp/codex-review.md Read /tmp/gemini-qa.md
+              → Opus: final-review.md с verdict
+            </div>
+
+            <p>
+              Всё, что нашли Codex и Gemini, фиксируется в final-review.md как
+              "accepted" или "deferred". Ничего не теряется. Если deferred — это
+              explicit decision, не забытый bug.
+            </p>
+
+            <!-- 14: SESSIONS -->
             <!-- VERDICT -->
             <div class="verdict-card" style="margin-top: 56px">
               <div class="verdict-title">
