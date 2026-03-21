@@ -1173,6 +1173,7 @@
       <nav id="mainNav">
         <div class="nav-logo">Принципы вайбкодинга</div>
         <a href="#hero" class="nav-link">Главная</a>
+        <a href="#changelog" class="nav-link">Обновления</a>
         <a href="#deepdive" class="nav-link">Принципы</a>
         <a href="#part2-divider" class="nav-link">Pipeline</a>
         <a href="#philosophy" class="nav-link">7 принципов</a>
@@ -1229,6 +1230,14 @@
           "Вайбкодинг работает, когда у тебя есть pipeline, который не даёт AI
           врать тебе, а тебе — врать себе."
         </div>
+      </section>
+
+      <!-- ═══ CHANGELOG ═══ -->
+      <section id="changelog" style="padding-bottom: 40px">
+        <div class="section-tag fade-in">Обновления</div>
+        <h2 class="section-title fade-in">Что нового</h2>
+        <p class="section-sub fade-in">Последние изменения на портале.</p>
+        <div id="changelogList" class="fade-in"></div>
       </section>
 
       <!-- ═══ S1b: DEEP DIVE PART 1 ═══ -->
@@ -4482,9 +4491,87 @@
           },
 
           // Removed: context, projects, antipatterns, comparison, stack data (covered in Deep Dive article)
+
+          changelog: [
+            {
+              date: "2026-03-21",
+              tag: "new",
+              items: [
+                "Реструктуризация: Часть 1 (Принципы) + Часть 2 (Kurdyuk Pipeline)",
+                "Brainstorm: два режима — Evaluation + Socratic Rebuild",
+                "Deep handoff с verification cycles для тяжёлых проектов",
+                "Декомпозиция: drill-down вглубь каждого пункта плана",
+                "Gemini CLI auto-refresh OAuth токена",
+              ],
+            },
+            {
+              date: "2026-03-20",
+              tag: "upd",
+              items: [
+                "Глава 01: Ошибка #0 — начать без контекста",
+                "Глава 19: Debugging flow",
+                "Cost estimation добавлен в bug hunting",
+                "UPD система — кнопка для фильтрации нового",
+              ],
+            },
+            {
+              date: "2026-03-19",
+              tag: "launch",
+              items: [
+                "Первая версия портала — 26 глав",
+                "GitHub Pages deploy с noindex",
+              ],
+            },
+          ],
         };
 
         /* ── BUILD FUNCTIONS ── */
+
+        function buildChangelog() {
+          const el = document.getElementById("changelogList");
+          if (!el) return;
+          const tagStyles = {
+            new: {
+              bg: "rgba(16,185,129,0.15)",
+              color: "var(--green)",
+              border: "rgba(16,185,129,0.3)",
+              label: "NEW",
+            },
+            upd: {
+              bg: "rgba(0,210,255,0.1)",
+              color: "var(--cyan)",
+              border: "rgba(0,210,255,0.2)",
+              label: "UPD",
+            },
+            fix: {
+              bg: "rgba(245,158,11,0.1)",
+              color: "var(--amber)",
+              border: "rgba(245,158,11,0.2)",
+              label: "FIX",
+            },
+            launch: {
+              bg: "rgba(124,58,237,0.1)",
+              color: "var(--purple)",
+              border: "rgba(124,58,237,0.2)",
+              label: "LAUNCH",
+            },
+          };
+          el.innerHTML = DATA.changelog
+            .map((entry) => {
+              const s = tagStyles[entry.tag] || tagStyles["upd"];
+              return `
+              <div style="background:var(--glass); border:1px solid var(--glass-border); border-radius:12px; padding:16px 20px; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                  <span style="font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:4px; background:${s.bg}; color:${s.color}; border:1px solid ${s.border};">${s.label}</span>
+                  <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">${entry.date}</span>
+                </div>
+                <ul style="margin:0; padding-left:20px; font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
+                  ${entry.items.map((item) => `<li>${item}</li>`).join("")}
+                </ul>
+              </div>`;
+            })
+            .join("");
+        }
 
         function buildPrinciples() {
           const grid = document.getElementById("principlesGrid");
@@ -4728,6 +4815,7 @@
 
         /* ── INIT ── */
         document.addEventListener("DOMContentLoaded", () => {
+          buildChangelog();
           buildPrinciples();
           buildPipeline();
           buildRouting();
