@@ -1313,32 +1313,36 @@
                 ><span class="toc-num">12</span> Ревью на ревью + мозговой
                 штурм</a
               >
+              <a href="#art-review-context"
+                ><span class="toc-num">13</span> Ревью без brief = ревью в
+                вакууме</a
+              >
               <a href="#art-bug-hunting"
-                ><span class="toc-num">13</span> Итеративная охота за багами</a
+                ><span class="toc-num">14</span> Итеративная охота за багами</a
               >
               <a href="#art-bug-triage"
-                ><span class="toc-num">14</span> Баги в процессе: замечай и
+                ><span class="toc-num">15</span> Баги в процессе: замечай и
                 документируй</a
               >
               <a href="#art-portals"
-                ><span class="toc-num">15</span> Порталы: данные бесполезны,
+                ><span class="toc-num">16</span> Порталы: данные бесполезны,
                 пока не видишь</a
               >
               <a href="#art-handoff"
-                ><span class="toc-num">16</span> Handoff, cleanup и гигиена
+                ><span class="toc-num">17</span> Handoff, cleanup и гигиена
                 сессий</a
               >
               <a href="#art-skill-sync"
-                ><span class="toc-num">17</span> Skill Sync: обмен знаниями
+                ><span class="toc-num">18</span> Skill Sync: обмен знаниями
                 между коллегами</a
               >
               <a href="#art-cli-setup"
-                ><span class="toc-num">18</span> Gemini + Codex CLI: ноль API
+                ><span class="toc-num">19</span> Gemini + Codex CLI: ноль API
                 ключей</a
               >
               <a href="#art-debugging"
-                ><span class="toc-num">19</span> Debugging: когда всё сломалось
-                прямо сейчас <span class="upd-badge">UPD</span></a
+                ><span class="toc-num">20</span> Debugging: когда всё сломалось
+                прямо сейчас <span class="upd-badge">UPD</span></
               >
               <div
                 style="
@@ -2406,14 +2410,6 @@
               <strong>конкретное решение с аргументацией</strong>.
             </p>
 
-            <div class="art-highlight">
-              <strong>Любое ревью начинается с brief.</strong> Без brief агент
-              проверяет код в вакууме — не знает ЗАЧЕМ он написан. Результат:
-              "код чистый, тесты проходят" — а по смыслу фича не решает задачу.
-              Всегда передавай brief (или intent) в промпт ревьюера: "Вот brief.
-              Вот код. Код решает задачу из brief? Что не покрыто? Где drift?"
-            </div>
-
             <div class="art-highlight-amber">
               <strong>Ревью на ревью:</strong> тот же принцип работает для
               ревью. Система выдала code review — "всё ок, мелкие замечания". Не
@@ -2678,11 +2674,44 @@
               Brainstorm = "как это построить".
             </div>
 
-            <!-- 20: BUG HUNTING -->
+            <!-- REVIEW CONTEXT -->
+            <h3 class="art-title" id="art-review-context">
+              <span class="art-label badge-opus">Quality</span><br />
+              13. Ревью без brief = ревью в вакууме
+            </h3>
+
+            <p>
+              Ревьюер (агент, Codex, Gemini — неважно) получает код и проверяет:
+              синтаксис, паттерны, edge cases. Отвечает "код чистый, тесты
+              проходят". Но
+              <strong>код может быть чистым и при этом не решать задачу</strong
+              >. Без brief ревьюер не знает ЗАЧЕМ код написан — и не может
+              проверить главное: соответствует ли реализация концепции.
+            </p>
+
+            <p>
+              <strong>Правило:</strong> любое ревью начинается с brief. Промпт
+              ревьюера: "Вот brief (ЧТО строим и ЗАЧЕМ). Вот код. Код решает
+              задачу из brief? Что из brief не покрыто? Где drift между
+              концепцией и реализацией?"
+            </p>
+
+            <div class="art-highlight">
+              <strong>Три уровня ревью:</strong><br />
+              — <strong>Без контекста:</strong> "код чистый" — бесполезно, не
+              знает зачем<br />
+              — <strong>С brief:</strong> "фича X из brief не реализована, drift
+              в модуле Y" — полезно<br />
+              — <strong>С brief + plan + invariants:</strong> "реализация
+              нарушает invariant #3, план предполагал другой порядок" — идеал<br /><br />
+              Чем больше контекста у ревьюера — тем ценнее ревью. Минимум =
+              brief. Оптимум = brief + plan.
+            </div>
+
             <!-- 20: BUG HUNTING -->
             <h3 class="art-title" id="art-bug-hunting">
               <span class="art-label badge-opus">Quality</span><br />
-              13. Итеративная охота за багами
+              14. Итеративная охота за багами
             </h3>
 
             <p>
@@ -2851,7 +2880,7 @@
             <!-- 21: BUG TRIAGE -->
             <h3 class="art-title" id="art-bug-triage">
               <span class="art-label badge-codex">Ops</span><br />
-              14. Баги в процессе: замечай, фиксируй, документируй
+              15. Баги в процессе: замечай, фиксируй, документируй
             </h3>
 
             <p>
@@ -2923,7 +2952,7 @@
             <!-- 16: PORTALS -->
             <h3 class="art-title" id="art-portals">
               <span class="art-label badge-sonnet">Визуализация</span><br />
-              15. Порталы: данные бесполезны, пока ты их не видишь
+              16. Порталы: данные бесполезны, пока ты их не видишь
             </h3>
 
             <p>
@@ -3007,7 +3036,7 @@
             <!-- 22: HANDOFF & SESSION HYGIENE -->
             <h3 class="art-title" id="art-handoff">
               <span class="art-label badge-opus">Session Mgmt</span><br />
-              16. Handoff, cleanup и гигиена сессий
+              17. Handoff, cleanup и гигиена сессий
             </h3>
 
             <p>
@@ -3170,7 +3199,7 @@
             <!-- 23: SKILL SYNC -->
             <h3 class="art-title" id="art-skill-sync">
               <span class="art-label badge-gemini">Collaboration</span><br />
-              17. Skill Sync: обмен знаниями между коллегами
+              18. Skill Sync: обмен знаниями между коллегами
             </h3>
 
             <p>
@@ -3323,7 +3352,7 @@
             <!-- 24: GEMINI & CODEX WITHOUT API KEYS -->
             <h3 class="art-title" id="art-cli-setup">
               <span class="art-label badge-gemini">Zero API Keys</span><br />
-              18. Gemini CLI и Codex CLI: полный оркестр без единого API ключа
+              19. Gemini CLI и Codex CLI: полный оркестр без единого API ключа
             </h3>
 
             <p>
@@ -3571,7 +3600,7 @@
             <h3 class="art-title upd-section" id="art-debugging">
               <span class="art-label badge-opus">Emergency</span>
               <span class="upd-badge">UPD</span><br />
-              19. Debugging: когда всё сломалось прямо сейчас
+              20. Debugging: когда всё сломалось прямо сейчас
             </h3>
 
             <p>
