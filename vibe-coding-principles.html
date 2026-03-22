@@ -1265,9 +1265,12 @@
               >
                 ЧАСТЬ 1: Принципы
               </div>
+              <a href="#art-what-is-this"
+                ><span class="toc-num">00</span> Что это вообще такое
+                <span class="upd-badge">NEW</span></a
+              >
               <a href="#art-error-zero"
-                ><span class="toc-num">01</span> Ошибка #0: начать без контекста
-                <span class="upd-badge">UPD</span></a
+                ><span class="toc-num">01</span> Ошибка #0: начать без контекста</a
               >
               <a href="#art-orchestration"
                 ><span class="toc-num">02</span> Оркестрация: почему я не пишу
@@ -1384,8 +1387,151 @@
               >
             </div>
 
+            <!-- 00: WHAT IS THIS -->
+            <h3 class="art-title upd-section" id="art-what-is-this">
+              <span
+                class="art-label"
+                style="
+                  background: rgba(0, 210, 255, 0.2);
+                  color: var(--cyan);
+                  border: 1px solid rgba(0, 210, 255, 0.3);
+                "
+                >Onboarding</span
+              >
+              <span class="upd-badge">NEW</span><br />
+              00. Что это вообще такое
+            </h3>
+
+            <p>
+              Если ты пользовался ChatGPT, Gemini или Copilot — забудь.
+              Это <strong>другой уровень</strong>. Не чат, не автокомплит,
+              не "помоги написать функцию". Это полноценный AI-агент,
+              который живёт внутри твоего редактора и имеет доступ ко всему:
+              файлы, терминал, git, интернет, другие AI-модели.
+            </p>
+
+            <h4 style="font-size:1rem; font-weight:700; color:#f1f5f9; margin:28px 0 12px;">
+              ChatGPT vs Claude Code: в чём разница
+            </h4>
+
+            <p>
+              <strong>ChatGPT/Gemini (чат):</strong> ты копируешь код в окно →
+              AI отвечает текстом → ты копируешь ответ обратно в редактор →
+              не работает → копируешь ошибку → AI отвечает → цикл.
+              AI не видит твои файлы, не знает структуру проекта,
+              не помнит прошлые разговоры.
+            </p>
+
+            <p>
+              <strong>Claude Code (агент):</strong> ты говоришь "исправь баг
+              в auth модуле" → Claude сам открывает файлы, читает код,
+              находит баг, редактирует файл, запускает тесты, коммитит в git.
+              Ты не копируешь ничего. AI видит всё что видишь ты.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Ключевое отличие:</strong> ChatGPT = советчик.
+              Claude Code = исполнитель. Ты не просишь совет — ты даёшь
+              задачу. "Сделай", не "подскажи как".
+            </div>
+
+            <h4 style="font-size:1rem; font-weight:700; color:#f1f5f9; margin:28px 0 12px;">
+              Как это выглядит: VS Code + расширение
+            </h4>
+
+            <p>
+              VS Code — редактор кода. Claude Code — расширение (extension)
+              для VS Code. Устанавливаешь, подключаешь подписку Anthropic ($20/мес),
+              и в VS Code появляется панель чата. Но это не просто чат —
+              это <strong>терминал с интеллектом</strong>:
+            </p>
+
+            <p>
+              — <strong>Видит все файлы</strong> проекта (читает, редактирует, создаёт)<br />
+              — <strong>Запускает команды</strong> в терминале (npm, python, git, brew, curl — что угодно)<br />
+              — <strong>Работает с git</strong> (коммиты, ветки, PR, push)<br />
+              — <strong>Ищет в интернете</strong> (WebSearch, WebFetch)<br />
+              — <strong>Запускает других AI</strong> как sub-agents (Gemini, Codex, Qwen)
+            </p>
+
+            <h4 style="font-size:1rem; font-weight:700; color:#f1f5f9; margin:28px 0 12px;">
+              Вкладки и сессии
+            </h4>
+
+            <p>
+              <strong>Вкладка</strong> = отдельная сессия Claude Code в VS Code.
+              Можно открыть несколько вкладок — каждая это отдельный разговор
+              с отдельным контекстом. Как вкладки в браузере, но для AI.
+            </p>
+
+            <p>
+              <strong>Сессия</strong> = один разговор с Claude. У сессии есть
+              контекстное окно — сколько текста Claude "помнит" прямо сейчас.
+              Opus 4.6 = 1 миллион токенов (~750K слов). Но даже это
+              заканчивается. Через 40-50 сообщений Claude начинает "забывать"
+              начало разговора (compression). Это нормально.
+            </p>
+
+            <p>
+              <strong>Поэтому:</strong> один проект = одна вкладка.
+              Новая задача = новая вкладка. Не мешай контексты.
+              Debug проблемы = отдельная вкладка (не засоряй рабочую сессию).
+            </p>
+
+            <div class="art-code">
+              Типичная раскладка вкладок:
+
+              Вкладка 1: Gap Pipeline — основная задача
+              Вкладка 2: Портал — параллельная работа
+              Вкладка 3: Debug — временная, для починки бага
+              Вкладка 4: Research — фоновый ресерч через Gemini
+            </div>
+
+            <h4 style="font-size:1rem; font-weight:700; color:#f1f5f9; margin:28px 0 12px;">
+              Sub-agents: Claude управляет другими AI
+            </h4>
+
+            <p>
+              Claude Code — <strong>оркестратор</strong>. Он не один.
+              Через терминал он запускает другие AI-модели как sub-agents:
+            </p>
+
+            <p>
+              — <strong>Gemini CLI</strong> (Google) — ресерч в интернете,
+              анализ PDF, работа с большими документами. Бесплатно по подписке Google<br />
+              — <strong>Codex CLI</strong> (OpenAI/GPT) — code review,
+              проверка реализации. Бесплатно по подписке ChatGPT<br />
+              — <strong>Qwen Code</strong> (Alibaba) — альтернативная перспектива,
+              другой training data. Полностью бесплатно
+            </p>
+
+            <p>
+              Claude запускает их <strong>сам</strong>, в фоне, без твоего участия.
+              Ты говоришь: "сделай ресерч по рынку sleep trackers" →
+              Claude запускает Gemini CLI в фоне → получает результат →
+              синтезирует и показывает тебе. Ты даже не знаешь что
+              работала другая модель.
+            </p>
+
+            <h4 style="font-size:1rem; font-weight:700; color:#f1f5f9; margin:28px 0 12px;">
+              Что нужно для старта
+            </h4>
+
+            <div class="art-highlight-amber">
+              <strong>Минимум:</strong><br />
+              1. VS Code (бесплатно)<br />
+              2. Claude Code extension (устанавливается из VS Code)<br />
+              3. Подписка Anthropic — $20/мес (Claude Pro)<br /><br />
+              <strong>Расширенный стек (бесплатно сверху):</strong><br />
+              4. Gemini CLI — `brew install gemini-cli`, OAuth через Google<br />
+              5. Codex CLI — `npm install -g @openai/codex`, логин ChatGPT<br />
+              6. Qwen Code — `brew install qwen-code`, OAuth через qwen.ai<br /><br />
+              Итого: $20/мес за подписку Claude. Остальное — $0.
+              Все sub-agents работают по подписке, не по API.
+            </div>
+
             <!-- 00: ERROR ZERO -->
-            <h3 class="art-title upd-section" id="art-error-zero">
+            <h3 class="art-title" id="art-error-zero">
               <span
                 class="art-label"
                 style="
