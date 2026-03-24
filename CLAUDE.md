@@ -162,7 +162,7 @@ Pipeline — **session-agnostic**. Файлы в `.kurdyuk-lite/runs/<slug>/` �
 | Consilium (code review)       | **Qwen CLI**      | **background Bash** | Быстрый, бесплатный, pattern matching                 |
 | Final Review                  | Opus              | inline              | Честный verdict, ловить пропущенное                   |
 
-Думающие фазы → Opus. Кодящая фаза → Sonnet. Implementation checks → Codex. Structured web research → Exa. Web/PDF/visual → Gemini. Classification/review → Qwen (non-thinking, `--system-prompt`).
+Думающие фазы → Opus. Кодящая фаза → Sonnet. Implementation checks → Codex. Structured web research → Exa. Web/PDF/visual → Gemini. Classification/review → Qwen (non-thinking, `--system-prompt`). PR review → Copilot (`gh pr edit --add-reviewer @copilot`).
 
 **⚠️ Qwen = non-thinking.** НЕ давать reasoning/architecture/trade-off задачи. Только classification, code review, pattern matching. Context ceiling 130K (не 1M). Детали — в skill `qwen-code-cli`.
 
