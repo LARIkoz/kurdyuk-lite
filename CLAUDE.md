@@ -38,10 +38,11 @@
 
 Research идёт в 1–2 прохода:
 
-1. **Pass 1 (broad scan)** — параллельно:
+1. **Pass 1 (broad scan)** — параллельно 3 канала:
    - **Exa** `/research` или `/search` — structured data: конкуренты, pricing, market size, app reviews. JSON schema для structured output.
    - **Gemini CLI** background — свежие новости, PDF, визуальный контент, то что Exa не покрывает.
-2. Opus синтезирует результаты обоих каналов → фиксирует в `research.md`. Помечает пункты как `verified` или `unverified / needs deeper look`.
+   - **GitHub** (`gh search repos/code/issues`) — reference implementations, open issues, community solutions, repo landscape. `--cache 1h` для экономии rate limit.
+2. Opus синтезирует результаты всех каналов → фиксирует в `research.md`. Помечает пункты как `verified` или `unverified / needs deeper look`.
 3. **Pass 2 (targeted, условный)** — если после Pass 1 есть `unverified` пункты, конфликтующие данные или вскрылась неожиданная область — Exa targeted search + Gemini background с конкретными вопросами по gaps. Если Pass 1 достаточен — сразу в Plan.
 4. Opus финальный синтез → обновляет `research.md`.
 
