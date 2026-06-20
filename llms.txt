@@ -11,12 +11,18 @@ Kurdyuk Lite installs as a marked contract block inside a project's `CLAUDE.md`,
 - [charter-for-charter.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/charter-for-charter.md): the 4 rules for writing a charter (no heuristics, no HOW, every principle is a test, write then cut)
 - [reference/example-charter.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/reference/example-charter.md): a complete worked charter example
 
+## Translations
+- [README.ru.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/README.ru.md): Russian (Русский) translation of the README
+- [README.ja.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/README.ja.md): Japanese (日本語) translation of the README
+- [README.zh-CN.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/README.zh-CN.md): Simplified Chinese (中文) translation of the README
+
 ## Install
 - `git clone https://github.com/LARIkoz/kurdyuk-lite.git ~/.kurdyuk-lite`
 - `~/.kurdyuk-lite/bin/kurdyuk-lite init .` injects the contract block + templates into the current repo (default target `CLAUDE.md`)
 - `~/.kurdyuk-lite/bin/kurdyuk-lite init . --agent codex|gemini|all` targets `AGENTS.md` / `GEMINI.md` for other agents
 - `~/.kurdyuk-lite/bin/kurdyuk-lite check .` reports drift (`UP TO DATE` when in sync)
-- [BOOTSTRAP.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/BOOTSTRAP.md): one-paste installer to give a Claude Code session
+- One command (clone + init + verify + health): `curl -fsSL https://raw.githubusercontent.com/LARIkoz/kurdyuk-lite/main/bin/kurdyuk-install | bash -s -- --agent claude .`
+- [BOOTSTRAP.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/BOOTSTRAP.md): agent self-install runbook — paste one line into any agent (Claude Code, Codex, Gemini) and it picks the matching `--agent`, clones, injects the contract, verifies, and reports a health verdict
 
 ## Key concepts
 - Charter: a numbered constitution (P1..PN; order = priority, lower number wins on conflict). Every design and implementation decision is checked against it; a violation is a blocker, not a debate.

@@ -7,7 +7,7 @@ Run folder for this project: `.kurdyuk-lite/runs/<project-slug>/`
 
 Do this first:
 
-1. Read `CLAUDE.md` in the repo root (the operating contract).
+1. Read your agent's instructions file in the repo root — `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex), or `GEMINI.md` (Gemini) — it holds the operating contract.
 2. If `.kurdyuk-lite/runs/<project-slug>/` does not exist — create it from `.kurdyuk-lite/templates/`.
 3. Read `.kurdyuk-lite/runs/<project-slug>/state.md`.
 4. Do NOT skip ahead. Start Phase 1 (Brainstorm + Research + Brief). Do not write a charter, spec, or code until the brief gate passes.

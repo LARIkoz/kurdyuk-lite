@@ -1,15 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Kurdyuk Lite — One-command installer
-# Usage: curl -sL <raw-url> | bash
-#    or: bash kurdyuk-install [project-dir]
+# Kurdyuk Lite — One-command installer (clone + init + verify + health report)
+# Usage: curl -sL <raw-url> | bash -s -- [project-dir] [--agent <name>]
+#    or: bash kurdyuk-install [project-dir] [--agent <name>]
+#
+# --agent: which instruction file the contract is injected into —
+#          claude (default → CLAUDE.md) · codex/agents (→ AGENTS.md) ·
+#          gemini (→ GEMINI.md) · all (→ all three)
 
 REPO="https://github.com/LARIkoz/kurdyuk-lite.git"
 INSTALL_DIR="$HOME/.kurdyuk-lite"
-TARGET_DIR="${1:-.}"
 
-echo "=== Kurdyuk Lite Installer ==="
+# Parse [project-dir] and --agent in any order
+TARGET_DIR="." AGENT="claude"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --agent) AGENT="${2:-claude}"; shift 2 ;;
+    --agent=*) AGENT="${1#*=}"; shift ;;
+    -h|--help)
+      echo "Usage: kurdyuk-install [project-dir] [--agent claude|codex|gemini|all]"
+      exit 0 ;;
+    -*) echo "ERROR: unknown option: $1" >&2; exit 1 ;;
+    *) TARGET_DIR="$1"; shift ;;
+  esac
+done
+
+echo "=== Kurdyuk Lite Installer (agent: $AGENT) ==="
 echo ""
 
 # Step 1: Clone or update framework
@@ -26,23 +43,31 @@ else
 fi
 chmod +x "$INSTALL_DIR/bin/kurdyuk-lite"
 
-# Step 2: Init project
+# Step 2: Init project (inject the contract into the chosen agent file)
 if [ ! -d "$TARGET_DIR" ]; then
   echo "ERROR: Directory does not exist: $TARGET_DIR"
   exit 1
 fi
-echo "[2/3] Initializing project..."
-"$INSTALL_DIR/bin/kurdyuk-lite" init "$TARGET_DIR"
+echo "[2/3] Initializing project (--agent $AGENT)..."
+"$INSTALL_DIR/bin/kurdyuk-lite" init "$TARGET_DIR" --agent "$AGENT"
 
-# Step 3: Check
+# Step 3: Check + extract the health verdict
 echo "[3/3] Verifying..."
-"$INSTALL_DIR/bin/kurdyuk-lite" check "$TARGET_DIR"
+check_output="$("$INSTALL_DIR/bin/kurdyuk-lite" check "$TARGET_DIR" 2>&1 || true)"
+echo "$check_output"
+verdict="$(printf '%s\n' "$check_output" | grep -E 'Status:' | tail -1 | sed -E 's/.*Status: //; s/ +—.*//; s/ *$//')"
+[ -z "$verdict" ] && verdict="UNKNOWN"
 
 echo ""
-echo "=== Install complete ==="
-echo ""
-echo "Next steps:"
-echo "  cd $TARGET_DIR"
-echo "  claude"
-echo ""
-echo "Kurdyuk Lite runs single-context on Claude Code alone — no extra CLI agents required."
+if [ "$verdict" = "UP TO DATE" ]; then
+  echo "HEALTH: UP TO DATE — Kurdyuk Lite is installed and verified."
+  echo ""
+  echo "Next: open your agent in '$TARGET_DIR' and start Phase 1 (Brief)."
+  echo "  Contract lives in your agent's instructions file; templates in .kurdyuk-lite/templates/."
+  echo "Kurdyuk Lite runs single-context — no extra CLI agents required."
+  exit 0
+else
+  echo "HEALTH: $verdict — install did not verify clean (see the check output above)."
+  echo "  Re-run: $INSTALL_DIR/bin/kurdyuk-lite init $TARGET_DIR --agent $AGENT"
+  exit 1
+fi

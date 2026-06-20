@@ -33,10 +33,16 @@ bash bin/kurdyuk-lite check "$TMP"     # expect: Status: UP TO DATE
 
 Keep `bin/` POSIX-portable (no `sed -i`, no Bash 4-isms) so it works on macOS and Linux.
 
+## Translations
+
+`README.md` (English) is the source. Translations live beside it — `README.ru.md`, `README.ja.md`, `README.zh-CN.md` — reachable from the flag switcher under the badges. They are community-maintained and may lag the English source.
+
+To add or update one: translate the **whole** README, keep every code block, command, URL, and link target byte-for-byte English, and include the reciprocal flag-switcher row (the current language **bold and unlinked**, the others linked) plus the "translations may lag" note. Adding a new language → add its flag link to the switcher row in _every_ README.
+
 ## Maintainer notes
 
 - **Version badge** reads the latest Git tag (`github/v/tag`) — cut a `vX.Y.Z` tag on release and the README badge updates itself; no manual edit.
-- **The phase-pipeline string** ("Brainstorm+Research+Brief → … → Final Review") is restated for humans in `README.md`, `BOOTSTRAP.md`, `concept.md`, `.kurdyuk-lite/STARTER-PROMPT.md`, and `templates/state.md`. `CLAUDE-contract.md` is the source of truth; if the phases ever change, update those restatements too.
+- **The phase-pipeline string** ("Brainstorm+Research+Brief → … → Final Review") is restated for humans in `README.md` (and its translations `README.ru.md` / `README.ja.md` / `README.zh-CN.md`), `BOOTSTRAP.md`, `concept.md`, `.kurdyuk-lite/STARTER-PROMPT.md`, and `templates/state.md`. `CLAUDE-contract.md` is the source of truth; if the phases ever change, update those restatements too.
 
 ## Pull requests
 

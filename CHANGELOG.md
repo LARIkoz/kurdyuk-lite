@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-06-20
+
+Agent self-install + translated READMEs.
+
+### Added
+
+- **Agent self-install.** `BOOTSTRAP.md` is now an agent-neutral runbook: paste one line into any agent (Claude Code / Codex / Gemini CLI) and it picks the matching `--agent`, clones, injects the contract, verifies, and reports a health verdict — no manual steps.
+- `kurdyuk-install` accepts `[project-dir]` and `--agent <claude|codex|gemini|all>` in any order, passes the agent through to `init`, and ends with an explicit `HEALTH: <verdict>` line (non-zero exit on anything but `UP TO DATE`) so an agent or CI can detect a bad install.
+- Translated READMEs: `README.ru.md` (Русский), `README.ja.md` (日本語), `README.zh-CN.md` (中文), with a flag language-switcher row by the badges in each. English `README.md` is the source; translations may lag it.
+
+### Changed
+
+- `BOOTSTRAP.md`, `kurdyuk-install`, and the in-target `STARTER-PROMPT.md` are agent-neutral (no longer Claude-only).
+- README `Install` section leads with the one-line agent self-install; the manual clone and a `curl … | bash` one-liner follow.
+
 ## [3.2.0] - 2026-06-20
 
 Multi-agent support.
@@ -67,6 +82,7 @@ Charter-based framework.
 
 - Replaced the v2 "Review Cycle + Readiness" model with the charter-driven pipeline.
 
+[3.3.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.3.0
 [3.2.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.2.0
 [3.1.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.1.0
 [3.0.1]: https://github.com/LARIkoz/kurdyuk-lite/commits/main

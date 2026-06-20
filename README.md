@@ -10,6 +10,8 @@ Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
 
+**🇬🇧 English** · [🇷🇺 Русский](README.ru.md) · [🇯🇵 日本語](README.ja.md) · [🇨🇳 中文](README.zh-CN.md)
+
 _Bash + Markdown · zero dependencies · works in any repo_
 
 ---
@@ -103,13 +105,29 @@ Now "should we gate the start screen behind a paywall?" has an answer — _viola
 
 ## Install
 
+### One line — let the agent install it
+
+Paste this into any AI coding agent (Claude Code, Codex, Gemini CLI, …) open in your project:
+
+> **Install Kurdyuk Lite in this repo: follow `https://raw.githubusercontent.com/LARIkoz/kurdyuk-lite/main/BOOTSTRAP.md` — pick the `--agent` that matches you, then run `check` and report the Status line.**
+
+The agent clones the framework, injects the contract into its _own_ instructions file (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`), verifies the install, and reports a health verdict — zero manual steps, any agent. The runbook it follows is [`BOOTSTRAP.md`](BOOTSTRAP.md).
+
+### By hand
+
 ```bash
 git clone https://github.com/LARIkoz/kurdyuk-lite.git ~/.kurdyuk-lite
 ~/.kurdyuk-lite/bin/kurdyuk-lite init .      # injects the contract into ./CLAUDE.md + copies templates
 ~/.kurdyuk-lite/bin/kurdyuk-lite check .     # → Status: UP TO DATE
 ```
 
-`init` is idempotent and non-destructive: it injects a marked block into your project's instructions file (backing up any existing one), drops the templates into `.kurdyuk-lite/`, and updates `.gitignore`. Re-run it to upgrade. Prefer one paste into a fresh chat? See [`BOOTSTRAP.md`](BOOTSTRAP.md).
+Or clone + init + verify in one command, choosing which agent file to write:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/LARIkoz/kurdyuk-lite/main/bin/kurdyuk-install | bash -s -- --agent claude .
+```
+
+`init` is idempotent and non-destructive: it injects a marked block into your project's instructions file (backing up any existing one), drops the templates into `.kurdyuk-lite/`, and updates `.gitignore`. Re-run it to upgrade.
 
 ## Works with any agent
 
