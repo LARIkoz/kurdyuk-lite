@@ -1,0 +1,250 @@
+#!/usr/bin/env bash
+set -euo pipefail
+trap 'rm -f "${_TMPFILE:-}"' EXIT
+
+# Kurdyuk Lite — framework init/update/check
+# Usage: kurdyuk-lite init [target-dir]
+#        kurdyuk-lite check [target-dir]
+
+MARKER_START="<!-- KURDYUK-LITE-START"
+MARKER_END="<!-- KURDYUK-LITE-END -->"
+
+# Resolve framework source directory (where this script lives)
+resolve_source() {
+  local script_path="${BASH_SOURCE[0]}"
+  # Follow symlinks on macOS (no readlink -f)
+  while [ -L "$script_path" ]; do
+    local dir="$(cd -P "$(dirname "$script_path")" && pwd)"
+    script_path="$(readlink "$script_path")"
+    [[ "$script_path" != /* ]] && script_path="$dir/$script_path"
+  done
+  SOURCE_DIR="$(cd -P "$(dirname "$script_path")/.." && pwd)"
+}
+
+# Print usage
+usage() {
+  echo "Usage: kurdyuk-lite <command> [target-dir]"
+  echo ""
+  echo "Commands:"
+  echo "  init   Initialize (or update) a project with Kurdyuk Lite"
+  echo "  check  Show version and detect drift"
+  echo ""
+  echo "target-dir defaults to current directory."
+}
+
+# Compute SHA256 of a file (portable)
+file_hash() {
+  local h
+  h="$(shasum -a 256 "$1" | cut -d' ' -f1)" || { echo "ERROR: Cannot hash $1" >&2; return 1; }
+  echo "$h"
+}
+
+# Inject or replace framework block in CLAUDE.md
+inject_block() {
+  local target_claude="$1"
+  local contract="$2"
+  local version="$3"
+
+  local start_marker="${MARKER_START} ${version} -->"
+  local block_content="${start_marker}
+${contract}
+${MARKER_END}"
+
+  if [ ! -f "$target_claude" ]; then
+    # No CLAUDE.md — create with block
+    echo "$block_content" > "$target_claude"
+    echo "  Created CLAUDE.md with framework contract"
+    return
+  fi
+
+  # Check if markers exist
+  if grep -q "$MARKER_START" "$target_claude" && grep -q "$MARKER_END" "$target_claude"; then
+    # Validate exactly one pair of markers
+    local start_count end_count
+    start_count="$(grep -c "$MARKER_START" "$target_claude")"
+    end_count="$(grep -c "$MARKER_END" "$target_claude")"
+    if [ "$start_count" -ne 1 ] || [ "$end_count" -ne 1 ]; then
+      echo "  ERROR: Multiple marker pairs found in CLAUDE.md — manual cleanup needed"
+      exit 1
+    fi
+
+    # Replace block between markers using head/tail split (BSD/GNU safe)
+    local tmpfile
+    tmpfile="$(mktemp)"; _TMPFILE="$tmpfile"
+    local start_line end_line
+    start_line="$(grep -n "$MARKER_START" "$target_claude" | head -1 | cut -d: -f1)"
+    end_line="$(grep -n "$MARKER_END" "$target_claude" | tail -1 | cut -d: -f1)"
+    if [ "$start_line" -ge "$end_line" ]; then
+      echo "  ERROR: Malformed markers — END appears before START"
+      rm -f "$tmpfile"
+      exit 1
+    fi
+    if [ "$((start_line - 1))" -gt 0 ]; then
+      head -n "$((start_line - 1))" "$target_claude" > "$tmpfile"
+    else
+      : > "$tmpfile"
+    fi
+    echo "$block_content" >> "$tmpfile"
+    tail -n "+$((end_line + 1))" "$target_claude" >> "$tmpfile"
+    mv "$tmpfile" "$target_claude"
+    echo "  Updated framework block in CLAUDE.md"
+  else
+    # Append block at end
+    echo "" >> "$target_claude"
+    echo "$block_content" >> "$target_claude"
+    echo "  Appended framework block to existing CLAUDE.md"
+  fi
+}
+
+# INIT command
+cmd_init() {
+  local target_dir="${1:-.}"
+  if [ ! -d "$target_dir" ]; then
+    echo "ERROR: Directory does not exist: $target_dir"
+    exit 1
+  fi
+  target_dir="$(cd "$target_dir" && pwd)"
+
+  # Refuse to init the framework repo onto itself — would co-mingle the thin-wrapper
+  # CLAUDE.md with an injected contract block (the exact two-doc drift v3 prevents).
+  if [ "$target_dir" = "$SOURCE_DIR" ]; then
+    echo "ERROR: refusing to init the framework repo onto itself ($SOURCE_DIR)"
+    echo "  Run 'kurdyuk-lite init <your-project-dir>' from the target project instead."
+    exit 1
+  fi
+
+  echo "Kurdyuk Lite init → $target_dir"
+
+  # Check source
+  if [ ! -f "$SOURCE_DIR/CLAUDE-contract.md" ]; then
+    echo "ERROR: CLAUDE-contract.md not found in $SOURCE_DIR"
+    echo "  Is this script inside the kurdyuk-lite repo?"
+    exit 1
+  fi
+
+  local version
+  version="$(cat "$SOURCE_DIR/VERSION" 2>/dev/null | tr -d '[:space:]')"
+  [ -z "$version" ] && version="0.0.0"
+
+  # Check prerequisites (warn, don't fail)
+  if ! command -v claude &>/dev/null; then
+    echo "  WARN: 'claude' not found — install Claude Code for full functionality"
+  fi
+
+  # Create .kurdyuk-lite structure
+  mkdir -p "$target_dir/.kurdyuk-lite/templates"
+  mkdir -p "$target_dir/.kurdyuk-lite/runs"
+  echo "  Created .kurdyuk-lite/ structure"
+
+  # Copy templates (source: repo-root templates/ → target: .kurdyuk-lite/templates/)
+  if [ -d "$SOURCE_DIR/templates" ] && [ "$(ls -A "$SOURCE_DIR/templates" 2>/dev/null)" ]; then
+    cp -r "$SOURCE_DIR/templates/"* "$target_dir/.kurdyuk-lite/templates/" || echo "  WARN: Template copy failed"
+    echo "  Copied templates"
+  else
+    echo "  No templates found in source"
+  fi
+
+  # Copy onboarding docs so the documented "paste STARTER-PROMPT.md" step resolves post-init
+  for doc in README.md STARTER-PROMPT.md; do
+    [ -f "$SOURCE_DIR/.kurdyuk-lite/$doc" ] && cp "$SOURCE_DIR/.kurdyuk-lite/$doc" "$target_dir/.kurdyuk-lite/$doc"
+  done
+  echo "  Copied onboarding docs (README, STARTER-PROMPT)"
+
+  # Backup CLAUDE.md (timestamped)
+  if [ -f "$target_dir/CLAUDE.md" ]; then
+    local backup="$target_dir/.kurdyuk-lite/CLAUDE.md.bak.$(date +%Y%m%d_%H%M%S)"
+    cp "$target_dir/CLAUDE.md" "$backup"
+    echo "  Backed up CLAUDE.md → $(basename "$backup")"
+  fi
+
+  # Inject framework block
+  local contract
+  contract="$(cat "$SOURCE_DIR/CLAUDE-contract.md")"
+  inject_block "$target_dir/CLAUDE.md" "$contract" "$version"
+
+  # Write version file
+  local contract_hash
+  contract_hash="$(file_hash "$SOURCE_DIR/CLAUDE-contract.md")"
+  echo "${version}|sha256:${contract_hash}|$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$target_dir/.kurdyuk-lite/version"
+  echo "  Version: $version (hash: ${contract_hash:0:12}...)"
+
+  # Update .gitignore (idempotent)
+  local gitignore="$target_dir/.gitignore"
+  if [ ! -f "$gitignore" ]; then
+    touch "$gitignore"
+  fi
+  grep -qxF ".kurdyuk-lite/runs/" "$gitignore" || echo ".kurdyuk-lite/runs/" >> "$gitignore"
+  grep -qxF ".kurdyuk-lite/*.bak.*" "$gitignore" || echo ".kurdyuk-lite/*.bak.*" >> "$gitignore"
+  echo "  Updated .gitignore"
+
+  echo ""
+  echo "Done. Open Claude Code in $target_dir and start working."
+  echo "  Run folder: .kurdyuk-lite/runs/<slug>/"
+  echo "  Framework version: $version"
+}
+
+# CHECK command
+cmd_check() {
+  local target_dir="${1:-.}"
+  if [ ! -d "$target_dir" ]; then
+    echo "ERROR: Directory does not exist: $target_dir"
+    exit 1
+  fi
+  target_dir="$(cd "$target_dir" && pwd)"
+
+  local version_file="$target_dir/.kurdyuk-lite/version"
+  if [ ! -f "$version_file" ]; then
+    echo "Not initialized. Run: kurdyuk-lite init"
+    exit 1
+  fi
+
+  local installed
+  installed="$(cat "$version_file")"
+  local installed_version installed_hash
+  installed_version="$(echo "$installed" | cut -d'|' -f1)"
+  installed_hash="$(echo "$installed" | cut -d'|' -f2 | sed 's/sha256://')"
+
+  echo "Kurdyuk Lite — $target_dir"
+  echo "  Installed version: $installed_version"
+  echo "  Installed hash: ${installed_hash:0:12}..."
+
+  # Check source version
+  if [ -f "$SOURCE_DIR/CLAUDE-contract.md" ]; then
+    local source_version source_hash
+    source_version="$(cat "$SOURCE_DIR/VERSION" 2>/dev/null | tr -d '[:space:]')"
+    source_hash="$(file_hash "$SOURCE_DIR/CLAUDE-contract.md")"
+
+    echo "  Source version: $source_version"
+    echo "  Source hash: ${source_hash:0:12}..."
+
+    if [ "$installed_hash" = "$source_hash" ]; then
+      echo "  Status: UP TO DATE"
+    else
+      echo "  Status: DRIFT DETECTED — run 'kurdyuk-lite init $target_dir' to sync"
+    fi
+  else
+    echo "  Source: not available (framework repo not found)"
+  fi
+}
+
+# Main
+resolve_source
+
+case "${1:-}" in
+  init)
+    shift
+    cmd_init "${1:-}"
+    ;;
+  check)
+    shift
+    cmd_check "${1:-}"
+    ;;
+  -h|--help|"")
+    usage
+    ;;
+  *)
+    echo "Unknown command: $1"
+    usage
+    exit 1
+    ;;
+esac

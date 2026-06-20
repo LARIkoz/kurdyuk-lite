@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────
+# Kurdyuk Lite — framework repo .gitignore
+# This checkout doubles as a live working environment. Everything
+# below is personal working state and MUST NOT be published.
+# ─────────────────────────────────────────────────────────────
+
+# Per-project runs + run tracking (session-specific)
+.kurdyuk-lite/runs/
+.kurdyuk-lite/.current-run
+.kurdyuk-lite/version
+.kurdyuk-lite/*.bak.*
+
+# Consilium / review outputs (contain local paths)
+.kurdyuk-lite/cv_*.md
+.kurdyuk-lite/rt_*.md
+.kurdyuk-lite/rtsys_*.md
+.kurdyuk-lite/redteam_*.md
+.kurdyuk-lite/consilium_*.md
+
+# Personal: handoffs, memory, research, task tracking
+output/
+memory/
+research/
+reddit_runs/
+x_web_runs/
+backups/
+tasks/
+scripts/
+
+# Working notes (not framework) — anchored to repo root so they don't eat nested
+# framework files (e.g. templates/todo.md on a case-insensitive filesystem)
+/TODO.md
+/gemini-cli-*.md
+/reference-claude-code-*.md
+
+# Local Claude / editor state
+.claude/
+.vscode/
+*.code-workspace
+
+# Dependencies
+node_modules/
+package.json
+package-lock.json
+
+# Secrets
+.env
+*.env
+*.key
+*.pem
+keys.env
+
+# Databases
+*.db
+
+# Media / downloads / scratch
+*.mp3
+*.mp4
+*.mp4.part
+*.part
+*.srt
+--full
+
+# Python caches
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store

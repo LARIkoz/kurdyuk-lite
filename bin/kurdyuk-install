@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Kurdyuk Lite — One-command installer
+# Usage: curl -sL <raw-url> | bash
+#    or: bash kurdyuk-install [project-dir]
+
+REPO="https://github.com/LARIkoz/kurdyuk-lite.git"
+INSTALL_DIR="$HOME/.kurdyuk-lite"
+TARGET_DIR="${1:-.}"
+
+echo "=== Kurdyuk Lite Installer ==="
+echo ""
+
+# Step 1: Clone or update framework
+if [ -d "$INSTALL_DIR" ]; then
+  echo "[1/3] Framework exists — updating..."
+  # --ff-only: never silently keep a stale clone or clobber local edits — fail loud instead
+  git -C "$INSTALL_DIR" pull --ff-only --quiet || {
+    echo "  WARN: '$INSTALL_DIR' has local changes or diverged — skipping update, using current version."
+    echo "        To force: cd $INSTALL_DIR && git fetch && git reset --hard origin/HEAD"
+  }
+else
+  echo "[1/3] Cloning framework..."
+  git clone --quiet "$REPO" "$INSTALL_DIR"
+fi
+chmod +x "$INSTALL_DIR/bin/kurdyuk-lite"
+
+# Step 2: Init project
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "ERROR: Directory does not exist: $TARGET_DIR"
+  exit 1
+fi
+echo "[2/3] Initializing project..."
+"$INSTALL_DIR/bin/kurdyuk-lite" init "$TARGET_DIR"
+
+# Step 3: Check
+echo "[3/3] Verifying..."
+"$INSTALL_DIR/bin/kurdyuk-lite" check "$TARGET_DIR"
+
+echo ""
+echo "=== Install complete ==="
+echo ""
+echo "Next steps:"
+echo "  cd $TARGET_DIR"
+echo "  claude"
+echo ""
+echo "Kurdyuk Lite runs single-context on Claude Code alone — no extra CLI agents required."
