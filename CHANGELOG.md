@@ -11,10 +11,16 @@ Multi-agent support.
 ### Added
 
 - `kurdyuk-lite init --agent <claude|codex|gemini|all>` injects the contract into the right instructions file (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`). Default stays `claude`.
+- `reference/discovery-toolkit.md` — optional, opt-in Phase-1 discovery scaffolds (Jobs-to-be-Done & the job hierarchy, jobs-based segmentation, critical sequence, Four Forces, the Riskiest Assumption Test, a laddering interview). Rewritten in our own words; not copied into target projects by `init`. Indexed in `reference/examples.md`.
+- README **Acknowledgements** crediting the methods the framework draws on (Jobs-to-be-Done — Clayton Christensen; the AJTBD synthesis — Ivan Zamesin; the Four Forces — Bob Moesta; the annotation cycle — Boris Tane).
 
 ### Changed
 
 - The contract and docs are agent-neutral: Claude Code is the default, but the framework runs on Codex, Gemini, and any agent that reads a project instructions file.
+- `kurdyuk-lite check` now verifies the **contract block inside the agent file** (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`), not just the stored version hash — it reports `UP TO DATE`, `UPDATE AVAILABLE`, `LOCAL EDIT`, or `BROKEN`, so a hand-edited or missing block is caught.
+- README version badge is driven by the latest Git tag instead of a hardcoded number.
+- `templates/brief.md` names the "market context" field the contract requires.
+- `CONTRIBUTING.md` adds maintainer notes (the tag-driven version badge; the files that restate the phase pipeline).
 
 ## [3.1.0] - 2026-06-20
 
