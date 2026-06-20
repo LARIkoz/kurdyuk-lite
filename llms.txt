@@ -1,0 +1,34 @@
+# Kurdyuk Lite
+
+> A charter-driven product-development framework for Claude Code. It replaces free-form chat with an AI coding agent with a strict six-phase pipeline — Brief → Charter → Spec → Plan → Implement → Final Review — where a numbered "Charter" (the product's constitution) is the central artifact that every decision is checked against. Bash + Markdown, MIT-licensed, zero dependencies.
+
+Kurdyuk Lite installs as a marked contract block inside a project's `CLAUDE.md`, plus a `.kurdyuk-lite/` working folder. The agent advances one gated phase at a time, resumes from files instead of chat memory (so work survives `/compact` and new sessions), and flags any choice that violates a charter principle as a blocker. It is built for solo developers and founders building a product largely with an AI agent who want control and a decision trail instead of drift and scope creep.
+
+## Documentation
+- [README](https://github.com/LARIkoz/kurdyuk-lite/blob/main/README.md): what it is, the job it closes (Jobs-to-be-Done), install, quick start, FAQ
+- [CLAUDE-contract.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/CLAUDE-contract.md): the canonical operating contract injected into a project — all 6 phases, gates, and rules in full
+- [concept.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/concept.md): the full methodology and a charter deep dive
+- [charter-for-charter.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/charter-for-charter.md): the 4 rules for writing a charter (no heuristics, no HOW, every principle is a test, write then cut)
+- [reference/example-charter.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/reference/example-charter.md): a complete worked charter example
+
+## Install
+- `git clone https://github.com/LARIkoz/kurdyuk-lite.git ~/.kurdyuk-lite`
+- `~/.kurdyuk-lite/bin/kurdyuk-lite init .` injects the contract block + templates into the current repo
+- `~/.kurdyuk-lite/bin/kurdyuk-lite check .` reports drift (`UP TO DATE` when in sync)
+- [BOOTSTRAP.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/BOOTSTRAP.md): one-paste installer to give a Claude Code session
+
+## Key concepts
+- Charter: a numbered constitution (P1..PN; order = priority, lower number wins on conflict). Every design and implementation decision is checked against it; a violation is a blocker, not a debate.
+- Phase gate: each of the six phases ends with an explicit user "OK" before the next begins. No skipping, no combining.
+- Single context: runs on Claude Code alone — no multi-agent orchestration, no extra CLI tools required.
+- Artifacts over chat: project truth lives in `state.md` and `gate-log.md`, so a context loss never loses the thread.
+
+## When to use
+- Best for 3–7 task, 1–2 session product work built with an AI agent.
+- For 8+ tasks or multi-session work with design-validation gates, split the work or use a heavier process.
+- For a one-line fix or quick refactor, no framework is needed.
+
+## Optional
+- [MIGRATION.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/MIGRATION.md): upgrading a v2 Review-Cycle setup to v3
+- [CONTRIBUTING.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/CONTRIBUTING.md): how to propose changes
+- [CHANGELOG.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/CHANGELOG.md): version history

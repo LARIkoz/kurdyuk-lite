@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/LARIkoz/kurdyuk-lite/discussions
+    about: Ask how to use Kurdyuk Lite, or discuss an idea before filing an issue.
+  - name: Read the docs first
+    url: https://github.com/LARIkoz/kurdyuk-lite/blob/main/README.md
+    about: README, concept, and charter-for-charter answer most "how does it work" questions.

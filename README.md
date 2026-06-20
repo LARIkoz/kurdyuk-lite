@@ -7,7 +7,12 @@ Stop _chatting_ with your AI agent. Start _directing_ it — through a strict si
 Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review
 ```
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) · Bash + Markdown, zero dependencies · works in any repo
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](CHANGELOG.md)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-8A63D2.svg)](https://claude.com/claude-code)
+
+Bash + Markdown · zero dependencies · works in any repo
 
 ---
 
@@ -128,13 +133,51 @@ kurdyuk-lite/
 ├── charter-for-charter.md # the 4 rules for writing a charter
 ├── BOOTSTRAP.md           # one-paste installer · MIGRATION.md — upgrade notes
 ├── bin/                   # kurdyuk-lite (init/check) · kurdyuk-install (bootstrap)
-├── reference/             # worked charter examples (not copied into your project)
+├── reference/             # worked charter examples + optional discovery toolkit (not copied into your project)
 └── templates/             # the 8 phase templates init copies into .kurdyuk-lite/templates/
 ```
 
 ## Requirements
 
 [Claude Code](https://claude.com/claude-code) — the CLI, desktop app, or IDE extension. Nothing else: Kurdyuk Lite is just Bash + Markdown.
+
+## Acknowledgements
+
+Kurdyuk Lite is assembled from established methods — named separately so you can go to each source:
+
+- **Jobs-to-be-Done** (Clayton Christensen) — the Big/Core Job framing this README runs on. The applied **AJTBD** synthesis behind the optional Phase-1 scaffolds: **Ivan Zamesin**.
+- **Four Forces of switching** (Push / Pull / Habit / Anxiety) — Bob Moesta and the JTBD "switch" school.
+- **Riskiest Assumption Test** — lean / MVP practice.
+- **Annotation cycle** — the plan-reviewed-in-passes loop (and several Claude Code working patterns) come from **Boris Tane**, ["How I use Claude Code"](https://boristane.com/blog/how-i-use-claude-code/).
+
+Optional Phase-1 discovery scaffolds distilled from the JTBD methods live in [`reference/discovery-toolkit.md`](reference/discovery-toolkit.md) — rewritten in our own words, opt-in, never copied into your project.
+
+## FAQ
+
+**What is Kurdyuk Lite?**
+A charter-driven product-development framework for Claude Code. It runs your AI coding agent through six gated phases — Brief → Charter → Spec → Plan → Implement → Final Review — with a numbered "Charter" (the product's constitution) at the center.
+
+**How is it different from just using Claude Code normally?**
+Plain chat is open-ended: the agent can skip ahead, drift, and forget. Kurdyuk Lite adds gates (each phase needs your "OK"), a Charter (every decision is checked against written principles), and file-based state (work survives a `/compact` or a new session).
+
+**Does it work with Cursor, Copilot, or other AI agents?**
+It's built for Claude Code — `init` injects the contract into your `CLAUDE.md`. The _method_ (phases + charter) is portable, but the installer and templates target Claude Code today.
+
+**Won't the process slow me down?**
+The gates take seconds; the Charter is a few lines. The time it saves — not re-doing work the agent drifted away from — is the point. For a one-line fix, skip it.
+
+**Can I add it to an existing project?**
+Yes. `init` is non-destructive: it injects a marked block into your existing `CLAUDE.md` (backing it up first) and adds a `.kurdyuk-lite/` folder. Re-run it any time to upgrade.
+
+**Is my code or data sent anywhere?**
+No. Kurdyuk Lite is Bash + Markdown with no network calls and no telemetry. It only writes files in your repo; everything else happens inside your own Claude Code session.
+
+**What's a Charter, in one line?**
+A short, numbered constitution for your product — order = priority — that turns "should we do X?" into a checkable answer ("violates P2") instead of a debate.
+
+## Contributing
+
+Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [security policy](SECURITY.md). Version history is in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
