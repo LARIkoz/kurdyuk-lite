@@ -8,7 +8,7 @@
 Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review
 ```
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
+[![CI](https://github.com/LARIkoz/kurdyuk-lite/actions/workflows/test.yml/badge.svg)](https://github.com/LARIkoz/kurdyuk-lite/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
 
 [🇬🇧 English](README.md) · **🇷🇺 Русский** · [🇯🇵 日本語](README.ja.md) · [🇨🇳 中文](README.zh-CN.md)
 
@@ -130,6 +130,8 @@ curl -fsSL https://raw.githubusercontent.com/LARIkoz/kurdyuk-lite/main/bin/kurdy
 ```
 
 `init` можно запускать сколько угодно раз, и он ничего не ломает: вставляет помеченный блок в файл инструкций проекта (сделав бэкап старого), кладёт шаблоны в `.kurdyuk-lite/`, дописывает `.gitignore`. Запустили снова — обновились.
+
+<a id="works-with-any-agent"></a>
 
 ## Работает с любым агентом
 

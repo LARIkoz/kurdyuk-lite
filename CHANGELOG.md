@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.1] - 2026-06-20
+
+Tooling and a translation fix.
+
+### Added
+
+- Continuous integration: `.github/workflows/test.yml` runs the installer test suite on Linux and macOS for every push and pull request, with a CI badge on the README.
+- `test/run.sh` — committed installer test suite (init/check across every `--agent` target, idempotency, drift → `BROKEN`, self-init guard). It is what CI runs and what `CONTRIBUTING.md` now points contributors to.
+
+### Fixed
+
+- Translated READMEs: the "Agents" badge linked to the English `#works-with-any-agent` anchor, which does not exist once the heading is translated. Added an explicit anchor in `README.ru.md` / `README.ja.md` / `README.zh-CN.md` so the badge resolves.
+
 ## [3.3.0] - 2026-06-20
 
 Agent self-install + translated READMEs.
@@ -82,6 +95,7 @@ Charter-based framework.
 
 - Replaced the v2 "Review Cycle + Readiness" model with the charter-driven pipeline.
 
+[3.3.1]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.3.1
 [3.3.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.3.0
 [3.2.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.2.0
 [3.1.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.1.0

@@ -22,16 +22,14 @@ After editing `CLAUDE-contract.md`, bump `VERSION` (the contract is hash-anchore
 
 ## Test your change
 
-There is no build step. Verify the installer end-to-end against a throwaway directory:
+There is no build step. Run the installer test suite — the same one CI runs on every push:
 
 ```bash
-TMP="$(mktemp -d)"
-bash bin/kurdyuk-lite init "$TMP"
-bash bin/kurdyuk-lite check "$TMP"     # expect: Status: UP TO DATE
-# re-run init to confirm idempotency: exactly one KURDYUK-LITE-START marker pair
+bash test/run.sh     # init/check across all --agent targets, idempotency, drift, self-init guard
 ```
 
-Keep `bin/` POSIX-portable (no `sed -i`, no Bash 4-isms) so it works on macOS and Linux.
+It must end with `RESULT: N passed, 0 failed`. CI (`.github/workflows/test.yml`) runs it on Linux and macOS for
+every push and PR. Keep `bin/` and `test/` POSIX-portable (no `sed -i`, no Bash 4-isms) so they work on both.
 
 ## Translations
 

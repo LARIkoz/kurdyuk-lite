@@ -8,7 +8,7 @@ Stop _chatting_ with your AI agent. Start _directing_ it — through a strict si
 Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review
 ```
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
+[![CI](https://github.com/LARIkoz/kurdyuk-lite/actions/workflows/test.yml/badge.svg)](https://github.com/LARIkoz/kurdyuk-lite/actions/workflows/test.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
 
 **🇬🇧 English** · [🇷🇺 Русский](README.ru.md) · [🇯🇵 日本語](README.ja.md) · [🇨🇳 中文](README.zh-CN.md)
 
