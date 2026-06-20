@@ -1,18 +1,16 @@
 # Kurdyuk Lite
 
 **A charter-driven product-development framework for Claude Code.**
+
 Stop _chatting_ with your AI agent. Start _directing_ it — through a strict six-phase pipeline with a written constitution at its core.
 
 ```
 Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review
 ```
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](CHANGELOG.md)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-8A63D2.svg)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-8A63D2.svg)](https://claude.com/claude-code)
 
-Bash + Markdown · zero dependencies · works in any repo
+_Bash + Markdown · zero dependencies · works in any repo_
 
 ---
 
