@@ -23,11 +23,15 @@ resolve_source() {
 
 # Print usage
 usage() {
-  echo "Usage: kurdyuk-lite <command> [target-dir]"
+  echo "Usage: kurdyuk-lite <command> [target-dir] [--agent <name>]"
   echo ""
   echo "Commands:"
   echo "  init   Initialize (or update) a project with Kurdyuk Lite"
   echo "  check  Show version and detect drift"
+  echo ""
+  echo "  --agent  Which agent's instruction file to inject the contract into:"
+  echo "           claude (default → CLAUDE.md) · codex/agents (→ AGENTS.md) ·"
+  echo "           gemini (→ GEMINI.md) · all (→ all three)"
   echo ""
   echo "target-dir defaults to current directory."
 }
@@ -98,7 +102,27 @@ ${MARKER_END}"
 
 # INIT command
 cmd_init() {
-  local target_dir="${1:-.}"
+  local target_dir="." agent="claude"
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --agent) agent="${2:-}"; shift 2 ;;
+      --agent=*) agent="${1#*=}"; shift ;;
+      -*) echo "ERROR: unknown option: $1"; exit 1 ;;
+      *) target_dir="$1"; shift ;;
+    esac
+  done
+
+  # Map agent → which instruction file(s) get the contract block.
+  # The contract is plain Markdown; only the filename a given agent auto-loads differs.
+  local files
+  case "$agent" in
+    claude)       files="CLAUDE.md" ;;
+    codex|agents) files="AGENTS.md" ;;
+    gemini)       files="GEMINI.md" ;;
+    all)          files="CLAUDE.md AGENTS.md GEMINI.md" ;;
+    *) echo "ERROR: unknown --agent '$agent' (use: claude | codex | gemini | agents | all)"; exit 1 ;;
+  esac
+
   if [ ! -d "$target_dir" ]; then
     echo "ERROR: Directory does not exist: $target_dir"
     exit 1
@@ -127,9 +151,9 @@ cmd_init() {
   [ -z "$version" ] && version="0.0.0"
 
   # Check prerequisites (warn, don't fail)
-  if ! command -v claude &>/dev/null; then
-    echo "  WARN: 'claude' not found — install Claude Code for full functionality"
-  fi
+  case "$files" in
+    *CLAUDE.md*) command -v claude &>/dev/null || echo "  note: 'claude' CLI not found — install Claude Code, or point another agent at CLAUDE-contract.md" ;;
+  esac
 
   # Create .kurdyuk-lite structure
   mkdir -p "$target_dir/.kurdyuk-lite/templates"
@@ -150,17 +174,17 @@ cmd_init() {
   done
   echo "  Copied onboarding docs (README, STARTER-PROMPT)"
 
-  # Backup CLAUDE.md (timestamped)
-  if [ -f "$target_dir/CLAUDE.md" ]; then
-    local backup="$target_dir/.kurdyuk-lite/CLAUDE.md.bak.$(date +%Y%m%d_%H%M%S)"
-    cp "$target_dir/CLAUDE.md" "$backup"
-    echo "  Backed up CLAUDE.md → $(basename "$backup")"
-  fi
-
-  # Inject framework block
-  local contract
+  # Inject the contract block into each chosen instruction file (backing up first)
+  local contract f backup
   contract="$(cat "$SOURCE_DIR/CLAUDE-contract.md")"
-  inject_block "$target_dir/CLAUDE.md" "$contract" "$version"
+  for f in $files; do
+    if [ -f "$target_dir/$f" ]; then
+      backup="$target_dir/.kurdyuk-lite/$f.bak.$(date +%Y%m%d_%H%M%S)"
+      cp "$target_dir/$f" "$backup"
+      echo "  Backed up $f → $(basename "$backup")"
+    fi
+    inject_block "$target_dir/$f" "$contract" "$version"
+  done
 
   # Write version file
   local contract_hash
@@ -178,7 +202,8 @@ cmd_init() {
   echo "  Updated .gitignore"
 
   echo ""
-  echo "Done. Open Claude Code in $target_dir and start working."
+  echo "Done. Contract injected into: $files"
+  echo "  Open your agent in $target_dir and start working."
   echo "  Run folder: .kurdyuk-lite/runs/<slug>/"
   echo "  Framework version: $version"
 }
@@ -208,22 +233,52 @@ cmd_check() {
   echo "  Installed version: $installed_version"
   echo "  Installed hash: ${installed_hash:0:12}..."
 
-  # Check source version
-  if [ -f "$SOURCE_DIR/CLAUDE-contract.md" ]; then
-    local source_version source_hash
-    source_version="$(cat "$SOURCE_DIR/VERSION" 2>/dev/null | tr -d '[:space:]')"
-    source_hash="$(file_hash "$SOURCE_DIR/CLAUDE-contract.md")"
+  # Check source + verify the injected contract block in each agent instruction file
+  if [ ! -f "$SOURCE_DIR/CLAUDE-contract.md" ]; then
+    echo "  Source: not available (framework repo not found) — cannot verify block integrity"
+    return
+  fi
 
-    echo "  Source version: $source_version"
-    echo "  Source hash: ${source_hash:0:12}..."
+  local source_version source_hash
+  source_version="$(cat "$SOURCE_DIR/VERSION" 2>/dev/null | tr -d '[:space:]')"
+  source_hash="$(file_hash "$SOURCE_DIR/CLAUDE-contract.md")"
+  echo "  Source version: $source_version"
+  echo "  Source hash: ${source_hash:0:12}..."
 
-    if [ "$installed_hash" = "$source_hash" ]; then
-      echo "  Status: UP TO DATE"
+  # The contract may live in any agent file init supports (CLAUDE.md / AGENTS.md / GEMINI.md).
+  # Verify the block actually present there, not just the stored hash.
+  local af path sc ec found="no" worst="UP TO DATE"
+  for af in CLAUDE.md AGENTS.md GEMINI.md; do
+    path="$target_dir/$af"
+    [ -f "$path" ] || continue
+    sc="$(grep -c "$MARKER_START" "$path" || true)"
+    ec="$(grep -c "$MARKER_END" "$path" || true)"
+    [ "$sc" = "0" ] && [ "$ec" = "0" ] && continue
+    found="yes"
+    if [ "$sc" != "1" ] || [ "$ec" != "1" ]; then
+      echo "  $af: BROKEN — multiple or malformed marker pairs"
+      worst="BROKEN"
+    elif diff -q -b -B \
+        <(awk '/<!-- KURDYUK-LITE-START/{flag=1;next} /<!-- KURDYUK-LITE-END -->/{flag=0} flag' "$path") \
+        "$SOURCE_DIR/CLAUDE-contract.md" >/dev/null 2>&1; then
+      echo "  $af: up to date"
+    elif [ "$installed_hash" != "$source_hash" ]; then
+      echo "  $af: outdated — framework has moved on"
+      [ "$worst" = "UP TO DATE" ] && worst="UPDATE AVAILABLE"
     else
-      echo "  Status: DRIFT DETECTED — run 'kurdyuk-lite init $target_dir' to sync"
+      echo "  $af: LOCAL EDIT — block changed since init"
+      worst="LOCAL EDIT"
     fi
+  done
+
+  if [ "$found" = "no" ]; then
+    echo "  Status: BROKEN — no contract block in CLAUDE.md / AGENTS.md / GEMINI.md. Run 'kurdyuk-lite init $target_dir'"
+  elif [ "$worst" = "UP TO DATE" ]; then
+    echo "  Status: UP TO DATE — contract block matches the framework"
+  elif [ "$worst" = "UPDATE AVAILABLE" ]; then
+    echo "  Status: UPDATE AVAILABLE — run 'kurdyuk-lite init $target_dir' to sync"
   else
-    echo "  Source: not available (framework repo not found)"
+    echo "  Status: $worst — run 'kurdyuk-lite init $target_dir' to restore or sync"
   fi
 }
 
@@ -233,7 +288,7 @@ resolve_source
 case "${1:-}" in
   init)
     shift
-    cmd_init "${1:-}"
+    cmd_init "$@"
     ;;
   check)
     shift

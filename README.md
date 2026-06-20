@@ -1,14 +1,14 @@
 # Kurdyuk Lite
 
-**A charter-driven product-development framework for Claude Code.**
+**A charter-driven product-development framework for AI coding agents.**
 
-Stop _chatting_ with your AI agent. Start _directing_ it — through a strict six-phase pipeline with a written constitution at its core.
+Stop _chatting_ with your AI agent. Start _directing_ it — through a strict six-phase pipeline with a written constitution at its core. Claude Code-native; works with Codex, Gemini, and any agent that reads a project instructions file.
 
 ```
 Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review
 ```
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-8A63D2.svg)](https://claude.com/claude-code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Version](https://img.shields.io/github/v/tag/LARIkoz/kurdyuk-lite?label=version&color=blue)](CHANGELOG.md) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md) [![Agents: Claude · Codex · Gemini](https://img.shields.io/badge/agents-Claude%20%C2%B7%20Codex%20%C2%B7%20Gemini-8A63D2.svg)](#works-with-any-agent)
 
 _Bash + Markdown · zero dependencies · works in any repo_
 
@@ -109,7 +109,20 @@ git clone https://github.com/LARIkoz/kurdyuk-lite.git ~/.kurdyuk-lite
 ~/.kurdyuk-lite/bin/kurdyuk-lite check .     # → Status: UP TO DATE
 ```
 
-`init` is idempotent and non-destructive: it injects a marked block into your project's `CLAUDE.md` (backing up any existing one), drops the templates into `.kurdyuk-lite/`, and updates `.gitignore`. Re-run it to upgrade. Prefer one paste into a fresh chat? See [`BOOTSTRAP.md`](BOOTSTRAP.md).
+`init` is idempotent and non-destructive: it injects a marked block into your project's instructions file (backing up any existing one), drops the templates into `.kurdyuk-lite/`, and updates `.gitignore`. Re-run it to upgrade. Prefer one paste into a fresh chat? See [`BOOTSTRAP.md`](BOOTSTRAP.md).
+
+## Works with any agent
+
+The contract is plain Markdown — any coding agent that loads a project instructions file can run it. `init` writes that file for the agent you choose:
+
+```bash
+kurdyuk-lite init .                 # Claude Code  → CLAUDE.md   (default)
+kurdyuk-lite init . --agent codex   # Codex / others → AGENTS.md
+kurdyuk-lite init . --agent gemini  # Gemini CLI   → GEMINI.md
+kurdyuk-lite init . --agent all     # all three at once
+```
+
+`AGENTS.md` is the cross-tool standard, so `--agent codex` also covers other AGENTS.md-aware agents. Using something else (Cursor, Aider, …)? Point it at `CLAUDE-contract.md`, or copy the injected block into that tool's own instructions file. `check` works the same regardless of which file holds the contract.
 
 ## Quick start
 
@@ -137,7 +150,7 @@ kurdyuk-lite/
 
 ## Requirements
 
-[Claude Code](https://claude.com/claude-code) — the CLI, desktop app, or IDE extension. Nothing else: Kurdyuk Lite is just Bash + Markdown.
+An AI coding agent that reads a project instructions file — [Claude Code](https://claude.com/claude-code) (the default), Codex, Gemini CLI, or similar. Nothing else: Kurdyuk Lite is just Bash + Markdown.
 
 ## Acknowledgements
 
@@ -158,8 +171,8 @@ A charter-driven product-development framework for Claude Code. It runs your AI 
 **How is it different from just using Claude Code normally?**
 Plain chat is open-ended: the agent can skip ahead, drift, and forget. Kurdyuk Lite adds gates (each phase needs your "OK"), a Charter (every decision is checked against written principles), and file-based state (work survives a `/compact` or a new session).
 
-**Does it work with Cursor, Copilot, or other AI agents?**
-It's built for Claude Code — `init` injects the contract into your `CLAUDE.md`. The _method_ (phases + charter) is portable, but the installer and templates target Claude Code today.
+**Does it work with Cursor, Codex, Gemini, or other AI agents?**
+Yes. The contract is plain Markdown. `init --agent codex` writes `AGENTS.md`, `--agent gemini` writes `GEMINI.md`, `--agent all` does every file. For anything else, point your agent at `CLAUDE-contract.md`. Claude Code is the default and the most-tested target.
 
 **Won't the process slow me down?**
 The gates take seconds; the Charter is a few lines. The time it saves — not re-doing work the agent drifted away from — is the point. For a one-line fix, skip it.

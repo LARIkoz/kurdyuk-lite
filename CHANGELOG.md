@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-06-20
+
+Multi-agent support.
+
+### Added
+
+- `kurdyuk-lite init --agent <claude|codex|gemini|all>` injects the contract into the right instructions file (`CLAUDE.md` / `AGENTS.md` / `GEMINI.md`). Default stays `claude`.
+
+### Changed
+
+- The contract and docs are agent-neutral: Claude Code is the default, but the framework runs on Codex, Gemini, and any agent that reads a project instructions file.
+
 ## [3.1.0] - 2026-06-20
 
 First public release.
@@ -49,6 +61,7 @@ Charter-based framework.
 
 - Replaced the v2 "Review Cycle + Readiness" model with the charter-driven pipeline.
 
+[3.2.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.2.0
 [3.1.0]: https://github.com/LARIkoz/kurdyuk-lite/releases/tag/v3.1.0
 [3.0.1]: https://github.com/LARIkoz/kurdyuk-lite/commits/main
 [3.0.0]: https://github.com/LARIkoz/kurdyuk-lite/commits/main

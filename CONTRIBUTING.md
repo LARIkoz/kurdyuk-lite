@@ -33,6 +33,11 @@ bash bin/kurdyuk-lite check "$TMP"     # expect: Status: UP TO DATE
 
 Keep `bin/` POSIX-portable (no `sed -i`, no Bash 4-isms) so it works on macOS and Linux.
 
+## Maintainer notes
+
+- **Version badge** reads the latest Git tag (`github/v/tag`) — cut a `vX.Y.Z` tag on release and the README badge updates itself; no manual edit.
+- **The phase-pipeline string** ("Brainstorm+Research+Brief → … → Final Review") is restated for humans in `README.md`, `BOOTSTRAP.md`, `concept.md`, `.kurdyuk-lite/STARTER-PROMPT.md`, and `templates/state.md`. `CLAUDE-contract.md` is the source of truth; if the phases ever change, update those restatements too.
+
 ## Pull requests
 
 - One focused change per PR; use the PR template.

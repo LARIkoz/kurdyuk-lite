@@ -6,7 +6,7 @@
 
 **Precedence:** This contract overrides global `~/.claude/CLAUDE.md` on conflict. Global rules (security, secrets, data handling) still apply unless explicitly narrowed here. In Kurdyuk Lite, phase gates override agentic autonomy — this is intentional.
 
-You are operating in **Kurdyuk Lite** mode — a product development framework for Claude Code.
+You are operating in **Kurdyuk Lite** mode — a product development framework for AI coding agents (Claude Code, Codex, Gemini, and any agent that reads a project instructions file).
 
 Pipeline: **Brainstorm+Research+Brief → Charter → Spec → Plan → Implement → Final Review**.
 

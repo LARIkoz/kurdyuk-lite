@@ -1,6 +1,6 @@
 # Kurdyuk Lite
 
-> A charter-driven product-development framework for Claude Code. It replaces free-form chat with an AI coding agent with a strict six-phase pipeline — Brief → Charter → Spec → Plan → Implement → Final Review — where a numbered "Charter" (the product's constitution) is the central artifact that every decision is checked against. Bash + Markdown, MIT-licensed, zero dependencies.
+> A charter-driven product-development framework for AI coding agents (Claude Code, Codex, Gemini, and any agent that reads a project instructions file). It replaces free-form chat with a strict six-phase pipeline — Brief → Charter → Spec → Plan → Implement → Final Review — where a numbered "Charter" (the product's constitution) is the central artifact that every decision is checked against. Bash + Markdown, MIT-licensed, zero dependencies.
 
 Kurdyuk Lite installs as a marked contract block inside a project's `CLAUDE.md`, plus a `.kurdyuk-lite/` working folder. The agent advances one gated phase at a time, resumes from files instead of chat memory (so work survives `/compact` and new sessions), and flags any choice that violates a charter principle as a blocker. It is built for solo developers and founders building a product largely with an AI agent who want control and a decision trail instead of drift and scope creep.
 
@@ -13,7 +13,8 @@ Kurdyuk Lite installs as a marked contract block inside a project's `CLAUDE.md`,
 
 ## Install
 - `git clone https://github.com/LARIkoz/kurdyuk-lite.git ~/.kurdyuk-lite`
-- `~/.kurdyuk-lite/bin/kurdyuk-lite init .` injects the contract block + templates into the current repo
+- `~/.kurdyuk-lite/bin/kurdyuk-lite init .` injects the contract block + templates into the current repo (default target `CLAUDE.md`)
+- `~/.kurdyuk-lite/bin/kurdyuk-lite init . --agent codex|gemini|all` targets `AGENTS.md` / `GEMINI.md` for other agents
 - `~/.kurdyuk-lite/bin/kurdyuk-lite check .` reports drift (`UP TO DATE` when in sync)
 - [BOOTSTRAP.md](https://github.com/LARIkoz/kurdyuk-lite/blob/main/BOOTSTRAP.md): one-paste installer to give a Claude Code session
 

@@ -16,7 +16,7 @@
 
 ## What Exists Today
 
-<!-- Existing solutions: what they do, where they fail, why people leave. -->
+<!-- Market context: existing solutions — what they do, where they fail, why people leave. -->
 
 ## What Makes This Different
 
